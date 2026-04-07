@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "D:\\Fitness-Studio-Desk\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|d:\\fitness-studio-desk\\fitnessstudioapp\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{79E066EC-717C-4F9C-ABF8-107EBCA8A67D}|UnitTests\\UnitTests.csproj|d:\\fitness-studio-desk\\unittests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79E066EC-717C-4F9C-ABF8-107EBCA8A67D}|UnitTests\\UnitTests.csproj|solutionrelative:unittests\\unittest1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|d:\\fitness-studio-desk\\fitnessstudioapp\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|d:\\fitness-studio-desk\\fitnessstudioapp\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|d:\\fitness-studio-desk\\fitnessstudioapp\\models\\enums\\specialty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\enums\\specialty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|d:\\fitness-studio-desk\\fitnessstudioapp\\repository\\irepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,8 +27,12 @@
       "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|D:\\Fitness-Studio-Desk\\fitnessstudioapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|d:\\fitness-studio-desk\\fitnessstudioapp\\models\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|D:\\Fitness-Studio-Desk\\fitnessstudioapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:fitnessstudioapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,8 +42,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Trainer.cs",
+              "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Trainer.cs",
+              "RelativeDocumentMoniker": "FitnessStudioApp\\MODELS\\Trainer.cs",
+              "ToolTip": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Trainer.cs",
+              "RelativeToolTip": "FitnessStudioApp\\MODELS\\Trainer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:45:15.204Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UnitTest1.cs",
+              "DocumentMoniker": "D:\\Fitness-Studio-Desk\\UnitTests\\UnitTest1.cs",
+              "RelativeDocumentMoniker": "UnitTests\\UnitTest1.cs",
+              "ToolTip": "D:\\Fitness-Studio-Desk\\UnitTests\\UnitTest1.cs",
+              "RelativeToolTip": "UnitTests\\UnitTest1.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T14:08:21.002Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -42,44 +84,68 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RegisterService.cs",
-              "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\SERVICES\\RegisterService.cs",
-              "RelativeDocumentMoniker": "FitnessStudioApp\\SERVICES\\RegisterService.cs",
-              "ToolTip": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\SERVICES\\RegisterService.cs",
-              "RelativeToolTip": "FitnessStudioApp\\SERVICES\\RegisterService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T09:01:49.31Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "IRepositroy.cs",
               "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\REPOSITORY\\IRepositroy.cs",
               "RelativeDocumentMoniker": "FitnessStudioApp\\REPOSITORY\\IRepositroy.cs",
               "ToolTip": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\REPOSITORY\\IRepositroy.cs",
               "RelativeToolTip": "FitnessStudioApp\\REPOSITORY\\IRepositroy.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T09:01:23.404Z"
+              "WhenOpened": "2026-04-07T13:03:43.445Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Specialty.cs",
+              "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Enums\\Specialty.cs",
+              "RelativeDocumentMoniker": "FitnessStudioApp\\MODELS\\Enums\\Specialty.cs",
+              "ToolTip": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Enums\\Specialty.cs",
+              "RelativeToolTip": "FitnessStudioApp\\MODELS\\Enums\\Specialty.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:51:50.446Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Admin.cs",
+              "RelativeDocumentMoniker": "FitnessStudioApp\\MODELS\\Admin.cs",
+              "ToolTip": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Admin.cs",
+              "RelativeToolTip": "FitnessStudioApp\\MODELS\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:45:04.106Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\User.cs",
               "RelativeDocumentMoniker": "FitnessStudioApp\\MODELS\\User.cs",
               "ToolTip": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\User.cs",
               "RelativeToolTip": "FitnessStudioApp\\MODELS\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-27T09:01:03.713Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
+              "Title": "Client.cs",
+              "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Client.cs",
+              "RelativeDocumentMoniker": "FitnessStudioApp\\MODELS\\Client.cs",
+              "ToolTip": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Client.cs",
+              "RelativeToolTip": "FitnessStudioApp\\MODELS\\Client.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T12:44:27.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\Form1.cs",
               "RelativeDocumentMoniker": "FitnessStudioApp\\Form1.cs",
