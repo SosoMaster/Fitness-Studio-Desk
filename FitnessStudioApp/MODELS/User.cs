@@ -1,12 +1,24 @@
-﻿using System;
+﻿using FitnessStudioApp.MODELS.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessStudioApp.MODELS
+namespace FitnessStudioApp.MODELS;
+
+public class User
 {
-    internal class User
-    {
-    }
+    public int UserId { get; set; }
+    public string Username { get; set; }
+    public string Email { get; set; }
+    public string Phone { get; set; }
+    public string Password { get; set; }
+    public Role Role { get; set; }
+
+    public Client Client { get; set; }
+    public Admin Admin { get; set; }
+    public Trainer Trainer { get; set; }
+
+    
 }

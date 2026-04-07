@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessStudioApp.REPOSITORY;
+namespace FitnessStudioApp.MODELS.Enums;
 
-public interface IRepositroy
+public enum Specialty
 {
-    
+
 }
