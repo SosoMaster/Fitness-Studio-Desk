@@ -12,7 +12,7 @@ namespace FitnessStudioApp.MODELS
         public int ClientId { get; set; }
         public DateTime Date { get; set; }
         public double Weight { get; set; }
-        public int BodyFat { get; set; }
+        public double BodyFat { get; set; }
         public int Calories { get; set; }
         public string Notes { get; set; }
     }

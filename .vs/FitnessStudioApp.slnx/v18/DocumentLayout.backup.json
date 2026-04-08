@@ -3,19 +3,27 @@
   "WorkspaceRootPath": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\client.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\repository\\irepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\repository\\irepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\services\\registerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\repository\\irepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\repository\\irepositroy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|c:\\users\\homepc\\documents\\github\\fitness-studio-desk\\fitnessstudioapp\\models\\progress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\models\\progress.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\fitnessstudioapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{CF387D30-019C-DFF7-0B61-F6101C71DB01}|FitnessStudioApp\\FitnessStudioApp.csproj|solutionrelative:fitnessstudioapp\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -26,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,7 +46,33 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Progress.cs",
+              "DocumentMoniker": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Progress.cs",
+              "RelativeDocumentMoniker": "FitnessStudioApp\\MODELS\\Progress.cs",
+              "ToolTip": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Progress.cs",
+              "RelativeToolTip": "FitnessStudioApp\\MODELS\\Progress.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-29T11:36:07.861Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Client.cs",
+              "DocumentMoniker": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Client.cs",
+              "RelativeDocumentMoniker": "FitnessStudioApp\\MODELS\\Client.cs",
+              "ToolTip": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\FitnessStudioApp\\MODELS\\Client.cs",
+              "RelativeToolTip": "FitnessStudioApp\\MODELS\\Client.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-29T11:30:42.642Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "RegisterService.cs",
               "DocumentMoniker": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\FitnessStudioApp\\SERVICES\\RegisterService.cs",
               "RelativeDocumentMoniker": "FitnessStudioApp\\SERVICES\\RegisterService.cs",
@@ -51,7 +85,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "IRepositroy.cs",
               "DocumentMoniker": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\FitnessStudioApp\\REPOSITORY\\IRepositroy.cs",
               "RelativeDocumentMoniker": "FitnessStudioApp\\REPOSITORY\\IRepositroy.cs",
@@ -77,7 +111,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\HomePC\\Documents\\GitHub\\Fitness-Studio-Desk\\FitnessStudioApp\\Form1.cs",
               "RelativeDocumentMoniker": "FitnessStudioApp\\Form1.cs",
