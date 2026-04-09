@@ -1,6 +1,7 @@
 {
   "format": 1,
   "restore": {
+<<<<<<< HEAD
     "C:\\Users\\valer\\Documents\\GitHub\\Fitness-Studio-Desk\\Fitness-Studio-Desk\\FitnessStudioApp\\FitnessStudioApp.csproj": {}
   },
   "projects": {
@@ -12,12 +13,29 @@
         "projectPath": "C:\\Users\\valer\\Documents\\GitHub\\Fitness-Studio-Desk\\Fitness-Studio-Desk\\FitnessStudioApp\\FitnessStudioApp.csproj",
         "packagesPath": "C:\\Users\\valer\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\valer\\Documents\\GitHub\\Fitness-Studio-Desk\\Fitness-Studio-Desk\\FitnessStudioApp\\obj\\",
+=======
+    "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\FitnessStudioApp.csproj": {}
+  },
+  "projects": {
+    "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\FitnessStudioApp.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\FitnessStudioApp.csproj",
+        "projectName": "FitnessStudioApp",
+        "projectPath": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\FitnessStudioApp.csproj",
+        "packagesPath": "C:\\Users\\Veselin\\.nuget\\packages\\",
+        "outputPath": "D:\\Fitness-Studio-Desk\\FitnessStudioApp\\obj\\",
+>>>>>>> f01ec74ff38b76d72536f0b2dc235ca68b04e314
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
+<<<<<<< HEAD
           "C:\\Users\\valer\\AppData\\Roaming\\NuGet\\NuGet.Config",
+=======
+          "C:\\Users\\Veselin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+>>>>>>> f01ec74ff38b76d72536f0b2dc235ca68b04e314
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -51,6 +69,18 @@
         "net9.0-windows": {
           "framework": "net9.0-windows7.0",
           "targetAlias": "net9.0-windows",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -62,24 +92,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[9.0.14, 9.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[9.0.14, 9.0.14]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[9.0.14, 9.0.14]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[9.0.14, 9.0.14]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
