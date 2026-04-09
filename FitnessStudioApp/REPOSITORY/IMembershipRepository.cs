@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessStudioApp.REPOSITORY
 {
-    internal interface IMembershipRepository : IRepositroy
+    internal interface IMembershipRepository : IRepository
     {
         void RenewMembership();
         void ViewMembership(string userId);

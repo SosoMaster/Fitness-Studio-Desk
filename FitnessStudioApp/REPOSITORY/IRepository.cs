@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessStudioApp.REPOSITORY
 {
-    internal interface IRepositroy
+    internal interface IRepository
     {
     }
 }
