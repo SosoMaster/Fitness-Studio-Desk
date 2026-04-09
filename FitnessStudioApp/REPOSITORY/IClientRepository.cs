@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace FitnessStudioApp.REPOSITORY
 {
-    internal interface IRepositroy
+    public interface IClientRepository : IRepository<Client>
     {
+        Task<Client> GetByUserIdAsync(int userId);
+
+        Task<bool> HasActiveMembershipAsync(int clientId);
     }
 }
