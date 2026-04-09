@@ -8,8 +8,6 @@ namespace FitnessStudioApp.REPOSITORY
 {
     public interface IClientRepository : IRepository<Client>
     {
-        Task<Client> GetByUserIdAsync(int userId);
-
         Task<bool> HasActiveMembershipAsync(int clientId);
     }
 }
