@@ -1,3 +1,5 @@
+using FitnessStudioApp.Forms;
+
 namespace FitnessStudioApp
 {
     internal static class Program
@@ -12,6 +14,8 @@ namespace FitnessStudioApp
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new LoginForm());
+
+
         }
     }
 }
