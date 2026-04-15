@@ -63,14 +63,40 @@ public class UserService : IService<User>
         }
     }
 
-    public Task<IEnumerable<User>> GetAllAsync()
+    public async Task<IEnumerable<User>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        try
+        {
+            if (_db.Set<User>().ToList().Count == 0)
+            {
+                throw new Exception("No Users found");
+            }
+            return await _userRepo.GetAllAsync();
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 
-    public Task<User> GetByIdAsync(int id)
+    public async Task<User> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var user = _db.Set<User>().FindAsync(id);
+
+            if (user == null)
+            {
+                throw new Exception("No found user");
+            }
+            return await user;
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 
     public void Update(User entity)
