@@ -8,6 +8,7 @@ namespace FitnessStudioApp.MODELS.Enumsp;
 
 public enum Role
 {
+    Unknown = 0,
     Admin,
     Client,
     Trainer
