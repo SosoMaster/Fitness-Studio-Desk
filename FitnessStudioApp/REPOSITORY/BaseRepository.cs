@@ -26,7 +26,7 @@ public class BaseRepository<T> : IRepository<T> where T : class
         await _db.SaveChangesAsync();
     }
 
-    public void Delete(T entity)
+    public async Task DeleteAsync(T entity)
     {
         _db.Remove(entity);
         _db.SaveChanges();
@@ -43,7 +43,7 @@ public class BaseRepository<T> : IRepository<T> where T : class
         
     }
 
-    public void Update(T entity)
+    public async Task UpdateAsync(T entity)
     {
         _dbSet.Update(entity);
         _db.SaveChangesAsync();
