@@ -11,96 +11,67 @@ namespace FitnessStudioApp.SERVICES;
 
 public class UserService : IService<User>
 {
-    private readonly FitnessStudioAppDbContext _db;
-    private readonly UserRepository _userRepo; 
+    private readonly UserRepository _userRepo;
 
-    public UserService(FitnessStudioAppDbContext db,UserRepository userRepo)
+    public UserService(UserRepository userRepo)
     {
-        _db = db;
         _userRepo = userRepo;
     }
 
     public async Task AddAsync(User entity)
     {
-        try
-        {
-            UserValidator.InfoFieldsValidate(entity);
+        UserValidator.InfoFieldsValidate(entity);
 
-            await _userRepo.AddAsync(entity);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(
-                "Error",
-                "Error",MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-                );
-        }
+        await _userRepo.AddAsync(entity);
     }
 
     public async Task Delete(User entity)
     {
-        try
+        if (entity == null)
         {
-            if (entity == null)
-            {
-                throw new Exception("User is null");
-            }
-
-            var existing = await _userRepo.GetByIdAsync(entity.UserId);
-
-            if (existing == null)
-            {
-                throw new Exception("No user found! Can not delete.");
-            }
-            await _userRepo.DeleteAsync(entity);
-
+            throw new Exception("User is null");
         }
-        catch (Exception)
+
+        var existing = await _userRepo.GetByIdAsync(entity.UserId);
+
+        if (existing == null)
         {
-
-            throw;
+            throw new Exception("No user found! Can not delete.");
         }
+        await _userRepo.DeleteAsync(existing);
     }
 
     public async Task<IEnumerable<User>> GetAllAsync()
     {
-        try
-        {
-            if (_db.Set<User>().ToList().Count == 0)
-            {
-                throw new Exception("No Users found");
-            }
-            return await _userRepo.GetAllAsync();
-        }
-        catch (Exception)
-        {
+        var users = await _userRepo.GetAllAsync();
 
-            throw;
-        }
+        if (!users.Any())
+            throw new Exception("No users found");   // може и без това?
+
+        return users;
     }
 
     public async Task<User> GetByIdAsync(int id)
     {
-        try
-        {
-            var user = _db.Set<User>().FindAsync(id);
+        var user =  await _userRepo.GetByIdAsync(id);
 
-            if (user == null)
-            {
-                throw new Exception("No found user");
-            }
-            return await user;
-        }
-        catch (Exception)
+        if (user == null)
         {
-
-            throw;
+            throw new Exception("No found user");
         }
+        return  user;
+
     }
 
-    public void Update(User entity)
+    public async Task Update(User entity)
     {
-        throw new NotImplementedException();
+        UserValidator.InfoFieldsValidate(entity);
+
+        var user = await _userRepo.GetByIdAsync(entity.UserId);
+
+        if (user == null)
+            throw new Exception("No found user");
+
+        await _userRepo.UpdateAsync(entity);
     }
 }
