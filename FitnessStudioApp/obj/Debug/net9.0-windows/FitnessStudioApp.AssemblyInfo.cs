@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FitnessStudioApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d2e340f642f8a900468295d2c210f90e0c43bfd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8d6eba4bd19cf203bd19658a7a35f54da1a3e8ad")]
 [assembly: System.Reflection.AssemblyProductAttribute("FitnessStudioApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FitnessStudioApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
