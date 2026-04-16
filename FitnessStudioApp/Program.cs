@@ -1,3 +1,6 @@
+using FitnessStudioApp.FORMS;
+using FitnessStudioApp.MODELS;
+
 namespace FitnessStudioApp
 {
     internal static class Program
@@ -11,7 +14,12 @@ namespace FitnessStudioApp
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+            Application.Run(new RegisterForm());
+
+            using (var db = new FitnessStudioAppDbContext())
+            {
+                db.Database.EnsureCreated();
+            }
         }
     }
 }
