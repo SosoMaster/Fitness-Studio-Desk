@@ -37,7 +37,6 @@
             txtPassword = new TextBox();
             txtPhone = new TextBox();
             btnRegister = new Button();
-            sqlCommand1 = new Microsoft.Data.SqlClient.SqlCommand();
             SuspendLayout();
             // 
             // lblUsername
@@ -114,11 +113,6 @@
             btnRegister.UseVisualStyleBackColor = true;
             btnRegister.Click += btnRegister_Click;
             // 
-            // sqlCommand1
-            // 
-            sqlCommand1.CommandTimeout = 30;
-            sqlCommand1.EnableOptimizedParameterBinding = false;
-            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -150,6 +144,5 @@
         private TextBox txtPassword;
         private TextBox txtPhone;
         private Button btnRegister;
-        private Microsoft.Data.SqlClient.SqlCommand sqlCommand1;
     }
 }
