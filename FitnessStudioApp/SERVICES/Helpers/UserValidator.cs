@@ -10,15 +10,12 @@ namespace FitnessStudioApp.SERVICES.Helpers
 {
     public static class UserValidator
     {
-        
-     
         public static bool InfoFieldsValidate(User user)
         {
             if (string.IsNullOrWhiteSpace(user.Username)||
                 string.IsNullOrWhiteSpace(user.Email)   ||
                 string.IsNullOrWhiteSpace(user.Phone)   ||
-                string.IsNullOrWhiteSpace(user.Password)||
-                user.Role == 0)
+                string.IsNullOrWhiteSpace(user.Password))
             {
                 return false;
                 throw new Exception("Invalid data");

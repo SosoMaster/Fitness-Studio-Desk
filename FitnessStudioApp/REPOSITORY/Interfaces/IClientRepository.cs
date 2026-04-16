@@ -9,6 +9,6 @@ namespace FitnessStudioApp.REPOSITORY.Interfaces
 {
     public interface IClientRepository : IRepository<Client>
     {
-   
+    
     }
 }
