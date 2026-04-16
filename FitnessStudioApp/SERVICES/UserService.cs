@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FitnessStudioApp.SERVICES;
 
-public class UserService : IService<User>
+public class UserService
 {
     private readonly UserRepository _userRepo;
 
