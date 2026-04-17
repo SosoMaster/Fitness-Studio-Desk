@@ -31,8 +31,8 @@
             lblLogin = new Label();
             lblUser = new Label();
             lblPassword = new Label();
-            txtbPassword = new TextBox();
-            txtbUser = new TextBox();
+            txtPassword = new TextBox();
+            txtUsername = new TextBox();
             chbShowPassword = new CheckBox();
             btnLogin = new Button();
             SuspendLayout();
@@ -64,20 +64,20 @@
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
-            // txtbPassword
+            // txtPassword
             // 
-            txtbPassword.Location = new Point(63, 99);
-            txtbPassword.Name = "txtbPassword";
-            txtbPassword.Size = new Size(100, 23);
-            txtbPassword.TabIndex = 3;
+            txtPassword.Location = new Point(68, 162);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new Size(100, 23);
+            txtPassword.TabIndex = 3;
             // 
-            // txtbUser
+            // txtUsername
             // 
-            txtbUser.Location = new Point(63, 162);
-            txtbUser.Name = "txtbUser";
-            txtbUser.Size = new Size(100, 23);
-            txtbUser.TabIndex = 5;
-            txtbUser.UseSystemPasswordChar = true;
+            txtUsername.Location = new Point(68, 99);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(100, 23);
+            txtUsername.TabIndex = 5;
+            txtUsername.UseSystemPasswordChar = true;
             // 
             // chbShowPassword
             // 
@@ -107,8 +107,8 @@
             ClientSize = new Size(935, 450);
             Controls.Add(btnLogin);
             Controls.Add(chbShowPassword);
-            Controls.Add(txtbUser);
-            Controls.Add(txtbPassword);
+            Controls.Add(txtUsername);
+            Controls.Add(txtPassword);
             Controls.Add(lblPassword);
             Controls.Add(lblUser);
             Controls.Add(lblLogin);
@@ -123,8 +123,8 @@
         private Label lblLogin;
         private Label lblUser;
         private Label lblPassword;
-        private TextBox txtbPassword;
-        private TextBox txtbUser;
+        private TextBox txtPassword;
+        private TextBox txtUsername;
         private CheckBox chbShowPassword;
         private Button btnLogin;
     }
