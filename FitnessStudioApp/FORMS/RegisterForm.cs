@@ -15,7 +15,9 @@ namespace FitnessStudioApp.FORMS
     public partial class RegisterForm : Form 
     {
         private UserService _userService;
-        
+
+       
+
         public RegisterForm(UserService userService)
         {
             InitializeComponent();
@@ -25,6 +27,7 @@ namespace FitnessStudioApp.FORMS
 
         private async void btnRegister_Click(object sender, EventArgs e)
         {
+
 
             try
             {
@@ -36,7 +39,7 @@ namespace FitnessStudioApp.FORMS
                     Password = txtPassword.Text,
 
                 };
-               await _userService.AddAsync(user);
+                await _userService.AddAsync(user);
             }
             catch (Exception ex)
             {
