@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace FitnessStudioApp.SERVICES;
 
-public class TrainerService 
+public class TrainerService
 {
     private readonly UserService _userService;
     private readonly TrainerRepository _trainerRepo;
 
-    public TrainerService(UserService userService, TrainerRepository trainerRepository )
+    public TrainerService(UserService userService, TrainerRepository trainerRepository)
     {
         _userService = userService;
         _trainerRepo = trainerRepository;
@@ -27,60 +27,58 @@ public class TrainerService
 
         trainer.UserId = user.UserId;
 
-        ClientValidator.InfoFieldsValidate(trainer);
-        await _clientRepo.AddAsync(clinet);
-
+        TrainerValidator.InfoFieldsValidate(trainer);
+        await _trainerRepo.AddAsync(trainer);
     }
 
-    public async Task Delete(Client entity)
+    public async Task Delete(Trainer entity)
     {
         if (entity == null)
         {
-            throw new Exception("User is null");
+            throw new Exception("Trainer is null");
         }
 
-        var existing = await _clientRepo.GetByIdAsync(entity.ClientId);
+        var existing = await _trainerRepo.GetByIdAsync(entity.TrainerId);
 
         if (existing == null)
         {
-            throw new Exception("No user found! Can not delete.");
+            throw new Exception("No trainer found! Cannot delete.");
         }
-        await _clientRepo.DeleteAsync(existing);
+        await _trainerRepo.DeleteAsync(existing);
     }
 
-    public async Task<IEnumerable<Client>> GetAllAsync()
+    public async Task<IEnumerable<Trainer>> GetAllAsync()
     {
-        var clients = await _clientRepo.GetAllAsync();
+        var trainers = await _trainerRepo.GetAllAsync();
 
-        if (!clients.Any())
-            throw new Exception("No clients found");   // може и без това?
+        if (!trainers.Any())
+            throw new Exception("No trainers found");
 
-        return clients;
+        return trainers;
     }
 
-    public async Task<Client> GetByIdAsync(int id)
+    public async Task<Trainer> GetByIdAsync(int id)
     {
-        var client = await _clientRepo.GetByIdAsync(id);
+        var trainer = await _trainerRepo.GetByIdAsync(id);
 
-        if (client == null)
+        if (trainer == null)
         {
-            throw new Exception("No client user");
+            throw new Exception("No trainer found");
         }
-        return client;
+        return trainer;
     }
 
-    public async Task Update(Client entity)
+    public async Task Update(Trainer entity)
     {
-        ClientValidator.InfoFieldsValidate(entity);
+        TrainerValidator.InfoFieldsValidate(entity);
 
-        var client = await _clientRepo.GetByIdAsync(entity.ClientId);
-        if (client == null)
+        var trainer = await _trainerRepo.GetByIdAsync(entity.TrainerId);
+        if (trainer == null)
         {
-            throw new Exception("No client found");
+            throw new Exception("No trainer found");
         }
 
-        await _clientRepo.UpdateAsync(entity);
+        await _trainerRepo.UpdateAsync(entity);
     }
-
 
 }
