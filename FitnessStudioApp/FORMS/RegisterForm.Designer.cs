@@ -81,7 +81,6 @@
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(157, 23);
             txtUsername.TabIndex = 4;
-            txtUsername.Text = "*";
             // 
             // txtEmail
             // 

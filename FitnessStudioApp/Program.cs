@@ -1,5 +1,7 @@
 using FitnessStudioApp.FORMS;
 using FitnessStudioApp.MODELS;
+using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.SERVICES;
 
 namespace FitnessStudioApp
 {
@@ -11,10 +13,13 @@ namespace FitnessStudioApp
         [STAThread]
         static void Main()
         {
+           using FitnessStudioAppDbContext dbContext = new FitnessStudioAppDbContext();
+            UserRepository UserRepository = new UserRepository(dbContext);
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new RegisterForm());
+            UserService userService = new UserService(UserRepository);
+            Application.Run(new RegisterForm(userService));
 
             using (var db = new FitnessStudioAppDbContext())
             {
