@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.SERVICES;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,26 +15,58 @@ namespace FitnessStudioApp.FORMS
 {
     public partial class LoginForm : Form
     {
+        private readonly LoginService _loginService;
         public LoginForm()
         {
             InitializeComponent();
+
+            var db = new FitnessStudioAppDbContext();
+            var userRepo = new UserRepository(db);
+            _loginService = new LoginService(userRepo);
         }
+        
         private void chbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (chbShowPassword.Checked)
             {
-                txtbPassword.UseSystemPasswordChar = false;
+                txtPassword.UseSystemPasswordChar = false;
             }
             else
             {
-                txtbPassword.UseSystemPasswordChar = true;
+                txtPassword.UseSystemPasswordChar = true;
             }
 
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private async void btnLogin_Click(object sender, EventArgs e)
         {
+            try
+            {
+                var user = await _loginService.LoginAsync(
+                txtUsername.Text,
+                txtPassword.Text);
 
+                MessageBox.Show("Login successful!" );
+
+                /*this.Hide();
+
+                if (user.Role == Role.Client)
+                {
+                    new ClientProfileForm(user.UserId).Show();
+                }
+                else if(user.Role == Role.Trainer)
+                {
+                    new TrainerProfileForm(user.UserId).Show();
+                }
+                else if (user.Role == Role.Admin)
+                {
+                    new AdminProfileForm().Show();
+                }*/
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Login failed: " + ex.Message);
+            }
         }
     }
 }
