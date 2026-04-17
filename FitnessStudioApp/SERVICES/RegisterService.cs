@@ -8,5 +8,6 @@ namespace FitnessStudioApp.SERVICES
 {
     internal class RegisterService
     {
+
     }
 }

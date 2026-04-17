@@ -1,5 +1,4 @@
-﻿using FitnessStudioApp.MODELS.Enumsp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,7 +15,6 @@ public class User
     public string Email { get; set; }
     public string Phone { get; set; }
     public string Password { get; set; }
-    public Role Role { get; set; }
 
     public Client Client { get; set; }
     public Admin Admin { get; set; }

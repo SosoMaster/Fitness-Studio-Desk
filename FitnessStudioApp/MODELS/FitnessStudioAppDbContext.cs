@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,18 @@ namespace FitnessStudioApp.MODELS
                 u.HasOne(u => u.Trainer)
                 .WithOne(c => c.User)
                 .HasForeignKey<Trainer>(c => c.UserId);
-            });
+
+                
+
+                u.Property(u => u.Username)
+                 .IsRequired()
+                 .HasMaxLength(50);
+
+                
+            }); 
 
             
+
         }
     }
 }
