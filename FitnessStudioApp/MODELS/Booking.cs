@@ -15,6 +15,6 @@ namespace FitnessStudioApp.MODELS
 
        
         public Client Client { get; set; }
-/*        public TrainingSession TrainingSession { get; set; }
-*/    }
+        public TrainingSession TrainingSession { get; set; }
+   }
 }
