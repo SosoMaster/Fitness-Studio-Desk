@@ -29,6 +29,9 @@ namespace FitnessStudioApp.FORMS
 
         }
 
-      
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

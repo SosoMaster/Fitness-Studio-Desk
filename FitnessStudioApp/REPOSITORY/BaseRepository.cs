@@ -1,4 +1,5 @@
-﻿using FitnessStudioApp.MODELS;
+﻿
+using FitnessStudioApp.MODELS;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
