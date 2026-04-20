@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessStudioApp.MODELS.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +11,11 @@ namespace FitnessStudioApp.MODELS
     {
         public int MembershipId { get; set; }  
         public int ClientId { get; set; }      
+        // Navigation property to the user who owns this membership
+        public Client? Client { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
-
-       
-        public Client Client { get; set; }
+        public Plans Plan { get; set; }
     }
 }

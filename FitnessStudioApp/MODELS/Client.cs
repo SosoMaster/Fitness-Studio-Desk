@@ -1,18 +1,40 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 
-namespace FitnessStudioApp.MODELS;
-
-public class Client
+namespace FitnessStudioApp.MODELS
 {
-    public int ClientId { get; set; }
-    public string MembershipStatus { get; set; }
+    public enum UserRole
+    {
+        Client,
+        Trainer,
+        Admin
+    }
 
-    public Trainer Trainer { get; set; }
+    public class Client
+    {
+        public int ClientId { get; set; }
 
-    public int UserId { get; set; }
-    public User User { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Email { get; set; }
+
+        public string PasswordHash { get; set; }
+
+        public UserRole Role { get; set; } = UserRole.Client;
+
+        public DateTime? DateOfBirth { get; set; }
+
+        public string? Phone { get; set; }
+
+        public string? ProfileImagePath { get; set; }
+
+        // Navigation properties
+        public ICollection<Membership> Memberships { get; set; } = new List<Membership>();
+        public ICollection<WorkoutPlan> WorkoutPlans { get; set; } = new List<WorkoutPlan>();
+        public ICollection<ProgressEntry> ProgressEntries { get; set; } = new List<ProgressEntry>();
+    }
 }

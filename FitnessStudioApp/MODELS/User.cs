@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessStudioApp.MODELS.Enums;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -16,7 +17,5 @@ public class User
     public string Phone { get; set; }
     public string Password { get; set; }
 
-    public Client Client { get; set; }
-    public Admin Admin { get; set; }
-    public Trainer Trainer { get; set; }
+    public Roles Role { get; set; }
 }

@@ -1,0 +1,38 @@
+﻿# Idea of the whole project
+ - Create a fitness studio management application that allows users to manage their workout plans, track their progress, and connect with other fitness enthusiasts.
+ - The application will be very user-friendly and will have a clean and modern design.
+# Features
+ - User registration and login system
+ - Workout plan creation and management
+ - Progress tracking with charts and statistics
+ - Admin panel for managing users and workout plans
+# Technologies to be used
+ - Backend: ASP.NET Core with Entity Framework for database management
+ - Fronend: Basic Windows Forms for the UI
+ - Database: SQL Server for storing user data, workout plans, and progress tracking information
+
+## Development Plan
+1. Set up the project structure and create the necessary folders for models, views, controllers, and data access.
+2. Set up of the models:
+  - Create the model classes for User, WorkoutPlan, Exercise and etc. These classes will represent the entities in the database and will be used for data manipulation and retrieval.
+  - Create Enums for the different types of exercises, workout plans, and user roles (e.g., Admin, Regular User).
+  - Make those Enums useful for the application logic and UI by implementing methods to convert them to user-friendly strings or to populate dropdowns in the UI.
+  - Create the DB Context class for EF and set up the connection to the SQL Server database.
+3. Set up of the Repositories:
+  - Create repository classes for each model to handle data access and manipulation. These repositories will contain methods for CRUD operations (Create, Read, Update, Delete) and any additional queries needed for the application.
+  - Implement the repository pattern to abstract away the data access logic from the rest of the application, making it easier to maintain and test.
+4. Set up of the Services:
+  - Create service classes that will contain the business logic for the application. These services will use the repositories to perform operations on the data and will be called by the controllers to handle user requests.
+  - Implement methods in the services for user registration, workout plan management, progress tracking, and any other features needed for the application.
+5. Set up of the Controllers:
+  - Create controller classes that will handle user requests and interact with the services to perform the necessary operations. These controllers will be responsible for processing user input, calling the appropriate service methods, and returning the results to the UI.
+  - Implement methods in the controllers for handling user registration, login, workout plan creation and management, progress tracking, and any other features needed for the application.
+6. Set up of the UI:
+ - Create the Windows Forms for the user interface. This will include forms for user registration and login, workout plan creation and management, progress tracking, and any other features needed for the application.
+ - Design the UI to be user-friendly and visually appealing, using appropriate controls and layouts to enhance the user experience.
+ - Implement event handlers for the UI controls to call the appropriate controller methods when users interact with the application.
+7. Testing and Debugging:
+ - Making NUnit tests for the services, repositories, and controllers to ensure that the application is functioning correctly and to catch any bugs or issues.
+ - Perform manual testing of the application to ensure that all features are working as expected and to identify any usability issues or bugs that may need to be addressed.
+8. Out of scope features for the current plan:
+ - Social features to connect with other users, share workout plans, and provide support
