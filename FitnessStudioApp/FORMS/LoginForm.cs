@@ -19,10 +19,6 @@ namespace FitnessStudioApp.FORMS
         public LoginForm()
         {
             InitializeComponent();
-
-            var db = new FitnessStudioAppDbContext();
-            var userRepo = new UserRepository(db);
-            _loginService = new LoginService(userRepo);
         }
         
         private void chbShowPassword_CheckedChanged(object sender, EventArgs e)

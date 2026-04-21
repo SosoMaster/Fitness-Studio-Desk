@@ -29,7 +29,11 @@ namespace FitnessStudioApp.SERVICES
 
         public async Task CreateMembershipAsync(Membership membership)
         {
-            if (membership == null) throw new ArgumentNullException(nameof(membership));
+            if (membership == null)
+            {
+                throw new ArgumentNullException(nameof(membership));
+            }
+
             await _membershipRepo.AddAsync(membership);
         }
 

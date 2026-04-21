@@ -1,6 +1,7 @@
 using FitnessStudioApp.FORMS;
 using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES;
 
 namespace FitnessStudioApp
@@ -20,7 +21,13 @@ namespace FitnessStudioApp
             ApplicationConfiguration.Initialize();
             UserService userService = new UserService(UserRepository);
             Application.Run(new RegisterForm(userService));
+            //
 
+            //var db = new FitnessStudioAppDbContext();
+            //var userRepo = new UserRepository(db);
+            //_loginService = new LoginService(userRepo);
+            //
+            //
             using (var db = new FitnessStudioAppDbContext())
             {
                 db.Database.EnsureCreated();

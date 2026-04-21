@@ -36,36 +36,39 @@
             // lblName
             // 
             lblName.AutoSize = true;
-            lblName.Location = new Point(37, 30);
+            lblName.Location = new Point(42, 40);
             lblName.Name = "lblName";
-            lblName.Size = new Size(39, 15);
+            lblName.Size = new Size(49, 20);
             lblName.TabIndex = 0;
             lblName.Text = "Name";
             // 
             // lblTargetedProgress
             // 
             lblTargetedProgress.AutoSize = true;
-            lblTargetedProgress.Location = new Point(37, 98);
+            lblTargetedProgress.Location = new Point(42, 131);
             lblTargetedProgress.Name = "lblTargetedProgress";
-            lblTargetedProgress.Size = new Size(140, 15);
+            lblTargetedProgress.Size = new Size(180, 20);
             lblTargetedProgress.TabIndex = 1;
             lblTargetedProgress.Text = "Type of targeted progress";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(49, 58);
+            textBox1.Location = new Point(56, 77);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
+            textBox1.Size = new Size(114, 27);
             textBox1.TabIndex = 2;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // ProgressForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(914, 600);
             Controls.Add(textBox1);
             Controls.Add(lblTargetedProgress);
             Controls.Add(lblName);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ProgressForm";
             ResumeLayout(false);
             PerformLayout();

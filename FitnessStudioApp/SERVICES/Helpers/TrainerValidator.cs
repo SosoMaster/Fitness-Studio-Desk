@@ -5,11 +5,11 @@ namespace FitnessStudioApp.SERVICES.Helpers;
 
 public static class TrainerValidator
 {
-    public static void InfoFieldsValidate(Trainer trainer)
+    public static bool InfoFieldsValidate(Trainer trainer)
     {
         if (trainer == null || trainer.UserId <= 0)
         {
-            throw new Exception("Invalid trainer data");
+            return false;
         }
     }
 }

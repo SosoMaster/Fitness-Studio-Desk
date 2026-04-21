@@ -335,14 +335,11 @@ namespace FitnessStudioApp.Migrations
 
             modelBuilder.Entity("FitnessStudioApp.MODELS.User", b =>
                 {
-                    b.Navigation("Admin")
-                        .IsRequired();
+                    b.Navigation("Admin");
 
-                    b.Navigation("Client")
-                        .IsRequired();
+                    b.Navigation("Client");
 
-                    b.Navigation("Trainer")
-                        .IsRequired();
+                    b.Navigation("Trainer");
                 });
 #pragma warning restore 612, 618
         }

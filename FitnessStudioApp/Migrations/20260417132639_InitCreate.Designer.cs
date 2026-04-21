@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessStudioApp.Migrations
 {
     [DbContext(typeof(FitnessStudioAppDbContext))]
-    [Migration("20260417081611_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260417132639_InitCreate")]
+    partial class InitCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -338,14 +338,11 @@ namespace FitnessStudioApp.Migrations
 
             modelBuilder.Entity("FitnessStudioApp.MODELS.User", b =>
                 {
-                    b.Navigation("Admin")
-                        .IsRequired();
+                    b.Navigation("Admin");
 
-                    b.Navigation("Client")
-                        .IsRequired();
+                    b.Navigation("Client");
 
-                    b.Navigation("Trainer")
-                        .IsRequired();
+                    b.Navigation("Trainer");
                 });
 #pragma warning restore 612, 618
         }

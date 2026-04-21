@@ -18,7 +18,6 @@ namespace FitnessStudioApp.SERVICES.Helpers
                 string.IsNullOrWhiteSpace(user.Password))
             {
                 return false;
-                throw new Exception("Invalid data");
             }
             return true;
         }

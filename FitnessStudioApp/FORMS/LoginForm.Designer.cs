@@ -40,51 +40,54 @@
             // lblLogin
             // 
             lblLogin.AutoSize = true;
-            lblLogin.Location = new Point(385, 26);
+            lblLogin.Location = new Point(96, 33);
             lblLogin.Name = "lblLogin";
-            lblLogin.Size = new Size(37, 15);
+            lblLogin.Size = new Size(46, 20);
             lblLogin.TabIndex = 0;
             lblLogin.Text = "Login";
             // 
             // lblUser
             // 
             lblUser.AutoSize = true;
-            lblUser.Location = new Point(63, 81);
+            lblUser.Location = new Point(72, 108);
             lblUser.Name = "lblUser";
-            lblUser.Size = new Size(30, 15);
+            lblUser.Size = new Size(38, 20);
             lblUser.TabIndex = 1;
             lblUser.Text = "User";
             // 
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(63, 144);
+            lblPassword.Location = new Point(72, 192);
             lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(57, 15);
+            lblPassword.Size = new Size(70, 20);
             lblPassword.TabIndex = 2;
             lblPassword.Text = "Password";
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(68, 162);
+            txtPassword.Location = new Point(78, 216);
+            txtPassword.Margin = new Padding(3, 4, 3, 4);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(100, 23);
+            txtPassword.Size = new Size(114, 27);
             txtPassword.TabIndex = 3;
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(68, 99);
+            txtUsername.Location = new Point(78, 132);
+            txtUsername.Margin = new Padding(3, 4, 3, 4);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(100, 23);
+            txtUsername.Size = new Size(114, 27);
             txtUsername.TabIndex = 5;
             txtUsername.UseSystemPasswordChar = true;
             // 
             // chbShowPassword
             // 
             chbShowPassword.AutoSize = true;
-            chbShowPassword.Location = new Point(63, 191);
+            chbShowPassword.Location = new Point(72, 255);
+            chbShowPassword.Margin = new Padding(3, 4, 3, 4);
             chbShowPassword.Name = "chbShowPassword";
-            chbShowPassword.Size = new Size(105, 19);
+            chbShowPassword.Size = new Size(128, 24);
             chbShowPassword.TabIndex = 6;
             chbShowPassword.Text = "ShowPassword";
             chbShowPassword.UseVisualStyleBackColor = true;
@@ -92,9 +95,10 @@
             // 
             // btnLogin
             // 
-            btnLogin.Location = new Point(63, 216);
+            btnLogin.Location = new Point(72, 288);
+            btnLogin.Margin = new Padding(3, 4, 3, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(75, 23);
+            btnLogin.Size = new Size(86, 31);
             btnLogin.TabIndex = 7;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
@@ -102,9 +106,9 @@
             // 
             // LoginForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(935, 450);
+            ClientSize = new Size(1069, 600);
             Controls.Add(btnLogin);
             Controls.Add(chbShowPassword);
             Controls.Add(txtUsername);
@@ -112,6 +116,7 @@
             Controls.Add(lblPassword);
             Controls.Add(lblUser);
             Controls.Add(lblLogin);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "LoginForm";
             Text = "LoginForm";
             ResumeLayout(false);

@@ -14,7 +14,6 @@ namespace FitnessStudioApp.MODELS
         public DateTime EndDate { get; set; }
         public string Status { get; set; }
 
-       
         public Client Client { get; set; }
     }
 }

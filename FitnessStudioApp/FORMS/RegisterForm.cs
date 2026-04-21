@@ -27,11 +27,9 @@ namespace FitnessStudioApp.FORMS
 
         private async void btnRegister_Click(object sender, EventArgs e)
         {
-
-
             try
             {
-                User user = new User()
+                User user = new()
                 {
                     Username = txtUsername.Text,
                     Email = txtEmail.Text,
@@ -43,8 +41,8 @@ namespace FitnessStudioApp.FORMS
             }
             catch (Exception ex)
             {
-
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("КАКВО СТАНА", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // logger.Error(ex.Message, ex.StackTrace)
             }
         }
     }
