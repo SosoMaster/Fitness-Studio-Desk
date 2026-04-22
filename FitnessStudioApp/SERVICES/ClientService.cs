@@ -21,12 +21,22 @@ public class ClientService
 
     public async Task AddAsync( User user,Client clinet)
     {
-       UserValidator.InfoFieldsValidate(user);
+        if (!UserValidator.InfoFieldsValidate(user))
+        {
+            throw new Exception("Invalid user");
+            
+        }
+       
        await _userService.AddAsync(user);
 
         clinet.UserId = user.UserId;
 
-       ClientValidator.InfoFieldsValidate(clinet);
+        if (!ClientValidator.InfoFieldsValidate(clinet))
+        {
+            throw new Exception("Invalid client");
+
+        }
+
        await _clientRepo.AddAsync(clinet);
 
     }
@@ -70,7 +80,11 @@ public class ClientService
 
     public async Task Update(Client entity)
     {
-        ClientValidator.InfoFieldsValidate(entity);
+       if (!ClientValidator.InfoFieldsValidate(entity))
+        {
+            throw new Exception("Invalid client");
+            
+        }
 
         var client = await _clientRepo.GetByIdAsync(entity.ClientId);
         if (client == null)

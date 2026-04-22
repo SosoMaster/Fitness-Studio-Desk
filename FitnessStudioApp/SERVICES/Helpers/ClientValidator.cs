@@ -9,13 +9,14 @@ namespace FitnessStudioApp.SERVICES.Helpers;
 
 public static class ClientValidator
 {
-    public static void InfoFieldsValidate(Client client)
+    public static bool InfoFieldsValidate(Client client)
     {
         if (string.IsNullOrEmpty(client.MembershipStatus)||
             client.Trainer == null)
         {
-            throw new Exception("Invalid info");
+            return false;
         }
+        return true;
     }
 
 }
