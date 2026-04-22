@@ -11,5 +11,6 @@ public static class TrainerValidator
         {
             return false;
         }
+        return true;
     }
 }
