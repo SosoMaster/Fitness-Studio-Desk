@@ -15,4 +15,6 @@ public class ClientRepository: BaseRepository<Client>, IClientRepository
     {
 
     }
+
+
 }
