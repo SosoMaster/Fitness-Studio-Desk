@@ -58,6 +58,10 @@ namespace FitnessStudioApp.MODELS
                  .IsRequired()
                  .HasMaxLength(50);
 
+                u.Property(u => u.Password).IsRequired();
+                u.Property(u=> u.Email).IsRequired().HasMaxLength(50);
+                u.Property(u => u.Phone).IsRequired().HasMaxLength(20);
+
 
                 // за релациите
                 u.Property(u => u.Trainer).IsRequired(false);
@@ -71,15 +75,25 @@ namespace FitnessStudioApp.MODELS
                 t.HasKey(t => t.TrainerId);
                 t.Property(t => t.TrainerId).IsRequired();
                 t.Property(t => t.UserId).IsRequired(false);
+
                 
                 t.HasMany(t => t.TrainingSessions)
                  .WithOne(ts => ts.Trainer)
                  .HasForeignKey(ts => ts.TrainerId);
                  
 
+
+                // Client => Trainer
+                t.HasMany(t => t.Clients)
+                 .WithOne(c => c.Trainer)
+                 .HasForeignKey(c => c.TrainerId);
+
+                t.Property(t => t.TrainerId).IsRequired();
+                t.Property(t => t.UserId).IsRequired(false);
+
                 // още ограничения
              t.Property(t => t.Specialty) .IsRequired();
-                t.Property(t => t.ClientId).IsRequired(false);
+                t.Property(t => t.UserId).IsRequired(false);
                 t.Property(t => t.UserId).IsRequired(false);
                 t.Property(t => t.TrainingSessions).IsRequired(false);
                 
@@ -88,9 +102,14 @@ namespace FitnessStudioApp.MODELS
             modelBuilder.Entity<Client>(c =>
             {
                 c.HasKey(c=> c.ClientId);
+                c.Property(c => c.ClientId).IsRequired();
+                c.Property(c => c.UserId).IsRequired(false);
+
+                c.Property(c => c.MembershipStatus).IsRequired();
                 // още ограничения
 
             });
+
 
             modelBuilder.Entity<TrainingSession>(ts =>
             {   
@@ -115,6 +134,14 @@ namespace FitnessStudioApp.MODELS
 
             }); 
 
+
+
+            modelBuilder.Entity<Admin>(a =>
+            {
+                a.HasKey(a => a.AdminId);
+                a.Property(a => a.AdminId).IsRequired();
+                a.Property(a => a.UserId).IsRequired(false);
+            });
 
 
 

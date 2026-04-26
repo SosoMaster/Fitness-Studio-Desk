@@ -11,8 +11,7 @@ public static class ClientValidator
 {
     public static bool InfoFieldsValidate(Client client)
     {
-        if (string.IsNullOrEmpty(client.MembershipStatus)||
-            client.Trainer == null)
+        if (client.Trainer == null)
         {
             return false;
         }
