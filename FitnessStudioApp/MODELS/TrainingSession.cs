@@ -16,5 +16,6 @@ public class TrainingSession
     public string Description { get; set; }
 
     public Trainer Trainer { get; set; }
+
     public ICollection<Booking> Bookings { get; set; }
 }
