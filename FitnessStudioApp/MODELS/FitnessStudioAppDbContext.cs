@@ -67,7 +67,7 @@ namespace FitnessStudioApp.MODELS
                 u.Property(u => u.Trainer).IsRequired(false);
                 u.Property(u => u.Client).IsRequired(false);
                 u.Property(u => u.Admin).IsRequired(false);
-                
+
             });
 
             modelBuilder.Entity<Trainer>(t =>
@@ -81,21 +81,14 @@ namespace FitnessStudioApp.MODELS
                  .WithOne(ts => ts.Trainer)
                  .HasForeignKey(ts => ts.TrainerId);
                  
-
-
                 // Client => Trainer
                 t.HasMany(t => t.Clients)
                  .WithOne(c => c.Trainer)
                  .HasForeignKey(c => c.TrainerId);
 
-                t.Property(t => t.TrainerId).IsRequired();
-                t.Property(t => t.UserId).IsRequired(false);
-
-                // още ограничения
-             t.Property(t => t.Specialty) .IsRequired();
-                t.Property(t => t.UserId).IsRequired(false);
-                t.Property(t => t.UserId).IsRequired(false);
-                t.Property(t => t.TrainingSessions).IsRequired(false);
+                 t.Property(t => t.TrainerId).IsRequired();
+                 t.Property(t => t.Specialty) .IsRequired();
+                 t.Property(t => t.TrainingSessions).IsRequired(false);
                 
             });
 
@@ -106,7 +99,15 @@ namespace FitnessStudioApp.MODELS
                 c.Property(c => c.UserId).IsRequired(false);
 
                 c.Property(c => c.MembershipStatus).IsRequired();
-                // още ограничения
+               
+
+            });
+
+            modelBuilder.Entity<Admin>(a =>
+            {
+                a.HasKey(a => a.AdminId);
+                a.Property(a => a.AdminId).IsRequired();
+                a.Property(a => a.UserId).IsRequired(false);
 
             });
 
@@ -120,33 +121,14 @@ namespace FitnessStudioApp.MODELS
                  .WithOne(b => b.TrainingSession)
                  .HasForeignKey(b => b.TrainingSessionId);
 
-
-
-
-
-                // още ограничения
                 ts.Property(ts => ts.StartTime).IsRequired();
                 ts.Property(ts => ts.EndTime).IsRequired();
                 ts.Property(ts => ts.Capacity).IsRequired();
-                ts.Property(ts => ts.Description).IsRequired(true);
-                ts.Property(ts => ts.Bookings).IsRequired(true);
-                ts.Property(ts => ts.Trainer).IsRequired(true);
+                ts.Property(ts => ts.Description).IsRequired();
+                ts.Property(ts => ts.Bookings).IsRequired();
+                ts.Property(ts => ts.Trainer).IsRequired();
 
             }); 
-
-
-
-            modelBuilder.Entity<Admin>(a =>
-            {
-                a.HasKey(a => a.AdminId);
-                a.Property(a => a.AdminId).IsRequired();
-                a.Property(a => a.UserId).IsRequired(false);
-            });
-
-
-
-
-
         }
     }
 }
