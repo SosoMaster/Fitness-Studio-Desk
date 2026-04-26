@@ -71,7 +71,18 @@ namespace FitnessStudioApp.MODELS
                 t.HasKey(t => t.TrainerId);
                 t.Property(t => t.TrainerId).IsRequired();
                 t.Property(t => t.UserId).IsRequired(false);
+                
+                t.HasMany(t => t.TrainingSessions)
+                 .WithOne(ts => ts.Trainer)
+                 .HasForeignKey(ts => ts.TrainerId);
+                 
+
                 // още ограничения
+             t.Property(t => t.Specialty) .IsRequired();
+                t.Property(t => t.ClientId).IsRequired(false);
+                t.Property(t => t.UserId).IsRequired(false);
+                t.Property(t => t.TrainingSessions).IsRequired(false);
+                
             });
 
             modelBuilder.Entity<Client>(c =>
@@ -81,9 +92,33 @@ namespace FitnessStudioApp.MODELS
 
             });
 
+            modelBuilder.Entity<TrainingSession>(ts =>
+            {   
+                ts.HasKey(ts => ts.TrainingSessionId);
+                ts.Property(ts => ts.TrainingSessionId).IsRequired();
+                ts.Property(ts => ts.TrainerId).IsRequired();
+                ts.HasMany(ts => ts.Bookings)
+                 .WithOne(b => b.TrainingSession)
+                 .HasForeignKey(b => b.TrainingSessionId);
 
 
-            
+
+
+
+                // още ограничения
+                ts.Property(ts => ts.StartTime).IsRequired();
+                ts.Property(ts => ts.EndTime).IsRequired();
+                ts.Property(ts => ts.Capacity).IsRequired();
+                ts.Property(ts => ts.Description).IsRequired(true);
+                ts.Property(ts => ts.Bookings).IsRequired(true);
+                ts.Property(ts => ts.Trainer).IsRequired(true);
+
+            }); 
+
+
+
+
+
 
         }
     }

@@ -17,4 +17,7 @@ public class Trainer
 
     public int UserId { get; set; }
     public User User { get; set; }
+    public List<TrainingSession> TrainingSessions { get; set; } = new List<TrainingSession>();
+
+
 }
