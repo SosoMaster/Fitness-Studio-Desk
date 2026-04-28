@@ -81,7 +81,15 @@ namespace FitnessStudioApp.MODELS
 
             });
 
+            modelBuilder.Entity<Progress>(p =>
+            {
+                p.HasKey(x => x.ProgressId);
+                p.HasOne(x => x.Client)
+                .WithMany(x => x.progresses)
+                .HasForeignKey(x => x.ClientId);
 
+
+            });
 
             
 
