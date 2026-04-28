@@ -34,66 +34,65 @@ namespace FitnessStudioApp.MODELS
             modelBuilder.Entity<User>(u =>
             {
                 u.HasKey(x => x.UserId);
-                u.Property(u => u.Username).IsRequired().HasMaxLength(50);
-                u.Property(u => u.Password).IsRequired();
-                u.Property(u => u.Email).IsRequired().HasMaxLength(50);
-                u.Property(u => u.Phone).IsRequired().HasMaxLength(20);
+                u.Property(x => x.UserId).IsRequired();
 
+                // релация за Client
                 u.HasOne(u => u.Client)
-                 .WithOne(c => c.User)
-                 .HasForeignKey<Client>(c => c.UserId)
-                 .OnDelete(DeleteBehavior.NoAction);
+                .WithOne(c => c.User)
+                .HasForeignKey<Client>(c => c.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
+                // релация за Trainer
                 u.HasOne(u => u.Trainer)
                  .WithOne(t => t.User)
                  .HasForeignKey<Trainer>(t => t.UserId)
-                 .OnDelete(DeleteBehavior.NoAction);
+                 .OnDelete(DeleteBehavior.Cascade);
 
+                // релация за Admin
                 u.HasOne(u => u.Admin)
                  .WithOne(a => a.User)
                  .HasForeignKey<Admin>(a => a.UserId)
-                 .OnDelete(DeleteBehavior.NoAction);
+                 .OnDelete(DeleteBehavior.Cascade);
+
+                u.Property(u => u.Username)
+                 .IsRequired()
+                 .HasMaxLength(50);
+
+
+                // за релациите
+                u.Property(u => u.Trainer).IsRequired(false);
+                u.Property(u => u.Client).IsRequired(false);
+                u.Property(u => u.Admin).IsRequired(false);
+                
             });
 
             modelBuilder.Entity<Trainer>(t =>
             {
                 t.HasKey(t => t.TrainerId);
-                t.Property(t => t.Specialty).IsRequired();
-
-                t.HasMany(t => t.TrainingSessions)
-                 .WithOne(ts => ts.Trainer)
-                 .HasForeignKey(ts => ts.TrainerId);
-
-                t.HasMany(t => t.Clients)
-                 .WithOne(c => c.Trainer)
-                 .HasForeignKey(c => c.TrainerId);
+                t.Property(t => t.TrainerId).IsRequired();
+                t.Property(t => t.UserId).IsRequired(false);
+                // още ограничения
             });
 
             modelBuilder.Entity<Client>(c =>
             {
-                c.HasKey(c => c.ClientId);
-                c.Property(c => c.MembershipStatus).IsRequired();
+                c.HasKey(c=> c.ClientId);
+                // още ограничения
+
             });
 
-            modelBuilder.Entity<Admin>(a =>
+            modelBuilder.Entity<Progress>(p =>
             {
-                a.HasKey(a => a.AdminId);
+                p.HasKey(x => x.ProgressId);
+                p.HasOne(x => x.Client)
+                .WithMany(x => x.progresses)
+                .HasForeignKey(x => x.ClientId);
+
+
             });
 
-            modelBuilder.Entity<TrainingSession>(ts =>
-            {
-                ts.HasKey(ts => ts.TrainingSessionId);
-                ts.Property(ts => ts.TrainerId).IsRequired();
-                ts.Property(ts => ts.StartTime).IsRequired();
-                ts.Property(ts => ts.EndTime).IsRequired();
-                ts.Property(ts => ts.Capacity).IsRequired();
-                ts.Property(ts => ts.Description).IsRequired();
+            
 
-                ts.HasMany(ts => ts.Bookings)
-                  .WithOne(b => b.TrainingSession)
-                  .HasForeignKey(b => b.TrainingSessionId)
-                  .OnDelete(DeleteBehavior.NoAction);
-            });
         }
     }
 }
