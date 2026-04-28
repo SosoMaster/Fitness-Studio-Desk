@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessStudioApp.MODELS.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,9 @@ namespace FitnessStudioApp.MODELS;
 public class Client
 {
     public int ClientId { get; set; }
-    public string MembershipStatus { get; set; }
+    public MembershipStatus MembershipStatus { get; set; }
 
+    public int TrainerId { get; set; }
     public Trainer Trainer { get; set; }
 
     public int UserId { get; set; }

@@ -20,7 +20,7 @@ namespace FitnessStudioApp.FORMS
         {
             InitializeComponent();
         }
-        
+
         private void chbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (chbShowPassword.Checked)
@@ -42,7 +42,7 @@ namespace FitnessStudioApp.FORMS
                 txtUsername.Text,
                 txtPassword.Text);
 
-                MessageBox.Show("Login successful!" );
+                MessageBox.Show("Login successful!");
 
                 /*this.Hide();
 
@@ -63,6 +63,11 @@ namespace FitnessStudioApp.FORMS
             {
                 MessageBox.Show("Login failed: " + ex.Message);
             }
+        }
+
+        private void lblUser_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
