@@ -37,6 +37,9 @@
             txtPassword = new TextBox();
             txtPhone = new TextBox();
             btnRegister = new Button();
+            pictureBox1 = new PictureBox();
+            label1 = new Label();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblUsername
@@ -113,11 +116,30 @@
             btnRegister.UseVisualStyleBackColor = true;
             btnRegister.Click += btnRegister_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(212, 39);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(76, 74);
+            pictureBox1.TabIndex = 9;
+            pictureBox1.TabStop = false;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(362, 39);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 10;
+            label1.Text = "label1";
+            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(label1);
+            Controls.Add(pictureBox1);
             Controls.Add(btnRegister);
             Controls.Add(txtPhone);
             Controls.Add(txtPassword);
@@ -129,6 +151,7 @@
             Controls.Add(lblUsername);
             Name = "RegisterForm";
             Text = "RegisterForm";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -144,5 +167,7 @@
         private TextBox txtPassword;
         private TextBox txtPhone;
         private Button btnRegister;
+        private PictureBox pictureBox1;
+        private Label label1;
     }
 }
