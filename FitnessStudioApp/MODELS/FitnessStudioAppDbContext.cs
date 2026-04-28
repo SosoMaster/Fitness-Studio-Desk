@@ -81,6 +81,13 @@ namespace FitnessStudioApp.MODELS
                 c.Property(c => c.UserId).IsRequired(false);
                 // още ограничения
 
+                c.HasOne(c => c.Membership)
+                 .WithOne(m => m.Client)
+                 .HasForeignKey<Membership>(m => m.ClientId);
+
+                c.HasMany(c => c.Bookings)
+                 .WithOne(b => b.Client)
+                 .HasForeignKey(c => c.ClientId);
             });
 
             modelBuilder.Entity<Progress>(p =>
