@@ -76,7 +76,9 @@ namespace FitnessStudioApp.MODELS
 
             modelBuilder.Entity<Client>(c =>
             {
-                c.HasKey(c=> c.ClientId);
+                c.HasKey(c => c.ClientId);
+                c.Property(c => c.TrainerId).IsRequired();
+                c.Property(c => c.UserId).IsRequired(false);
                 // още ограничения
 
             });
