@@ -42,7 +42,7 @@
             // lblUsername
             // 
             lblUsername.AutoSize = true;
-            lblUsername.Location = new Point(343, 19);
+            lblUsername.Location = new Point(340, 172);
             lblUsername.Name = "lblUsername";
             lblUsername.Size = new Size(60, 15);
             lblUsername.TabIndex = 0;
@@ -51,7 +51,7 @@
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(357, 63);
+            lblEmail.Location = new Point(351, 216);
             lblEmail.Name = "lblEmail";
             lblEmail.Size = new Size(36, 15);
             lblEmail.TabIndex = 1;
@@ -60,7 +60,7 @@
             // lblPhone
             // 
             lblPhone.AutoSize = true;
-            lblPhone.Location = new Point(357, 151);
+            lblPhone.Location = new Point(346, 304);
             lblPhone.Name = "lblPhone";
             lblPhone.Size = new Size(41, 15);
             lblPhone.TabIndex = 2;
@@ -69,7 +69,7 @@
             // lblPassword
             // 
             lblPassword.AutoSize = true;
-            lblPassword.Location = new Point(346, 107);
+            lblPassword.Location = new Point(343, 260);
             lblPassword.Name = "lblPassword";
             lblPassword.Size = new Size(57, 15);
             lblPassword.TabIndex = 3;
@@ -77,35 +77,35 @@
             // 
             // txtUsername
             // 
-            txtUsername.Location = new Point(297, 37);
+            txtUsername.Location = new Point(297, 190);
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(157, 23);
             txtUsername.TabIndex = 4;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(297, 81);
+            txtEmail.Location = new Point(297, 234);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(157, 23);
             txtEmail.TabIndex = 5;
             // 
             // txtPassword
             // 
-            txtPassword.Location = new Point(297, 125);
+            txtPassword.Location = new Point(297, 278);
             txtPassword.Name = "txtPassword";
             txtPassword.Size = new Size(157, 23);
             txtPassword.TabIndex = 6;
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(297, 169);
+            txtPhone.Location = new Point(297, 322);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(157, 23);
             txtPhone.TabIndex = 7;
             // 
             // btnRegister
             // 
-            btnRegister.Location = new Point(297, 235);
+            btnRegister.Location = new Point(297, 361);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(157, 57);
             btnRegister.TabIndex = 8;
