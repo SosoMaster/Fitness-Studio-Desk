@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessStudioApp.Migrations
 {
     [DbContext(typeof(FitnessStudioAppDbContext))]
-    [Migration("20260417132639_InitCreate")]
-    partial class InitCreate
+    [Migration("20260429083456_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -79,14 +79,21 @@ namespace FitnessStudioApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ClientId"));
 
-                    b.Property<string>("MembershipStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MembershipStatus")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProgressId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TrainerId")
+                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ClientId");
+
+                    b.HasIndex("TrainerId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -108,16 +115,16 @@ namespace FitnessStudioApp.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("MembershipStatus")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("MembershipId");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("ClientId")
+                        .IsUnique();
 
                     b.ToTable("Memberships");
                 });
@@ -151,6 +158,8 @@ namespace FitnessStudioApp.Migrations
 
                     b.HasKey("ProgressId");
 
+                    b.HasIndex("ClientId");
+
                     b.ToTable("Progresses");
                 });
 
@@ -162,9 +171,6 @@ namespace FitnessStudioApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TrainerId"));
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Specialty")
                         .HasColumnType("int");
 
@@ -172,9 +178,6 @@ namespace FitnessStudioApp.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("TrainerId");
-
-                    b.HasIndex("ClientId")
-                        .IsUnique();
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -223,7 +226,8 @@ namespace FitnessStudioApp.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -231,7 +235,8 @@ namespace FitnessStudioApp.Migrations
 
                     b.Property<string>("Phone")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -248,7 +253,7 @@ namespace FitnessStudioApp.Migrations
                     b.HasOne("FitnessStudioApp.MODELS.User", "User")
                         .WithOne("Admin")
                         .HasForeignKey("FitnessStudioApp.MODELS.Admin", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -257,15 +262,15 @@ namespace FitnessStudioApp.Migrations
             modelBuilder.Entity("FitnessStudioApp.MODELS.Booking", b =>
                 {
                     b.HasOne("FitnessStudioApp.MODELS.Client", "Client")
-                        .WithMany()
+                        .WithMany("Bookings")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FitnessStudioApp.MODELS.TrainingSession", "TrainingSession")
                         .WithMany("Bookings")
                         .HasForeignKey("TrainingSessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Client");
@@ -275,11 +280,19 @@ namespace FitnessStudioApp.Migrations
 
             modelBuilder.Entity("FitnessStudioApp.MODELS.Client", b =>
                 {
+                    b.HasOne("FitnessStudioApp.MODELS.Trainer", "Trainer")
+                        .WithMany("Clients")
+                        .HasForeignKey("TrainerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("FitnessStudioApp.MODELS.User", "User")
                         .WithOne("Client")
                         .HasForeignKey("FitnessStudioApp.MODELS.Client", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("Trainer");
 
                     b.Navigation("User");
                 });
@@ -287,7 +300,18 @@ namespace FitnessStudioApp.Migrations
             modelBuilder.Entity("FitnessStudioApp.MODELS.Membership", b =>
                 {
                     b.HasOne("FitnessStudioApp.MODELS.Client", "Client")
-                        .WithMany()
+                        .WithOne("Membership")
+                        .HasForeignKey("FitnessStudioApp.MODELS.Membership", "ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("FitnessStudioApp.MODELS.Progress", b =>
+                {
+                    b.HasOne("FitnessStudioApp.MODELS.Client", "Client")
+                        .WithMany("progresses")
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -297,19 +321,11 @@ namespace FitnessStudioApp.Migrations
 
             modelBuilder.Entity("FitnessStudioApp.MODELS.Trainer", b =>
                 {
-                    b.HasOne("FitnessStudioApp.MODELS.Client", "Client")
-                        .WithOne("Trainer")
-                        .HasForeignKey("FitnessStudioApp.MODELS.Trainer", "ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FitnessStudioApp.MODELS.User", "User")
                         .WithOne("Trainer")
                         .HasForeignKey("FitnessStudioApp.MODELS.Trainer", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Client");
 
                     b.Navigation("User");
                 });
@@ -317,7 +333,7 @@ namespace FitnessStudioApp.Migrations
             modelBuilder.Entity("FitnessStudioApp.MODELS.TrainingSession", b =>
                 {
                     b.HasOne("FitnessStudioApp.MODELS.Trainer", "Trainer")
-                        .WithMany()
+                        .WithMany("TrainingSessions")
                         .HasForeignKey("TrainerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -327,8 +343,19 @@ namespace FitnessStudioApp.Migrations
 
             modelBuilder.Entity("FitnessStudioApp.MODELS.Client", b =>
                 {
-                    b.Navigation("Trainer")
+                    b.Navigation("Bookings");
+
+                    b.Navigation("Membership")
                         .IsRequired();
+
+                    b.Navigation("progresses");
+                });
+
+            modelBuilder.Entity("FitnessStudioApp.MODELS.Trainer", b =>
+                {
+                    b.Navigation("Clients");
+
+                    b.Navigation("TrainingSessions");
                 });
 
             modelBuilder.Entity("FitnessStudioApp.MODELS.TrainingSession", b =>
@@ -338,11 +365,14 @@ namespace FitnessStudioApp.Migrations
 
             modelBuilder.Entity("FitnessStudioApp.MODELS.User", b =>
                 {
-                    b.Navigation("Admin");
+                    b.Navigation("Admin")
+                        .IsRequired();
 
-                    b.Navigation("Client");
+                    b.Navigation("Client")
+                        .IsRequired();
 
-                    b.Navigation("Trainer");
+                    b.Navigation("Trainer")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

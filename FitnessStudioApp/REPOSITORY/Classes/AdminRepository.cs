@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessStudioApp.REPOSITORY;
+namespace FitnessStudioApp.REPOSITORY.Classes;
 
 public class AdminRepository : BaseRepository<Admin>
 {

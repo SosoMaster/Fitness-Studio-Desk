@@ -17,5 +17,5 @@ public class TrainingSession
 
     public Trainer Trainer { get; set; }
 
-    public ICollection<Booking> Bookings { get; set; }
+    public List<Booking> Bookings { get; set; } = new List<Booking>();
 }

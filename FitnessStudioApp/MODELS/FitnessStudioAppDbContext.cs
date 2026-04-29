@@ -34,52 +34,45 @@ namespace FitnessStudioApp.MODELS
             modelBuilder.Entity<User>(u =>
             {
                 u.HasKey(x => x.UserId);
-                u.Property(x => x.UserId).IsRequired();
+                u.Property(u => u.Username).IsRequired().HasMaxLength(50);
+                u.Property(u => u.Password).IsRequired();
+                u.Property(u => u.Email).IsRequired().HasMaxLength(50);
+                u.Property(u => u.Phone).IsRequired().HasMaxLength(20);
 
-                // релация за Client
                 u.HasOne(u => u.Client)
-                .WithOne(c => c.User)
-                .HasForeignKey<Client>(c => c.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
+                 .WithOne(c => c.User)
+                 .HasForeignKey<Client>(c => c.UserId)
+                 .OnDelete(DeleteBehavior.NoAction);
 
-                // релация за Trainer
                 u.HasOne(u => u.Trainer)
                  .WithOne(t => t.User)
                  .HasForeignKey<Trainer>(t => t.UserId)
-                 .OnDelete(DeleteBehavior.Cascade);
+                 .OnDelete(DeleteBehavior.NoAction);
 
-                // релация за Admin
                 u.HasOne(u => u.Admin)
                  .WithOne(a => a.User)
                  .HasForeignKey<Admin>(a => a.UserId)
-                 .OnDelete(DeleteBehavior.Cascade);
-
-                u.Property(u => u.Username)
-                 .IsRequired()
-                 .HasMaxLength(50);
-
-
-                // за релациите
-                u.Property(u => u.Trainer).IsRequired(false);
-                u.Property(u => u.Client).IsRequired(false);
-                u.Property(u => u.Admin).IsRequired(false);
-                
+                 .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Trainer>(t =>
             {
                 t.HasKey(t => t.TrainerId);
-                t.Property(t => t.TrainerId).IsRequired();
-                t.Property(t => t.UserId).IsRequired(false);
-                // още ограничения
+                t.Property(t => t.Specialty).IsRequired();
+
+                t.HasMany(t => t.TrainingSessions)
+                 .WithOne(ts => ts.Trainer)
+                 .HasForeignKey(ts => ts.TrainerId);
+
+                t.HasMany(t => t.Clients)
+                 .WithOne(c => c.Trainer)
+                 .HasForeignKey(c => c.TrainerId);
             });
 
             modelBuilder.Entity<Client>(c =>
             {
                 c.HasKey(c => c.ClientId);
-                c.Property(c => c.TrainerId).IsRequired();
-                c.Property(c => c.UserId).IsRequired(false);
-                // още ограничения
+                c.Property(c => c.MembershipStatus).IsRequired();
 
                 c.HasOne(c => c.Membership)
                  .WithOne(m => m.Client)
@@ -87,7 +80,28 @@ namespace FitnessStudioApp.MODELS
 
                 c.HasMany(c => c.Bookings)
                  .WithOne(b => b.Client)
-                 .HasForeignKey(c => c.ClientId);
+                 .HasForeignKey(c => c.ClientId)
+                 .OnDelete(DeleteBehavior.NoAction);
+            });
+
+            modelBuilder.Entity<Admin>(a =>
+            {
+                a.HasKey(a => a.AdminId);
+            });
+
+            modelBuilder.Entity<TrainingSession>(ts =>
+            {
+                ts.HasKey(ts => ts.TrainingSessionId);
+                ts.Property(ts => ts.TrainerId).IsRequired();
+                ts.Property(ts => ts.StartTime).IsRequired();
+                ts.Property(ts => ts.EndTime).IsRequired();
+                ts.Property(ts => ts.Capacity).IsRequired();
+                ts.Property(ts => ts.Description).IsRequired();
+
+                ts.HasMany(ts => ts.Bookings)
+                  .WithOne(b => b.TrainingSession)
+                  .HasForeignKey(b => b.TrainingSessionId)
+                  .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Progress>(p =>
@@ -99,9 +113,6 @@ namespace FitnessStudioApp.MODELS
 
 
             });
-
-            
-
         }
     }
 }
