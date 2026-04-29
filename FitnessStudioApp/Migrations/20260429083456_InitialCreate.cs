@@ -6,29 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FitnessStudioApp.Migrations
 {
     /// <inheritdoc />
-    public partial class InitCreate : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Progresses",
-                columns: table => new
-                {
-                    ProgressId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Weight = table.Column<double>(type: "float", nullable: false),
-                    BodyFat = table.Column<double>(type: "float", nullable: false),
-                    Calories = table.Column<int>(type: "int", nullable: false),
-                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Progresses", x => x.ProgressId);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
@@ -36,8 +18,8 @@ namespace FitnessStudioApp.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
@@ -60,50 +42,7 @@ namespace FitnessStudioApp.Migrations
                         name: "FK_Admins_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Clients",
-                columns: table => new
-                {
-                    ClientId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MembershipStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Clients", x => x.ClientId);
-                    table.ForeignKey(
-                        name: "FK_Clients_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "UserId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Memberships",
-                columns: table => new
-                {
-                    MembershipId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientId = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Memberships", x => x.MembershipId);
-                    table.ForeignKey(
-                        name: "FK_Memberships_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "ClientId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -113,24 +52,43 @@ namespace FitnessStudioApp.Migrations
                     TrainerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Specialty = table.Column<int>(type: "int", nullable: false),
-                    ClientId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Trainers", x => x.TrainerId);
                     table.ForeignKey(
-                        name: "FK_Trainers_Clients_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "Clients",
-                        principalColumn: "ClientId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Trainers_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "UserId",
+                        principalColumn: "UserId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MembershipStatus = table.Column<int>(type: "int", nullable: false),
+                    TrainerId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ProgressId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientId);
+                    table.ForeignKey(
+                        name: "FK_Clients_Trainers_TrainerId",
+                        column: x => x.TrainerId,
+                        principalTable: "Trainers",
+                        principalColumn: "TrainerId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Clients_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "UserId");
                 });
 
             migrationBuilder.CreateTable(
@@ -157,6 +115,52 @@ namespace FitnessStudioApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Memberships",
+                columns: table => new
+                {
+                    MembershipId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MembershipStatus = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Memberships", x => x.MembershipId);
+                    table.ForeignKey(
+                        name: "FK_Memberships_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Progresses",
+                columns: table => new
+                {
+                    ProgressId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
+                    BodyFat = table.Column<double>(type: "float", nullable: false),
+                    Calories = table.Column<int>(type: "int", nullable: false),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Progresses", x => x.ProgressId);
+                    table.ForeignKey(
+                        name: "FK_Progresses_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bookings",
                 columns: table => new
                 {
@@ -173,14 +177,12 @@ namespace FitnessStudioApp.Migrations
                         name: "FK_Bookings_Clients_ClientId",
                         column: x => x.ClientId,
                         principalTable: "Clients",
-                        principalColumn: "ClientId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ClientId");
                     table.ForeignKey(
                         name: "FK_Bookings_TrainingSession_TrainingSessionId",
                         column: x => x.TrainingSessionId,
                         principalTable: "TrainingSession",
-                        principalColumn: "TrainingSessionId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "TrainingSessionId");
                 });
 
             migrationBuilder.CreateIndex(
@@ -200,6 +202,11 @@ namespace FitnessStudioApp.Migrations
                 column: "TrainingSessionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clients_TrainerId",
+                table: "Clients",
+                column: "TrainerId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Clients_UserId",
                 table: "Clients",
                 column: "UserId",
@@ -208,13 +215,13 @@ namespace FitnessStudioApp.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Memberships_ClientId",
                 table: "Memberships",
-                column: "ClientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Trainers_ClientId",
-                table: "Trainers",
                 column: "ClientId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Progresses_ClientId",
+                table: "Progresses",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Trainers_UserId",
@@ -247,10 +254,10 @@ namespace FitnessStudioApp.Migrations
                 name: "TrainingSession");
 
             migrationBuilder.DropTable(
-                name: "Trainers");
+                name: "Clients");
 
             migrationBuilder.DropTable(
-                name: "Clients");
+                name: "Trainers");
 
             migrationBuilder.DropTable(
                 name: "Users");
