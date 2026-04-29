@@ -13,9 +13,8 @@ public class Trainer
     public Specialty Specialty { get; set; }
     public List<Client> Clients { get; set; } = new List<Client>();
 
-    public int UserId { get; set; }
-
-    public User User { get; set; }
+    public int UserId { get; set; } 
+    public User User { get; set; } = null!;
     public List<TrainingSession> TrainingSessions { get; set; } = new List<TrainingSession>();
 
 
