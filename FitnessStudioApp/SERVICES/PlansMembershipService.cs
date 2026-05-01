@@ -1,6 +1,5 @@
 ﻿using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
-using FitnessStudioApp.REPOSITORY.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
