@@ -108,7 +108,7 @@ namespace FitnessStudioApp.MODELS
             {
                 p.HasKey(x => x.ProgressId);
                 p.HasOne(x => x.Client)
-                .WithMany(x => x.progresses)
+                .WithMany(x => x.Progresses)
                 .HasForeignKey(x => x.ClientId);
 
 

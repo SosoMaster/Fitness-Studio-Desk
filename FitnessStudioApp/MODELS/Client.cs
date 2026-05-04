@@ -19,7 +19,7 @@ public class Client
     public User User { get; set; } = null!;
 
     public int ProgressId { get; set; }
-    public List<Progress> progresses { get; } = new List<Progress>();
+    public List<Progress> Progresses { get; set; } = new List<Progress>();
     
     public Membership Membership { get; set; }
     public List<Booking> Bookings { get; set; } = new List<Booking>();
