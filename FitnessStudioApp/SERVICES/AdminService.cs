@@ -11,25 +11,11 @@ namespace FitnessStudioApp.SERVICES;
 
 public class AdminService
 {
-    private readonly UserService _userService;
     private readonly AdminRepository _adminRepo;
 
     public AdminService(UserService userService, AdminRepository adminRepository)
     {
-        _userService = userService;
         _adminRepo = adminRepository;
-    }
-
-    public async Task AddAsync(User user, Admin admin)
-    {
-        UserValidator.InfoFieldsValidate(user);
-        await _userService.AddAsync(user);
-
-        admin.UserId = user.UserId;
-
-        /*ClientValidator.InfoFieldsValidate(trainer);*/
-        await _adminRepo.AddAsync(admin);
-
     }
 
     public async Task Delete(Admin entity)
