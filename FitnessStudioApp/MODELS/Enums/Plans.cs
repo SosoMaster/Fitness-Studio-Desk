@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessStudioApp.MODELS.Enums
 {
-    internal class Plans
+    public enum Plans
     {
     }
 }
