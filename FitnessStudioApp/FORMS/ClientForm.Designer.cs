@@ -20,138 +20,135 @@
             base.Dispose(disposing);
         }
 
-            #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-            /// <summary>
-            /// Required method for Designer support - do not modify
-            /// the contents of this method with the code editor.
-            /// </summary>
-            private void InitializeComponent()
-            {
-                lbl_Name = new Label();
-                lbl_Phone = new Label();
-                lbl_Email = new Label();
-                textBox1 = new TextBox();
-                txtb_Email = new TextBox();
-                txtb_Phone = new TextBox();
-                btn_EditProfile = new Button();
-                listBox1 = new ListBox();
-                btn_BookSession = new Button();
-                btn_CancelBooking = new Button();
-                SuspendLayout();
-                // 
-                // lbl_Name
-                // 
-                lbl_Name.AutoSize = true;
-                lbl_Name.Location = new Point(61, 45);
-                lbl_Name.Name = "lbl_Name";
-                lbl_Name.Size = new Size(39, 15);
-                lbl_Name.TabIndex = 0;
-                lbl_Name.Text = "Name";
-                // 
-                // lbl_Phone
-                // 
-                lbl_Phone.AutoSize = true;
-                lbl_Phone.Location = new Point(61, 129);
-                lbl_Phone.Name = "lbl_Phone";
-                lbl_Phone.Size = new Size(41, 15);
-                lbl_Phone.TabIndex = 1;
-                lbl_Phone.Text = "Phone";
-                // 
-                // lbl_Email
-                // 
-                lbl_Email.AutoSize = true;
-                lbl_Email.Location = new Point(61, 89);
-                lbl_Email.Name = "lbl_Email";
-                lbl_Email.Size = new Size(36, 15);
-                lbl_Email.TabIndex = 3;
-                lbl_Email.Text = "Email";
-                // 
-                // textBox1
-                // 
-                textBox1.Location = new Point(61, 63);
-                textBox1.Name = "textBox1";
-                textBox1.Size = new Size(100, 23);
-                textBox1.TabIndex = 4;
-                // 
-                // txtb_Email
-                // 
-                txtb_Email.Location = new Point(61, 107);
-                txtb_Email.Name = "txtb_Email";
-                txtb_Email.Size = new Size(100, 23);
-                txtb_Email.TabIndex = 5;
-                // 
-                // txtb_Phone
-                // 
-                txtb_Phone.Location = new Point(61, 147);
-                txtb_Phone.Name = "txtb_Phone";
-                txtb_Phone.Size = new Size(100, 23);
-                txtb_Phone.TabIndex = 6;
-                // 
-                // btn_EditProfile
-                // 
-                btn_EditProfile.Location = new Point(61, 191);
-                btn_EditProfile.Name = "btn_EditProfile";
-                btn_EditProfile.Size = new Size(100, 26);
-                btn_EditProfile.TabIndex = 8;
-                btn_EditProfile.Text = "Edit Profile";
-                btn_EditProfile.UseVisualStyleBackColor = true;
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            lbl_Name = new Label();
+            lbl_Phone = new Label();
+            lbl_Email = new Label();
+            textBox1 = new TextBox();
+            txtb_Email = new TextBox();
+            txtb_Phone = new TextBox();
+            btn_EditProfile = new Button();
+            listBox1 = new ListBox();
+            btn_BookSession = new Button();
+            btn_CancelBooking = new Button();
+            SuspendLayout();
+            // 
+            // lbl_Name
+            // 
+            lbl_Name.AutoSize = true;
+            lbl_Name.Location = new Point(61, 45);
+            lbl_Name.Name = "lbl_Name";
+            lbl_Name.Size = new Size(39, 15);
+            lbl_Name.TabIndex = 0;
+            lbl_Name.Text = "Name";
+            // 
+            // lbl_Phone
+            // 
+            lbl_Phone.AutoSize = true;
+            lbl_Phone.Location = new Point(61, 129);
+            lbl_Phone.Name = "lbl_Phone";
+            lbl_Phone.Size = new Size(41, 15);
+            lbl_Phone.TabIndex = 1;
+            lbl_Phone.Text = "Phone";
+            // 
+            // lbl_Email
+            // 
+            lbl_Email.AutoSize = true;
+            lbl_Email.Location = new Point(61, 89);
+            lbl_Email.Name = "lbl_Email";
+            lbl_Email.Size = new Size(36, 15);
+            lbl_Email.TabIndex = 3;
+            lbl_Email.Text = "Email";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(61, 63);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(100, 23);
+            textBox1.TabIndex = 4;
+            // 
+            // txtb_Email
+            // 
+            txtb_Email.Location = new Point(61, 107);
+            txtb_Email.Name = "txtb_Email";
+            txtb_Email.Size = new Size(100, 23);
+            txtb_Email.TabIndex = 5;
+            // 
+            // txtb_Phone
+            // 
+            txtb_Phone.Location = new Point(61, 147);
+            txtb_Phone.Name = "txtb_Phone";
+            txtb_Phone.Size = new Size(100, 23);
+            txtb_Phone.TabIndex = 6;
+            // 
+            // btn_EditProfile
+            // 
+            btn_EditProfile.Location = new Point(61, 191);
+            btn_EditProfile.Name = "btn_EditProfile";
+            btn_EditProfile.Size = new Size(100, 26);
+            btn_EditProfile.TabIndex = 8;
+            btn_EditProfile.Text = "Edit Profile";
+            btn_EditProfile.UseVisualStyleBackColor = true;
             btn_EditProfile.Click += Btn_EditProfile_Click;
-            // Add this method to the partial class to resolve CS0103
-       
+            // 
+            // listBox1
+            // 
+            listBox1.FormattingEnabled = true;
+            listBox1.Items.AddRange(new object[] { "Trainer:", "", "", "Date:", "", "", "Time:" });
+            listBox1.Location = new Point(420, 63);
+            listBox1.Name = "listBox1";
+            listBox1.Size = new Size(224, 154);
+            listBox1.TabIndex = 9;
+            // 
+            // btn_BookSession
+            // 
+            btn_BookSession.Location = new Point(420, 243);
+            btn_BookSession.Name = "btn_BookSession";
+            btn_BookSession.Size = new Size(109, 23);
+            btn_BookSession.TabIndex = 10;
+            btn_BookSession.Text = "BookSession";
+            btn_BookSession.UseVisualStyleBackColor = true;
+            btn_BookSession.Click += btn_BookSession_Click;
+            // 
+            // btn_CancelBooking
+            // 
+            btn_CancelBooking.Location = new Point(535, 243);
+            btn_CancelBooking.Name = "btn_CancelBooking";
+            btn_CancelBooking.Size = new Size(109, 23);
+            btn_CancelBooking.TabIndex = 11;
+            btn_CancelBooking.Text = "CancelBooking";
+            btn_CancelBooking.UseVisualStyleBackColor = true;
+            btn_CancelBooking.Click += btn_CancelBooking_Click;
+            // 
+            // ClientForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(btn_CancelBooking);
+            Controls.Add(btn_BookSession);
+            Controls.Add(listBox1);
+            Controls.Add(btn_EditProfile);
+            Controls.Add(txtb_Phone);
+            Controls.Add(txtb_Email);
+            Controls.Add(textBox1);
+            Controls.Add(lbl_Email);
+            Controls.Add(lbl_Phone);
+            Controls.Add(lbl_Name);
+            Name = "ClientForm";
+            Text = "ClientForm";
+            ResumeLayout(false);
+            PerformLayout();
+        }
 
-        // 
-        // listBox1
-        // 
-        listBox1.FormattingEnabled = true;
-                listBox1.Items.AddRange(new object[] { "Trainer:", "", "", "Date:", "", "", "Time:" });
-                listBox1.Location = new Point(420, 63);
-                listBox1.Name = "listBox1";
-                listBox1.Size = new Size(224, 154);
-                listBox1.TabIndex = 9;
-                // 
-                // btn_BookSession
-                // 
-                btn_BookSession.Location = new Point(420, 243);
-                btn_BookSession.Name = "btn_BookSession";
-                btn_BookSession.Size = new Size(109, 23);
-                btn_BookSession.TabIndex = 10;
-                btn_BookSession.Text = "BookSession";
-                btn_BookSession.UseVisualStyleBackColor = true;
-                btn_BookSession.Click += btn_BookSession_Click;
-                // 
-                // btn_CancelBooking
-                // 
-                btn_CancelBooking.Location = new Point(535, 243);
-                btn_CancelBooking.Name = "btn_CancelBooking";
-                btn_CancelBooking.Size = new Size(109, 23);
-                btn_CancelBooking.TabIndex = 11;
-                btn_CancelBooking.Text = "CancelBooking";
-                btn_CancelBooking.UseVisualStyleBackColor = true;
-                btn_CancelBooking.Click += btn_CancelBooking_Click;
-                // 
-                // ClientForm
-                // 
-                AutoScaleDimensions = new SizeF(7F, 15F);
-                AutoScaleMode = AutoScaleMode.Font;
-                ClientSize = new Size(800, 450);
-                Controls.Add(btn_CancelBooking);
-                Controls.Add(btn_BookSession);
-                Controls.Add(listBox1);
-                Controls.Add(btn_EditProfile);
-                Controls.Add(txtb_Phone);
-                Controls.Add(txtb_Email);
-                Controls.Add(textBox1);
-                Controls.Add(lbl_Email);
-                Controls.Add(lbl_Phone);
-                Controls.Add(lbl_Name);
-                Name = "ClientForm";
-                Text = "ClientForm";
-                ResumeLayout(false);
-                PerformLayout();
-            }
-
-            #endregion      #endregion  
+        #endregion      #endregion  
 
 
         private Label lbl_Name;
