@@ -16,9 +16,11 @@ namespace FitnessStudioApp.FORMS
     public partial class LoginForm : Form
     {
         private readonly LoginService _loginService;
-        public LoginForm()
+        public LoginForm(LoginService loginService)
         {
+            _loginService = loginService;
             InitializeComponent();
+
         }
 
         private void chbShowPassword_CheckedChanged(object sender, EventArgs e)

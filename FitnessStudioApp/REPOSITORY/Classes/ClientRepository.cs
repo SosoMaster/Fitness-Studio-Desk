@@ -1,5 +1,7 @@
 ﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.REPOSITORY.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +18,13 @@ public class ClientRepository: BaseRepository<Client>, IClientRepository
 
     }
 
-
+    public async Task<IEnumerable<ClientAndTrainerDTO>> GetAddClientWithUserInfo()
+    {
+       return await  _dbSet.Include(c => c.User).Select(c=> new ClientAndTrainerDTO
+       {
+           ModelId = c.ClientId,
+           UserId = c.UserId,
+           Name = c.User.Username
+       }).ToListAsync();
+    }
 }
