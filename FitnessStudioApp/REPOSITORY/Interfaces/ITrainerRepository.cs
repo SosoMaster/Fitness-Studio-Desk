@@ -1,4 +1,5 @@
 ﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.MODELS.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,5 @@ namespace FitnessStudioApp.REPOSITORY.Interfaces;
 
 public interface ITrainerRepository: IRepository<Trainer>
 {
-
+    Task<IEnumerable<ClientAndTrainerDTO>> GetAddTrainerWithUserInfo();
 }
