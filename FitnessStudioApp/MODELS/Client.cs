@@ -17,8 +17,6 @@ public class Client
 
     public int UserId { get; set; }
     public User User { get; set; } = null!;
-
-    public int ProgressId { get; set; }
     public List<Progress> Progresses { get; set; } = new List<Progress>();
     
     public Membership Membership { get; set; }

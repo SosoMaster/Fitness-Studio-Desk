@@ -68,7 +68,8 @@ namespace FitnessStudioApp.MODELS
 
                 t.HasMany(t => t.Clients)
                  .WithOne(c => c.Trainer)
-                 .HasForeignKey(c => c.TrainerId);
+                 .HasForeignKey(c => c.TrainerId)
+                 .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Client>(c =>

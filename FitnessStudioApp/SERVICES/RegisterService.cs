@@ -31,7 +31,8 @@ namespace FitnessStudioApp.SERVICES
             _adminRepo = adminRepo;
         }
 
-        public async Task RegisterAsync(User user, string role)
+        public async Task 
+            RegisterAsync(User user, string role)
         {
             // validation
             UserValidator.InfoFieldsValidate(user);
