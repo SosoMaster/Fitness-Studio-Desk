@@ -70,5 +70,27 @@ namespace FitnessStudioApp.FORMS
                 throw;
             }
         }
+
+        private async void btnDeleteClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UserValidator.ListBoxIndexChecked(lbxClients))
+                {
+                    var clientDTO = lbxClients.Items[lbxClients.SelectedIndex] as ClientAndTrainerDTO;
+                    lbxClients.Items.RemoveAt(lbxClients.SelectedIndex);
+                    
+                    var user = await _userService.GetByIdAsync(clientDTO.UserId);
+                    var client = await _clientService.GetByIdAsync(clientDTO.ModelId);
+                     await _clientService.Delete(client);
+                     await _userService.Delete(user);
+                }
+            }
+            catch (Exception ex )
+            {
+
+                throw;
+            }
+        }
     }
 }
