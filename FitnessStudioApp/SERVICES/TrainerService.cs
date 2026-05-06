@@ -1,4 +1,5 @@
 ﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.REPOSITORY.Classes;
 using FitnessStudioApp.SERVICES.Helpers;
 using System;
@@ -66,6 +67,11 @@ public class TrainerService
         }
 
         await _trainerRepo.UpdateAsync(entity);
+    }
+
+    public async Task<IEnumerable<ClientAndTrainerDTO>> GetAddTrainerWithUserInfo()
+    {
+        return await _trainerRepo.GetAddTrainerWithUserInfo();
     }
 
 }
