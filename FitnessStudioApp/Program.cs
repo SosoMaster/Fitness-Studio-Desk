@@ -30,10 +30,13 @@ namespace FitnessStudioApp
             AdminRepository adminRepository = new AdminRepository(dbContext);
             AdminService adminService = new AdminService(userService,adminRepository);
 
+            RegisterService registerService = new RegisterService(userService,userRepository, clientRepository, trainerRepository, adminRepository);
 
-            Application.Run(new AdminUsersForm(userService, clientService, trainerService));
+            /*Application.Run(new AdminUsersForm(userService, clientService, trainerService));*/
 
-    
+            Application.Run(new RegisterForm(registerService));
+
+
             using (var db = new FitnessStudioAppDbContext())
             {
                 db.Database.EnsureCreated();
