@@ -23,6 +23,8 @@ namespace FitnessStudioApp.MODELS
         public DbSet<Trainer> Trainers { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DbSet<TrainingSession> TrainingSessions { get; set; }
+
         override protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=FItnessStudioApp;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;Command Timeout=30");
@@ -108,7 +110,7 @@ namespace FitnessStudioApp.MODELS
             {
                 p.HasKey(x => x.ProgressId);
                 p.HasOne(x => x.Client)
-                .WithMany(x => x.progresses)
+                .WithMany(x => x.Progresses)
                 .HasForeignKey(x => x.ClientId);
 
 

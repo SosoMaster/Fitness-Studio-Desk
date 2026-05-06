@@ -11,24 +11,11 @@ namespace FitnessStudioApp.SERVICES;
 
 public class TrainerService
 {
-    private readonly UserService _userService;
     private readonly TrainerRepository _trainerRepo;
 
     public TrainerService(UserService userService, TrainerRepository trainerRepository)
     {
-        _userService = userService;
         _trainerRepo = trainerRepository;
-    }
-
-    public async Task AddAsync(User user, Trainer trainer)
-    {
-        UserValidator.InfoFieldsValidate(user);
-        await _userService.AddAsync(user);
-
-        trainer.UserId = user.UserId;
-
-        TrainerValidator.InfoFieldsValidate(trainer);
-        await _trainerRepo.AddAsync(trainer);
     }
 
     public async Task Delete(Trainer entity)

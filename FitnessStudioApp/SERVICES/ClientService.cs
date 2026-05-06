@@ -11,34 +11,11 @@ namespace FitnessStudioApp.SERVICES;
 
 public class ClientService 
 {
-    private readonly UserService _userService;
     private readonly ClientRepository _clientRepo;
     public ClientService(UserService userService, ClientRepository clientRepository)
     {
-        _userService = userService;
-        _clientRepo = clientRepository;
-    }
-
-    public async Task AddAsync( User user,Client clinet)
-    {
-        if (!UserValidator.InfoFieldsValidate(user))
-        {
-            throw new Exception("Invalid user");
-            
-        }
        
-       await _userService.AddAsync(user);
-
-        clinet.UserId = user.UserId;
-
-        if (!ClientValidator.InfoFieldsValidate(clinet))
-        {
-            throw new Exception("Invalid client");
-
-        }
-
-       await _clientRepo.AddAsync(clinet);
-
+        _clientRepo = clientRepository;
     }
 
     public async Task Delete(Client entity)

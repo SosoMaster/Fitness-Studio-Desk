@@ -22,6 +22,15 @@ namespace FitnessStudioApp.SERVICES.Helpers
             return true;
         }
 
+        public static bool ListBoxIndexChecked(ListBox listBox)
+        {
+            if (listBox.SelectedIndex < 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
 
     }
 }

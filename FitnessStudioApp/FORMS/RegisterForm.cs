@@ -12,17 +12,17 @@ using System.Windows.Forms;
 
 namespace FitnessStudioApp.FORMS
 {
-    public partial class RegisterForm : Form 
+    public partial class RegisterForm : Form
     {
-        private UserService _userService;
+        private RegisterService _registerService;
 
-       
 
-        public RegisterForm(UserService userService)
+
+        public RegisterForm(RegisterService registerService)
         {
             InitializeComponent();
-            _userService = userService;
-            
+            _registerService = registerService;
+
         }
 
         private async void btnRegister_Click(object sender, EventArgs e)
@@ -37,13 +37,20 @@ namespace FitnessStudioApp.FORMS
                     Password = txtPassword.Text,
 
                 };
-                await _userService.AddAsync(user);
+                string role = cmbRoles.Text;
+                await _registerService.RegisterAsync(user, role);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show("КАКВО СТАНА", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // logger.Error(ex.Message, ex.StackTrace)
             }
+        }
+
+        private void RegisterForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
