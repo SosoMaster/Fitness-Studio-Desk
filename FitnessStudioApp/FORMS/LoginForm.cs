@@ -46,13 +46,14 @@ namespace FitnessStudioApp.FORMS
 
                 MessageBox.Show("Login successful!");
 
-                /*this.Hide();
+                
 
-                if (user.Role == Role.Client)
+                if (user.Client != null)
                 {
-                    new ClientProfileForm(user.UserId).Show();
+                    this.Hide();
+                    new ClientForm().Show();
                 }
-                else if(user.Role == Role.Trainer)
+              /*  else if (user.Role == Role.Trainer)
                 {
                     new TrainerProfileForm(user.UserId).Show();
                 }

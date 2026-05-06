@@ -13,9 +13,11 @@ public class UserRepository: BaseRepository<User>, IUserRepository
 {
     public async Task<User> GetByUsernameAsync(string username)
     {
-        return await _db.Users
+        return await _db.Users.Include(u=> u.Client).Include(u=> u.Trainer).Include(u => u.Admin)
             .FirstOrDefaultAsync(u => u.Username == username);
     }
+
+
     public UserRepository(FitnessStudioAppDbContext db) : base(db)
     {
 

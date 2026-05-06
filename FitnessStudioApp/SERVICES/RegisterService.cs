@@ -55,7 +55,8 @@ namespace FitnessStudioApp.SERVICES
                 case "Client":
                     Client client = new Client()
                     {
-                        UserId = user.UserId
+                        UserId = user.UserId,
+                        
                     };
 
                     await _clientRepo.AddAsync(client);
