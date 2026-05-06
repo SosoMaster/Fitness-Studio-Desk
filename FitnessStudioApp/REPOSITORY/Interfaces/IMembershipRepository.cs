@@ -9,7 +9,7 @@ namespace FitnessStudioApp.REPOSITORY.Interfaces;
 
 public interface IMembershipRepository : IRepository<Membership>
 {
-    void RenewMembership();
-    void ViewMembership(string userId);
-    void EndMembership(string userId); // не знам дали ще е нужно да има параметър, но за сега ще го оставя така
+    Task RenewMembership(int userId);
+    Task<Membership> ViewMembership(int userId);
+    Task EndMembership(int userId); // не знам дали ще е нужно да има параметър, но за сега ще го оставя така
 }

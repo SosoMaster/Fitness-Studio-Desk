@@ -11,6 +11,7 @@ namespace FitnessStudioApp.MODELS
         public int BookingId { get; set; }         
         public int ClientId { get; set; }
         public int TrainingSessionId { get; set; } 
+        public DateTime BookingDate { get; set; }
         public string Status { get; set; }
 
        

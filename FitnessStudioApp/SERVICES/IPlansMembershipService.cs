@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessStudioApp.REPOSITORY.Interfaces;
+namespace FitnessStudioApp.SERVICES;
 
 public interface IPlansMembershipService
 {

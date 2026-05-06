@@ -1,5 +1,6 @@
 using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +14,32 @@ public class MembershipRepository : BaseRepository<Membership>, IMembershipRepos
     public MembershipRepository(FitnessStudioAppDbContext db) : base(db)
     {
     }
-
-    public void RenewMembership()
+    public async Task RenewMembership(int userId)
     {
-        // implement domain-specific logic as needed
-        throw new NotImplementedException();
+        var membership = await _dbSet.FirstOrDefaultAsync(m => m.ClientId == userId);
+
+        if (membership != null)
+        {
+            membership.ExpirationDate = membership.ExpirationDate.AddMonths(1);
+            _dbSet.Update(membership);
+            await _db.SaveChangesAsync();
+        }
     }
 
-    public void ViewMembership(string userId)
+    public async Task<Membership?> ViewMembership(int userId)
     {
-        throw new NotImplementedException();
+        return await _dbSet.FirstOrDefaultAsync(m => m.ClientId == userId);
     }
 
-    public void EndMembership(string userId)
+    public async Task EndMembership(int userId)
     {
-        throw new NotImplementedException();
+        var membership = await _dbSet.FirstOrDefaultAsync(m => m.ClientId == userId);
+
+        if (membership != null)
+        {
+            membership.IsActive = false;
+            _dbSet.Update(membership);
+            await _db.SaveChangesAsync();
+        }
     }
 }

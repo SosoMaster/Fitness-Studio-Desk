@@ -13,6 +13,8 @@ namespace FitnessStudioApp.MODELS
         public int ClientId { get; set; }      
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
+        public bool IsActive { get; set; }
         public MembershipStatus MembershipStatus { get; set; }
 
         public Client Client { get; set; }
