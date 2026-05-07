@@ -13,9 +13,12 @@ namespace FitnessStudioApp.FORMS
 {
     public partial class BookingForm : Form
     {
-        public BookingForm()
+        private int currentClientId;
+
+        public BookingForm(int clientId)
         {
             InitializeComponent();
+            currentClientId = clientId;
         }
 
         private void btn_Create_Click(object sender, EventArgs e)
@@ -27,8 +30,25 @@ namespace FitnessStudioApp.FORMS
             // save booking obj to db.
             // edit trainers availability
             // 
-            Booking booking = new Booking();
-           
+            if (cmb_TrainingSession.SelectedIndex == -1)
+            {
+                MessageBox.Show("Моля, изберете тренировка!");
+                return;
+            }
+
+            int trainingSessionId = (int)cmb_TrainingSession.SelectedValue;
+
+            Booking booking = new Booking()
+            {
+                ClientId = currentClientId,
+                TrainingSessionId = trainingSessionId,
+                BookingDate = DateTime.Now,
+                Status = "Active"
+            };
+
+            await _bookingRepository.AddAsync(booking);
+
+            MessageBox.Show("Успешна резервация!");
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
