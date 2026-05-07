@@ -34,7 +34,7 @@ namespace FitnessStudioApp
 
             LoginService loginService = new LoginService(userRepository);
 
-            /*Application.Run(new AdminUsersForm(userService, clientService, trainerService));*/
+            Application.Run(new AdminUsersForm(userService, clientService, trainerService));
 
 
 
@@ -42,7 +42,7 @@ namespace FitnessStudioApp
 
             /*  Application.Run(new ClientForm());*/
 
-            Application.Run(new LoginForm(loginService));
+            /*Application.Run(new LoginForm(loginService));*/
 
 
             using (var db = new FitnessStudioAppDbContext())
