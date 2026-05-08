@@ -4,6 +4,9 @@
     <Compile Update="FORMS\BookingForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FORMS\ClientRegisterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="FORMS\АdminForms\AdminUsersForm.cs">
       <SubType>Form</SubType>
     </Compile>

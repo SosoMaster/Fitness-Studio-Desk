@@ -16,7 +16,7 @@ namespace FitnessStudioApp.FORMS
     {
         private RegisterService _registerService;
 
-
+        //da se dobavi login kopshe.
 
         public RegisterForm(RegisterService registerService)
         {
