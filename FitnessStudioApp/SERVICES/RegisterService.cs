@@ -31,7 +31,8 @@ namespace FitnessStudioApp.SERVICES
             _adminRepo = adminRepo;
         }
 
-        public async Task RegisterAsync(User user, string role)
+        public async Task 
+            RegisterAsync(User user, string role)
         {
             // validation
             UserValidator.InfoFieldsValidate(user);
@@ -54,7 +55,8 @@ namespace FitnessStudioApp.SERVICES
                 case "Client":
                     Client client = new Client()
                     {
-                        UserId = user.UserId
+                        UserId = user.UserId,
+                        
                     };
 
                     await _clientRepo.AddAsync(client);

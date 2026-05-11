@@ -4,6 +4,7 @@ using FitnessStudioApp.MODELS;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FitnessStudioApp.Migrations
 {
     [DbContext(typeof(FitnessStudioAppDbContext))]
-    partial class FitnessStudioAppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260506181723_CreateInit")]
+    partial class CreateInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,6 +85,9 @@ namespace FitnessStudioApp.Migrations
                     b.Property<int>("MembershipStatus")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProgressId")
+                        .HasColumnType("int");
+
                     b.Property<int>("TrainerId")
                         .HasColumnType("int");
 
@@ -108,6 +114,9 @@ namespace FitnessStudioApp.Migrations
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("ExpirationDate")
                         .HasColumnType("datetime2");
@@ -264,13 +273,13 @@ namespace FitnessStudioApp.Migrations
                     b.HasOne("FitnessStudioApp.MODELS.Client", "Client")
                         .WithMany("Bookings")
                         .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("FitnessStudioApp.MODELS.TrainingSession", "TrainingSession")
                         .WithMany("Bookings")
                         .HasForeignKey("TrainingSessionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Client");
@@ -283,7 +292,7 @@ namespace FitnessStudioApp.Migrations
                     b.HasOne("FitnessStudioApp.MODELS.Trainer", "Trainer")
                         .WithMany("Clients")
                         .HasForeignKey("TrainerId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("FitnessStudioApp.MODELS.User", "User")

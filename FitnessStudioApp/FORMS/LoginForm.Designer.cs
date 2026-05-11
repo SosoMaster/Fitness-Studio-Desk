@@ -81,7 +81,6 @@
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(177, 23);
             txtUsername.TabIndex = 5;
-            txtUsername.UseSystemPasswordChar = true;
             // 
             // chbShowPassword
             // 

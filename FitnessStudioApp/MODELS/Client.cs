@@ -9,6 +9,12 @@ namespace FitnessStudioApp.MODELS;
 
 public class Client
 {
+    public int Age { get; set; }
+    public string Gender { get; set; }
+    public int Height { get; set; }
+    public double Weight {  get; set; }
+
+
     public int ClientId { get; set; }
     public MembershipStatus MembershipStatus { get; set; }
 
@@ -17,8 +23,6 @@ public class Client
 
     public int UserId { get; set; }
     public User User { get; set; } = null!;
-
-    public int ProgressId { get; set; }
     public List<Progress> Progresses { get; set; } = new List<Progress>();
     
     public Membership Membership { get; set; }

@@ -16,7 +16,7 @@ namespace FitnessStudioApp.FORMS
     {
         private RegisterService _registerService;
 
-
+        //da se dobavi login kopshe.
 
         public RegisterForm(RegisterService registerService)
         {
@@ -43,7 +43,7 @@ namespace FitnessStudioApp.FORMS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("КАКВО СТАНА", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 // logger.Error(ex.Message, ex.StackTrace)
             }
         }

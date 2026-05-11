@@ -68,7 +68,8 @@ namespace FitnessStudioApp.MODELS
 
                 t.HasMany(t => t.Clients)
                  .WithOne(c => c.Trainer)
-                 .HasForeignKey(c => c.TrainerId);
+                 .HasForeignKey(c => c.TrainerId)
+                 .OnDelete(DeleteBehavior.NoAction);
             });
 
             modelBuilder.Entity<Client>(c =>
@@ -83,7 +84,7 @@ namespace FitnessStudioApp.MODELS
                 c.HasMany(c => c.Bookings)
                  .WithOne(b => b.Client)
                  .HasForeignKey(c => c.ClientId)
-                 .OnDelete(DeleteBehavior.NoAction);
+                 .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Admin>(a =>
@@ -103,7 +104,7 @@ namespace FitnessStudioApp.MODELS
                 ts.HasMany(ts => ts.Bookings)
                   .WithOne(b => b.TrainingSession)
                   .HasForeignKey(b => b.TrainingSessionId)
-                  .OnDelete(DeleteBehavior.NoAction);
+                  .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Progress>(p =>
