@@ -15,14 +15,15 @@ namespace FitnessStudioApp.FORMS
     public partial class RegisterForm : Form
     {
         private RegisterService _registerService;
+        private ClientRegisterService _clientRegisterService;
 
         //da se dobavi login kopshe.
 
-        public RegisterForm(RegisterService registerService)
+        public RegisterForm(RegisterService registerService, ClientRegisterService clientRegisterService)
         {
             InitializeComponent();
             _registerService = registerService;
-
+            _clientRegisterService = clientRegisterService;
         }
 
         private async void btnRegister_Click(object sender, EventArgs e)
