@@ -31,6 +31,8 @@ namespace FitnessStudioApp
             TrainerService trainerService = new TrainerService(userService, trainerRepository);
             AdminRepository adminRepository = new AdminRepository(dbContext);
             AdminService adminService = new AdminService(userService,adminRepository);
+            ProgressRepository progressRepository = new ProgressRepository(dbContext);
+            AdminClientProgressService adminClientProgressService = new AdminClientProgressService(progressRepository);
 
             RegisterService registerService = new RegisterService(userService, userRepository, clientRepository, trainerRepository, adminRepository);
 

@@ -20,12 +20,14 @@ namespace FitnessStudioApp.FORMS
         readonly private UserService _userService;
         readonly private ClientService _clientService;
         readonly private TrainerService _trainerService;
-        public AdminUsersForm(UserService userService, ClientService clientService, TrainerService trainerService)
+        readonly private AdminClientProgressService _adminClientProgressService;
+        public AdminUsersForm(UserService userService, ClientService clientService, TrainerService trainerService, AdminClientProgressService adminClientProgressService)
         {
             InitializeComponent();
             _userService = userService;
             _clientService = clientService;
             _trainerService = trainerService;
+            _adminClientProgressService = adminClientProgressService;
 
         }
 
@@ -59,7 +61,8 @@ namespace FitnessStudioApp.FORMS
             {
                 if (UserValidator.ListBoxIndexChecked(lbxClients))
                 {
-                    var editClientForm = new EditClientForm();
+                    var client = lbxClients.SelectedItem as ClientAndTrainerDTO;
+                    var editClientForm = new EditClientForm(client.UserId,_adminClientProgressService,_userService,_clientService);
                     editClientForm.Show();
                     this.Hide();
                 }
