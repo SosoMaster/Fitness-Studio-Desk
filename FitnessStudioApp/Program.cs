@@ -20,10 +20,12 @@ namespace FitnessStudioApp
             // see https://aka.ms/applicationconfiguration.
 
             ApplicationConfiguration.Initialize();
-
+            User user = new User();
             UserRepository userRepository = new UserRepository(dbContext);
             UserService userService = new UserService(userRepository);
             ClientRepository clientRepository = new ClientRepository(dbContext);
+            ClientRegisterService clientRegisterService = new ClientRegisterService();
+            ClientRegisterForm clientRegisterForm = new ClientRegisterForm(user.UserId, clientRegisterService);
             ClientService clientService = new ClientService(userService,clientRepository);
             TrainerRepository trainerRepository = new TrainerRepository(dbContext);
             TrainerService trainerService = new TrainerService(userService, trainerRepository);
@@ -34,11 +36,11 @@ namespace FitnessStudioApp
 
             LoginService loginService = new LoginService(userRepository);
 
-            Application.Run(new AdminUsersForm(userService, clientService, trainerService));
+            /*Application.Run(new AdminUsersForm(userService, clientService, trainerService));*/
 
 
 
-            /*   Application.Run(new RegisterForm(registerService));*/
+            Application.Run(new RegisterForm(registerService, clientRegisterService));
 
             /*  Application.Run(new ClientForm());*/
 
