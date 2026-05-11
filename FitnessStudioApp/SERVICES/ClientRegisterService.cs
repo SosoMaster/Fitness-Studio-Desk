@@ -1,4 +1,5 @@
 ﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.REPOSITORY.Classes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace FitnessStudioApp.SERVICES
 {
     public class ClientRegisterService
     {
+        private readonly ClientRepository _clientRepo;
         public ClientRegisterService() 
         {
 
@@ -27,6 +29,14 @@ namespace FitnessStudioApp.SERVICES
                 gender = "Female";
             }
             return gender;
+        }
+
+        public async Task RegisterClientAsync(Client client)
+        {
+            if (client.UserId == 0)
+                throw new Exception("Missing UserId");
+
+            await _clientRepo.AddAsync(client);
         }
     }
 

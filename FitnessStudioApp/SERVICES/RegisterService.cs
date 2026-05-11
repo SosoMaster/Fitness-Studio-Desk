@@ -1,4 +1,5 @@
-﻿using FitnessStudioApp.MODELS;
+﻿using FitnessStudioApp.FORMS;
+using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
 using FitnessStudioApp.SERVICES.Helpers;
 using System;
@@ -12,7 +13,9 @@ namespace FitnessStudioApp.SERVICES
     public class RegisterService
     {
         private readonly UserService _userService;
+        private readonly RegisterForm _registerForm;
         private readonly ClientRepository _clientRepo;
+        private readonly ClientRegisterService _clientRegisterService;
         private readonly TrainerRepository _trainerRepo;
         private readonly AdminRepository _adminRepo;
         private readonly UserRepository _userRepo;
@@ -31,8 +34,7 @@ namespace FitnessStudioApp.SERVICES
             _adminRepo = adminRepo;
         }
 
-        public async Task 
-            RegisterAsync(User user, string role)
+        public async Task RegisterAsync(User user, string role)
         {
             // validation
             UserValidator.InfoFieldsValidate(user);
@@ -53,13 +55,9 @@ namespace FitnessStudioApp.SERVICES
             switch (role)
             {
                 case "Client":
-                    Client client = new Client()
-                    {
-                        UserId = user.UserId,
-                        
-                    };
-
-                    await _clientRepo.AddAsync(client);
+                    var clientForm = new ClientRegisterForm(user.UserId, _clientRegisterService);
+                    clientForm.Show();
+                    _registerForm.Hide();
                     break;
 
                 case "Trainer":
