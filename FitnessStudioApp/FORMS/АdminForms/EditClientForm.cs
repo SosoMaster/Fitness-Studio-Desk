@@ -1,4 +1,7 @@
-﻿using System;
+﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.SERVICES;
+using FitnessStudioApp.SERVICES.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +15,90 @@ namespace FitnessStudioApp.FORMS.АdminForms
 {
     public partial class EditClientForm : Form
     {
-        public EditClientForm()
+        readonly AdminClientProgressService _progressService;
+        readonly UserService _userService;
+        readonly ClientService _clientService;
+        private int _userId;
+        public EditClientForm(int userId, AdminClientProgressService adminClientProgressService, UserService userService, ClientService clientService)
         {
             InitializeComponent();
+            _progressService = adminClientProgressService;
+            _userService = userService;
+            _clientService = clientService;
+            _userId = userId;
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void EditClientForm_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                var user = await _userService.GetByIdAsync(_userId);
+                var client = await _clientService.GetClientByUserId(_userId);
+                List<Progress> progresses = await _progressService.GetAllProgressToClient(client.ClientId);
+
+                foreach (Progress prog in progresses)
+                {
+                    lbxProgresses.Items.Add(prog);
+                }
+
+                tbxEmail.Text = user.Email;
+                tbxPassword.Text = user.Password;
+                tbxPhone.Text = user.Phone;
+                tbxUsername.Text = user.Username;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+
+        }
+
+        private void cbxShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbxShowPassword.Checked)
+            {
+                tbxPassword.UseSystemPasswordChar = true;
+            }
+            else
+            {
+                tbxPassword.UseSystemPasswordChar = false;
+            }
+        }
+
+        private async void btnUpdateData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var user = await _userService.GetByIdAsync(_userId);
+                if (UserValidator.InfoFieldsValidate(user))
+                {
+                    user.Username = tbxUsername.Text;
+                    user.Phone = tbxPhone.Text;
+                    user.Email = tbxEmail.Text;
+                    user.Password = tbxPassword.Text;
+                    await _userService.Update(user);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
     }
 }

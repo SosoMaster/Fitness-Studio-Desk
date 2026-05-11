@@ -24,17 +24,19 @@ namespace FitnessStudioApp
             UserRepository userRepository = new UserRepository(dbContext);
             UserService userService = new UserService(userRepository);
             ClientRepository clientRepository = new ClientRepository(dbContext);
-            ClientService clientService = new ClientService(userService,clientRepository);
+            ClientService clientService = new ClientService(clientRepository);
             TrainerRepository trainerRepository = new TrainerRepository(dbContext);
             TrainerService trainerService = new TrainerService(userService, trainerRepository);
             AdminRepository adminRepository = new AdminRepository(dbContext);
             AdminService adminService = new AdminService(userService,adminRepository);
+            ProgressRepository progressRepository = new ProgressRepository(dbContext);
+            AdminClientProgressService adminClientProgressService = new AdminClientProgressService(progressRepository);
 
             RegisterService registerService = new RegisterService(userService, userRepository, clientRepository, trainerRepository, adminRepository);
 
             LoginService loginService = new LoginService(userRepository);
 
-            Application.Run(new AdminUsersForm(userService, clientService, trainerService));
+            Application.Run(new AdminUsersForm(userService, clientService, trainerService, adminClientProgressService));
 
 
 
