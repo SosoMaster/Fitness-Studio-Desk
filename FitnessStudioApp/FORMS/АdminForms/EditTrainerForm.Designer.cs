@@ -54,6 +54,7 @@
             cbxShowPassword.TabIndex = 23;
             cbxShowPassword.Text = "Show password";
             cbxShowPassword.UseVisualStyleBackColor = true;
+            cbxShowPassword.CheckedChanged += cbxShowPassword_CheckedChanged;
             // 
             // btnUpdateData
             // 
@@ -63,6 +64,7 @@
             btnUpdateData.TabIndex = 22;
             btnUpdateData.Text = "Update data";
             btnUpdateData.UseVisualStyleBackColor = true;
+            btnUpdateData.Click += btnUpdateData_Click_1;
             // 
             // tbxPassword
             // 
@@ -194,6 +196,7 @@
             Controls.Add(label2);
             Name = "EditTrainerForm";
             Text = "EditTrainerForm";
+            Load += EditTrainerForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }

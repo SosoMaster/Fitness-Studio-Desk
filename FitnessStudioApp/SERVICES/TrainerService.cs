@@ -74,4 +74,9 @@ public class TrainerService
         return await _trainerRepo.GetAddTrainerWithUserInfo();
     }
 
+    public async Task<Trainer> GetClientByUserId(int userId)
+    {
+        return await _trainerRepo.GetClientByUserId(userId);
+    }
+
 }

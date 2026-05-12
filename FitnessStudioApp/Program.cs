@@ -1,5 +1,6 @@
 using FitnessStudioApp.FORMS;
 using FitnessStudioApp.MODELS;
+using FitnessStudioApp.MODELS.Enums;
 using FitnessStudioApp.REPOSITORY.Classes;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES;
@@ -47,7 +48,7 @@ namespace FitnessStudioApp
 
             LoginService loginService = new LoginService(userRepository);
 
-            /*Application.Run(new AdminUsersForm(userService, clientService, trainerService));*/
+            Application.Run(new AdminUsersForm(userService, clientService, trainerService, adminClientProgressService));
 
             Application.Run(new RegisterForm(registerService, clientRegisterService, trainerRegisterService));
 
