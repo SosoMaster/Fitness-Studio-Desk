@@ -26,4 +26,9 @@ public class TrainerRepository: BaseRepository<Trainer>, ITrainerRepository
             Name = t.User.Username
         }).ToListAsync();
     }
+
+    public async Task<Trainer> GetClientByUserId(int userId)
+    {
+        return await _dbSet.Where(c => c.UserId == userId).FirstOrDefaultAsync();
+    }
 }

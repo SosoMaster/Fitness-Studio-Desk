@@ -1,4 +1,5 @@
 ﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,6 +17,8 @@ namespace FitnessStudioApp.REPOSITORY.Classes
 
         }
 
+     
+
         public Task GainMuscle()
         {
             throw new NotImplementedException();
@@ -26,9 +29,19 @@ namespace FitnessStudioApp.REPOSITORY.Classes
             throw new NotImplementedException();
         }
 
-        public async Task<List<Progress>> GetAllProgressToClient(int clientId)
+        public async Task<List<AdminProgressDTO>> GetAllProgressToClient(int clientId)
         {
-            return await _dbSet.Where(p => p.ClientId == clientId).ToListAsync();
+            return await _dbSet.Where(p => p.ClientId == clientId).Select(p => new AdminProgressDTO()
+            {
+                ProgressId = p.ProgressId,
+                Weight = p.Weight,
+                Height = p.Height,
+            }).ToListAsync();
+        }
+
+        public async Task<Progress> GetProgressByClientId(int clientId)
+        {
+           return await _dbSet.Where(c => c.ClientId == clientId).FirstOrDefaultAsync();
         }
 
         public Task LoseWeight()

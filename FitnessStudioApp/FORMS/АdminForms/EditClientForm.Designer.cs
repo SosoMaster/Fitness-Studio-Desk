@@ -137,6 +137,7 @@
             btnDeleteProgress.TabIndex = 10;
             btnDeleteProgress.Text = "Detete Progress";
             btnDeleteProgress.UseVisualStyleBackColor = true;
+            btnDeleteProgress.Click += btnDeleteProgress_Click;
             // 
             // btnExit
             // 
