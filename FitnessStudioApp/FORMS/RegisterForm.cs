@@ -14,16 +14,19 @@ namespace FitnessStudioApp.FORMS
 {
     public partial class RegisterForm : Form
     {
-        private RegisterService _registerService;
-        private ClientRegisterService _clientRegisterService;
+        private readonly RegisterService _registerService;
+        private readonly ClientRegisterService _clientRegisterService;
+        private readonly TrainerRegisterService _trainerRegisterService;
 
-        //da se dobavi login kopshe.
-
-        public RegisterForm(RegisterService registerService, ClientRegisterService clientRegisterService)
+        public RegisterForm(
+            RegisterService registerService,
+            ClientRegisterService clientRegisterService,
+            TrainerRegisterService trainerRegisterService)
         {
             InitializeComponent();
             _registerService = registerService;
             _clientRegisterService = clientRegisterService;
+            _trainerRegisterService = trainerRegisterService;
         }
 
         private async void btnRegister_Click(object sender, EventArgs e)
@@ -32,26 +35,50 @@ namespace FitnessStudioApp.FORMS
             {
                 User user = new()
                 {
-                    Username = txtUsername.Text,
-                    Email = txtEmail.Text,
-                    Phone = txtPhone.Text,
-                    Password = txtPassword.Text,
-
+                    Username = txtUsername.Text.Trim(),
+                    Email = txtEmail.Text.Trim(),
+                    Phone = txtPhone.Text.Trim(),
+                    Password = txtPassword.Text,  
                 };
-                string role = cmbRoles.Text;
-                await _registerService.RegisterAsync(user, role);
 
+                string role = cmbRoles.Text;
+
+                User savedUser = await _registerService.RegisterAsync(user, role);
+
+                // Navigate to the role-specific profile form
+                switch (role)
+                {
+                    case "Client":
+                        var clientForm = new ClientRegisterForm(
+                            savedUser.UserId, _clientRegisterService);
+                        clientForm.Show();
+                        this.Hide();
+                        break;
+
+                    case "Trainer":
+                        var trainerForm = new TrainerRegisterForm(
+                            savedUser.UserId, _trainerRegisterService);
+                        trainerForm.Show();
+                        this.Hide();
+                        break;
+
+                    case "Admin":
+                        MessageBox.Show(
+                            "Admin registered successfully!",
+                            "Success",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                        this.Close();
+                        break;
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                // logger.Error(ex.Message, ex.StackTrace)
+                MessageBox.Show(ex.Message, "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void RegisterForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void RegisterForm_Load(object sender, EventArgs e) { }
     }
 }

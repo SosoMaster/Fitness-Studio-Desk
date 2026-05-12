@@ -13,74 +13,48 @@ namespace FitnessStudioApp.SERVICES
     public class RegisterService
     {
         private readonly UserService _userService;
-        private readonly RegisterForm _registerForm;
-        private readonly ClientRepository _clientRepo;
-        private readonly ClientRegisterService _clientRegisterService;
-        private readonly TrainerRepository _trainerRepo;
-        private readonly AdminRepository _adminRepo;
         private readonly UserRepository _userRepo;
+        private readonly AdminRepository _adminRepo;
 
         public RegisterService(
             UserService userService,
             UserRepository userRepo,
-            ClientRepository clientRepo,
-            TrainerRepository trainerRepo,
             AdminRepository adminRepo)
         {
             _userService = userService;
             _userRepo = userRepo;
-            _clientRepo = clientRepo;
-            _trainerRepo = trainerRepo;
             _adminRepo = adminRepo;
         }
 
-        public async Task RegisterAsync(User user, string role)
+        /// <summary>
+        /// Creates the User row.
+        /// Returns the saved User (with its new UserId) so the caller
+        /// can open the correct role-specific form.
+        /// </summary>
+        public async Task<User> RegisterAsync(User user, string role)
         {
-            // validation
+            // Validate fields
             UserValidator.InfoFieldsValidate(user);
 
-            // duplicate check
-            var existingUser =
-                await _userRepo.GetByUsernameAsync(user.Username);
+            // Duplicate check
+            var existing = await _userRepo.GetByUsernameAsync(user.Username);
+            if (existing != null)
+                throw new Exception("Username already exists.");
 
-            if (existingUser != null)
-            {
-                throw new Exception("Username already exists");
-            }
+            if (role != "Client" && role != "Trainer" && role != "Admin")
+                throw new Exception("Please select a valid role.");
 
-            // create user
+            // Persist user — EF will populate UserId after SaveChanges
             await _userService.AddAsync(user);
 
-            // role assignment
-            switch (role)
+            // For Admin, finish here (no extra profile form needed)
+            if (role == "Admin")
             {
-                case "Client":
-                    var clientForm = new ClientRegisterForm(user.UserId, _clientRegisterService);
-                    clientForm.Show();
-                    _registerForm.Hide();
-                    break;
-
-                case "Trainer":
-                    Trainer trainer = new Trainer()
-                    {
-                        UserId = user.UserId
-                    };
-
-                    await _trainerRepo.AddAsync(trainer);
-                    break;
-
-                case "Admin":
-                    Admin admin = new Admin()
-                    {
-                        UserId = user.UserId
-                    };
-
-                    await _adminRepo.AddAsync(admin);
-                    break;
-
-                default:
-                    throw new Exception("Invalid role");
+                Admin admin = new() { UserId = user.UserId };
+                await _adminRepo.AddAsync(admin);
             }
+
+            return user; // UserId is now set
         }
     }
 }
