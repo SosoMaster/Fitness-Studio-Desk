@@ -28,5 +28,8 @@
     <Compile Update="FORMS\АdminForms\EditClientForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="FORMS\АdminForms\EditTrainerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

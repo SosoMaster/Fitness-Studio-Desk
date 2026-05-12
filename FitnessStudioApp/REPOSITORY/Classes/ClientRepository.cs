@@ -27,4 +27,9 @@ public class ClientRepository: BaseRepository<Client>, IClientRepository
            Name = c.User.Username
        }).ToListAsync();
     }
+
+    public async Task<Client> GetClientByUserId(int userId)
+    {
+        return await _dbSet.Where(c => c.UserId == userId).FirstOrDefaultAsync();
+    }
 }

@@ -13,10 +13,11 @@ namespace FitnessStudioApp.SERVICES;
 public class ClientService 
 {
     private readonly ClientRepository _clientRepo;
-    public ClientService(UserService userService, ClientRepository clientRepository)
+    public ClientService(ClientRepository clientRepository)
     {
        
         _clientRepo = clientRepository;
+        
     }
 
     public async Task Delete(Client entity)
@@ -77,5 +78,10 @@ public class ClientService
     public async Task<IEnumerable<ClientAndTrainerDTO>> GetAddClientWithUserInfo()
     {
         return await _clientRepo.GetAddClientWithUserInfo();
+    }
+
+    public async Task<Client> GetClientByUserId (int userId)
+    {
+        return await _clientRepo.GetClientByUserId(userId);
     }
 }
