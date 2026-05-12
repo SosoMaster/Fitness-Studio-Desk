@@ -38,6 +38,9 @@
             listBox1 = new ListBox();
             btn_BookSession = new Button();
             btn_CancelBooking = new Button();
+            chb_ShowPassword_clientform = new CheckBox();
+            lbl_Password_clientform = new Label();
+            txtb_Password_form = new TextBox();
             SuspendLayout();
             // 
             // lbl_Name
@@ -90,13 +93,13 @@
             // 
             // btn_EditProfile
             // 
-            btn_EditProfile.Location = new Point(61, 191);
+            btn_EditProfile.Location = new Point(61, 248);
             btn_EditProfile.Name = "btn_EditProfile";
             btn_EditProfile.Size = new Size(100, 26);
             btn_EditProfile.TabIndex = 8;
             btn_EditProfile.Text = "Edit Profile";
             btn_EditProfile.UseVisualStyleBackColor = true;
-            btn_EditProfile.Click += Btn_EditProfile_Click;
+            btn_EditProfile.Click += btn_EditProfile_Click;
             // 
             // listBox1
             // 
@@ -127,11 +130,42 @@
             btn_CancelBooking.UseVisualStyleBackColor = true;
             btn_CancelBooking.Click += btn_CancelBooking_Click;
             // 
+            // chb_ShowPassword_clientform
+            // 
+            chb_ShowPassword_clientform.AutoSize = true;
+            chb_ShowPassword_clientform.Location = new Point(61, 223);
+            chb_ShowPassword_clientform.Name = "chb_ShowPassword_clientform";
+            chb_ShowPassword_clientform.Size = new Size(108, 19);
+            chb_ShowPassword_clientform.TabIndex = 12;
+            chb_ShowPassword_clientform.Text = "Show Password";
+            chb_ShowPassword_clientform.UseVisualStyleBackColor = true;
+            chb_ShowPassword_clientform.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // lbl_Password_clientform
+            // 
+            lbl_Password_clientform.AutoSize = true;
+            lbl_Password_clientform.Location = new Point(61, 176);
+            lbl_Password_clientform.Name = "lbl_Password_clientform";
+            lbl_Password_clientform.Size = new Size(52, 15);
+            lbl_Password_clientform.TabIndex = 13;
+            lbl_Password_clientform.Text = "Pasword";
+            // 
+            // txtb_Password_form
+            // 
+            txtb_Password_form.Location = new Point(61, 194);
+            txtb_Password_form.Name = "txtb_Password_form";
+            txtb_Password_form.Size = new Size(100, 23);
+            txtb_Password_form.TabIndex = 14;
+            txtb_Password_form.UseSystemPasswordChar = true;
+            // 
             // ClientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(txtb_Password_form);
+            Controls.Add(lbl_Password_clientform);
+            Controls.Add(chb_ShowPassword_clientform);
             Controls.Add(btn_CancelBooking);
             Controls.Add(btn_BookSession);
             Controls.Add(listBox1);
@@ -144,6 +178,7 @@
             Controls.Add(lbl_Name);
             Name = "ClientForm";
             Text = "ClientForm";
+            Load += ClientForm_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -167,202 +202,18 @@
 
         private void btn_BookSession_Click(object sender, EventArgs e)
         {
-            try
-            {
-               
-                var hasBooking = false;
-                for (int i = 0; i < listBox1.Items.Count; i++)
-                {
-                    var itemText = (listBox1.Items[i] ?? string.Empty).ToString();
-                    if (string.IsNullOrWhiteSpace(itemText))
-                        continue;
-                    if (itemText == "Trainer:" || itemText == "Date:" || itemText == "Time:")
-                        continue;
-                    hasBooking = true;
-                    break;
-                }
-
-                if (hasBooking)
-                {
-                    var overwrite = MessageBox.Show(this, "You already have a booking. Overwrite it?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if (overwrite != DialogResult.Yes)
-                        return;
-                }
-
-              
-                var trainer = Microsoft.VisualBasic.Interaction.InputBox("Enter trainer name:", "Book Session", "");
-                if (string.IsNullOrWhiteSpace(trainer))
-                {
-                    MessageBox.Show(this, "Booking cancelled or trainer not provided.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-              
-                var dateInput = Microsoft.VisualBasic.Interaction.InputBox("Enter date (e.g. 2026-04-30):", "Book Session - Date", DateTime.Today.ToString("yyyy-MM-dd"));
-                if (string.IsNullOrWhiteSpace(dateInput))
-                {
-                    MessageBox.Show(this, "Booking cancelled or date not provided.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                if (!DateTime.TryParse(dateInput, out var parsedDate))
-                {
-                    MessageBox.Show(this, "Invalid date format. Please use a valid date.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-               
-                var timeInput = Microsoft.VisualBasic.Interaction.InputBox("Enter time (e.g. 14:30):", "Book Session - Time", "09:00");
-                if (string.IsNullOrWhiteSpace(timeInput))
-                {
-                    MessageBox.Show(this, "Booking cancelled or time not provided.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                TimeSpan parsedTime;
-                if (!TimeSpan.TryParse(timeInput, out parsedTime))
-                {
-                    
-                    if (DateTime.TryParse(timeInput, out var dt))
-                    {
-                        parsedTime = dt.TimeOfDay;
-                    }
-                    else
-                    {
-                        MessageBox.Show(this, "Invalid time format. Please use HH:mm or a valid time.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
-                }
-
-               
-                listBox1.Items.Clear();
-                listBox1.Items.AddRange(new object[]
-                {
-                    "Trainer:", trainer, "",
-                    "Date:", parsedDate.ToString("yyyy-MM-dd"), "",
-                    "Time:", parsedTime.ToString(@"hh\:mm")
-                });
-
-                MessageBox.Show(this, "Session booked successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, $"An error occurred while booking the session: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
         }
         private void btn_CancelBooking_Click(object sender, EventArgs e)
         {
-            try
-            {
-               
-                var hasBooking = false;
-                for (int i = 0; i < listBox1.Items.Count; i++)
-                {
-                    var itemText = (listBox1.Items[i] ?? string.Empty).ToString();
-                    if (string.IsNullOrWhiteSpace(itemText))
-                        continue;
-                    if (itemText == "Trainer:" || itemText == "Date:" || itemText == "Time:")
-                        continue;
-                    
-                    hasBooking = true;
-                    break;
-                }
-
-                if (!hasBooking)
-                {
-                    MessageBox.Show(this, "No booking to cancel.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return;
-                }
-
-                var confirm = MessageBox.Show(this, "Are you sure you want to cancel the booking?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (confirm != DialogResult.Yes)
-                    return;
-
-               
-                listBox1.Items.Clear();
-                listBox1.Items.AddRange(new object[] { "Trainer:", "", "", "Date:", "", "", "Time:" });
-
-                MessageBox.Show(this, "Booking cancelled.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, $"An error occurred while cancelling the booking: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private void Btn_EditProfile_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                
-                var isSaveMode = string.Equals(btn_EditProfile.Text, "Save", StringComparison.OrdinalIgnoreCase);
-
-                if (isSaveMode)
-                {
-                    
-                    btn_EditProfile.Text = "Save";
-
-                    textBox1.ReadOnly = false;
-                    txtb_Email.ReadOnly = false;
-                    txtb_Phone.ReadOnly = false;
-
-                    textBox1.BackColor = SystemColors.Window;
-                    txtb_Email.BackColor = SystemColors.Window;
-                    txtb_Phone.BackColor = SystemColors.Window;
-
-                    textBox1.Focus();
-                    return;
-                }
-
-               
-                var name = textBox1.Text?.Trim() ?? string.Empty;
-                var email = txtb_Email.Text?.Trim() ?? string.Empty;
-                var phone = txtb_Phone.Text?.Trim() ?? string.Empty;
-
-                if (string.IsNullOrEmpty(name))
-                {
-                    MessageBox.Show(this, "Please enter a name.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    textBox1.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(email) || !email.Contains("@"))
-                {
-                    MessageBox.Show(this, "Please enter a valid email address.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtb_Email.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(phone))
-                {
-                    MessageBox.Show(this, "Please enter a phone number.", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    txtb_Phone.Focus();
-                    return;
-                }
-
-               
-                btn_EditProfile.Text = "Edit Profile";
-
-                textBox1.ReadOnly = true;
-                txtb_Email.ReadOnly = true;
-                txtb_Phone.ReadOnly = true;
-
-                
-                textBox1.BackColor = SystemColors.Control;
-                txtb_Email.BackColor = SystemColors.Control;
-                txtb_Phone.BackColor = SystemColors.Control;
-
-                MessageBox.Show(this, "Profile saved.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception ex)
-            {
-               
-                MessageBox.Show(this, $"An error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
             
-
         }
+
+
        
+        private CheckBox chb_ShowPassword_clientform;
+        private Label lbl_Password_clientform;
+        private TextBox txtb_Password_form;
+
     }
 }
