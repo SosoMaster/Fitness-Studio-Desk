@@ -15,15 +15,19 @@ namespace FitnessStudioApp.FORMS
 {
     public partial class LoginForm : Form
     {
+        private readonly UserService _userService;
+
+
         private readonly LoginService _loginService;
-        public LoginForm(LoginService loginService)
+        public LoginForm(LoginService loginService, UserService userService)
         {
             _loginService = loginService;
             InitializeComponent();
-
+            _userService = userService;
         }
 
-        private void chbShowPassword_CheckedChanged(object sender, EventArgs e)
+
+            private void chbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (chbShowPassword.Checked)
             {
@@ -51,7 +55,7 @@ namespace FitnessStudioApp.FORMS
                 if (user.Client != null)
                 {
                     this.Hide();
-                    new ClientForm().Show();
+                    new ClientForm(_userService).Show();
                 }
               /*  else if (user.Role == Role.Trainer)
                 {

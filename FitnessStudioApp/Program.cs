@@ -32,7 +32,7 @@ namespace FitnessStudioApp
             ClientRepository clientRepository = new ClientRepository(dbContext);
             ClientRegisterService clientRegisterService = new ClientRegisterService(clientRepository);
             ClientRegisterForm clientRegisterForm = new ClientRegisterForm(user.UserId, clientRegisterService);
-            ClientService clientService = new ClientService(userService, clientRepository);
+            ClientService clientService = new ClientService( clientRepository);
 
             TrainerRepository trainerRepository = new TrainerRepository(dbContext);
             TrainerRegisterService trainerRegisterService = new TrainerRegisterService(trainerRepository);
