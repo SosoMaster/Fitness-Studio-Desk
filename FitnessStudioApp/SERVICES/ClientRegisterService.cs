@@ -1,4 +1,5 @@
 ﻿using FitnessStudioApp.MODELS;
+using FitnessStudioApp.MODELS.Enums;
 using FitnessStudioApp.REPOSITORY.Classes;
 using System;
 using System.Collections.Generic;
@@ -11,33 +12,38 @@ namespace FitnessStudioApp.SERVICES
     public class ClientRegisterService
     {
         private readonly ClientRepository _clientRepo;
-        public ClientRegisterService() 
-        {
 
-        }
-        
-        public string Gender( RadioButton RdbMale, RadioButton RdbFemale)
+        public ClientRegisterService(ClientRepository clientRepo)
         {
-            string gender = string.Empty;
-
-            if (RdbMale.Checked)
-            {
-                gender = "Male";
-            }
-            else if (RdbFemale.Checked)
-            {
-                gender = "Female";
-            }
-            return gender;
+            _clientRepo = clientRepo;
         }
 
+   
+        public string Gender(RadioButton rdbMale, RadioButton rdbFemale)
+        {
+            if (rdbMale.Checked) return "Male";
+            if (rdbFemale.Checked) return "Female";
+            throw new Exception("Please select a gender.");
+        }
+
+      
         public async Task RegisterClientAsync(Client client)
         {
-            if (client.UserId == 0)
-                throw new Exception("Missing UserId");
+            // Basic validation
+            if (client.Age <= 0 || client.Age > 120)
+                throw new Exception("Please enter a valid age (1-120).");
+            if (client.Height <= 0)
+                throw new Exception("Please enter a valid height.");
+            if (client.Weight <= 0)
+                throw new Exception("Please enter a valid weight.");
+            if (string.IsNullOrEmpty(client.Gender))
+                throw new Exception("Please select a gender.");
+
+           
+            client.MembershipStatus = MembershipStatus.Inactive;
 
             await _clientRepo.AddAsync(client);
         }
+            
     }
-
 }
