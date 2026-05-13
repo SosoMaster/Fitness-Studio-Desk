@@ -50,7 +50,7 @@ namespace FitnessStudioApp
 
             Application.Run(new AdminUsersForm(userService, clientService, trainerService, adminClientProgressService));
 
-            Application.Run(new RegisterForm(registerService, clientRegisterService, trainerRegisterService));
+            /*Application.Run(new RegisterForm(registerService, clientRegisterService, trainerRegisterService));*/
 
             /*Application.Run(new ClientForm());*/
 
