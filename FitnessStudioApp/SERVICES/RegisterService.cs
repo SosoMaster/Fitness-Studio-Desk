@@ -1,6 +1,7 @@
 ﻿using FitnessStudioApp.FORMS;
 using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES.Helpers;
 using System;
 using System.Collections.Generic;
@@ -13,74 +14,54 @@ namespace FitnessStudioApp.SERVICES
     public class RegisterService
     {
         private readonly UserService _userService;
-        private readonly RegisterForm _registerForm;
-        private readonly ClientRepository _clientRepo;
-        private readonly ClientRegisterService _clientRegisterService;
-        private readonly TrainerRepository _trainerRepo;
-        private readonly AdminRepository _adminRepo;
         private readonly UserRepository _userRepo;
+        private readonly AdminRepository _adminRepo;
+        private UserService object1;
+        private IUserRepository object2;
+        private IAdminRepository object3;
 
         public RegisterService(
             UserService userService,
             UserRepository userRepo,
-            ClientRepository clientRepo,
-            TrainerRepository trainerRepo,
             AdminRepository adminRepo)
         {
             _userService = userService;
             _userRepo = userRepo;
-            _clientRepo = clientRepo;
-            _trainerRepo = trainerRepo;
             _adminRepo = adminRepo;
         }
 
-        public async Task RegisterAsync(User user, string role)
+        public RegisterService(UserService object1, IUserRepository object2, IAdminRepository object3)
         {
-            // validation
+            this.object1 = object1;
+            this.object2 = object2;
+            this.object3 = object3;
+        }
+
+        /// <summary>
+        /// Creates the User row.
+        /// Returns the saved User (with its new UserId) so the caller
+        /// can open the correct role-specific form.
+        /// </summary>
+        public async Task<User> RegisterAsync(User user, string role)
+        {
             UserValidator.InfoFieldsValidate(user);
 
-            // duplicate check
-            var existingUser =
-                await _userRepo.GetByUsernameAsync(user.Username);
+            var existing = await _userRepo.GetByUsernameAsync(user.Username);
+            if (existing != null)
+                throw new Exception("Username already exists.");
 
-            if (existingUser != null)
-            {
-                throw new Exception("Username already exists");
-            }
+            if (role != "Client" && role != "Trainer" && role != "Admin")
+                throw new Exception("Please select a valid role.");
 
-            // create user
             await _userService.AddAsync(user);
 
-            // role assignment
-            switch (role)
+            if (role == "Admin")
             {
-                case "Client":
-                    var clientForm = new ClientRegisterForm(user.UserId, _clientRegisterService);
-                    clientForm.Show();
-                    _registerForm.Hide();
-                    break;
-
-                case "Trainer":
-                    Trainer trainer = new Trainer()
-                    {
-                        UserId = user.UserId
-                    };
-
-                    await _trainerRepo.AddAsync(trainer);
-                    break;
-
-                case "Admin":
-                    Admin admin = new Admin()
-                    {
-                        UserId = user.UserId
-                    };
-
-                    await _adminRepo.AddAsync(admin);
-                    break;
-
-                default:
-                    throw new Exception("Invalid role");
+                Admin admin = new() { UserId = user.UserId };
+                await _adminRepo.AddAsync(admin);
             }
+
+            return user; 
         }
     }
 }

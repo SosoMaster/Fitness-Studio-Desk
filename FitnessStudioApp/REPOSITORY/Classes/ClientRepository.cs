@@ -28,8 +28,23 @@ public class ClientRepository: BaseRepository<Client>, IClientRepository
        }).ToListAsync();
     }
 
+    public async Task<List<ClientAndTrainerDTO>> GetAllCklinetsToTrainer(int trainerId)
+    {
+        return await _dbSet.Where(c => c.TrainerId == trainerId).Select(c=> new ClientAndTrainerDTO
+        {
+            ModelId = c.ClientId,
+            UserId = c.UserId,
+            Name = c.User.Username
+        } ).ToListAsync();
+    }
+
     public async Task<Client> GetClientByUserId(int userId)
     {
-        return await _dbSet.Where(c => c.UserId == userId).FirstOrDefaultAsync();
+        var client = await _dbSet.FirstOrDefaultAsync(c => c.UserId == userId);
+
+        if (client == null)
+            throw new Exception("Client not found!");
+
+        return client;
     }
 }

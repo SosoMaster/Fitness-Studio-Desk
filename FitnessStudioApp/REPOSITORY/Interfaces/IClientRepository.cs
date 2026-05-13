@@ -14,6 +14,8 @@ namespace FitnessStudioApp.REPOSITORY.Interfaces
         
      Task <Client> GetClientByUserId(int  userId);
 
-    
+     Task<List<ClientAndTrainerDTO>> GetAllCklinetsToTrainer(int trainerId);
+
+
     }
 }
