@@ -1,6 +1,7 @@
 ﻿using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY;
 using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.SERVICES;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,23 +16,36 @@ namespace FitnessStudioApp.FORMS
 {
     public partial class BookingForm : Form
     {
-        private int currentClientId;
-        private readonly TrainingSessionRepository _sessionRepository;
-        private readonly TrainerRepository _trainerRepository;
-        private readonly BaseRepository<Booking> _bookingRepository;
+        private readonly int _currentClientId;
 
-        private List<TrainingSession> _allSessions = new List<TrainingSession>();
+        private readonly TrainingSessionService _sessionService;
+        private readonly TrainerService _trainerService;
+
+        private readonly BaseRepository<Booking> _bookingRepo;
+
+        private List<TrainingSession> _allSessions = new();
         private DateTime? _selectedDate;
 
         public BookingForm(int clientId)
         {
             InitializeComponent();
-            currentClientId = clientId;
+
+            _currentClientId = clientId;
 
             var db = new FitnessStudioAppDbContext();
-            _sessionRepository = new TrainingSessionRepository(db);
-            _trainerRepository = new TrainerRepository(db);
-            _bookingRepository = new BaseRepository<Booking>(db);
+
+            var trainerRepo = new TrainerRepository(db);
+            var sessionRepo = new TrainingSessionRepository(db);
+            var clientRepo = new ClientRepository(db);
+
+            _trainerService = new TrainerService(null, trainerRepo);
+
+            _sessionService = new TrainingSessionService(
+                sessionRepo,
+                clientRepo,
+                trainerRepo);
+
+            _bookingRepo = new BaseRepository<Booking>(db);
 
             this.Load += BookingForm_Load;
 
@@ -46,13 +60,14 @@ namespace FitnessStudioApp.FORMS
 
         private async Task LoadDataAsync()
         {
-            var trainers = await _trainerRepository.GetAddTrainerWithUserInfo();
-            var trainerList = trainers.ToList();
+            var trainers = await _trainerService.GetAddTrainerWithUserInfo();
+
             cmb_Trainer.DisplayMember = "Name";
             cmb_Trainer.ValueMember = "ModelId";
-            cmb_Trainer.DataSource = trainerList;
+            cmb_Trainer.DataSource = trainers.ToList();
 
-            var sessions = await _sessionRepository.GetAllAsync();
+            var sessions = await _sessionService.GetAllAsync();
+
             _allSessions = sessions.ToList();
 
             UpdateSessionComboBox();
@@ -63,28 +78,37 @@ namespace FitnessStudioApp.FORMS
 
         private async void btn_Create_Click(object sender, EventArgs e)
         {
-            if (cmb_TrainingSession.SelectedIndex == -1 || cmb_TrainingSession.SelectedValue == null)
+            if (cmb_TrainingSession.SelectedIndex == -1 ||
+                cmb_TrainingSession.SelectedValue == null)
             {
                 MessageBox.Show("Моля, изберете тренировка!");
                 return;
             }
-            int trainingSessionId = Convert.ToInt32(cmb_TrainingSession.SelectedValue);
 
-            // find the session to get the exact start time
-            var session = _allSessions.FirstOrDefault(s => s.TrainingSessionId == trainingSessionId);
-            DateTime bookingDate = session?.StartTime ?? DateTime.Now;
+            int trainingSessionId =
+                Convert.ToInt32(cmb_TrainingSession.SelectedValue);
 
-            Booking booking = new Booking()
+            var session = _allSessions
+                .FirstOrDefault(s => s.TrainingSessionId == trainingSessionId);
+
+            if (session == null)
             {
-                ClientId = currentClientId,
+                MessageBox.Show("Невалидна тренировка!");
+                return;
+            }
+
+            Booking booking = new()
+            {
+                ClientId = _currentClientId,
                 TrainingSessionId = trainingSessionId,
-                BookingDate = bookingDate,
+                BookingDate = session.StartTime,
                 Status = "Active"
             };
 
-            await _bookingRepository.AddAsync(booking);
+            await _bookingRepo.AddAsync(booking);
 
             MessageBox.Show("Успешна резервация!");
+
             this.Close();
         }
 
@@ -93,24 +117,24 @@ namespace FitnessStudioApp.FORMS
             this.Close();
         }
 
-        private void cmb_TrainingType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void cmb_Trainer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // when trainer changes, refresh available sessions
             try
             {
                 UpdateSessionComboBox();
             }
-            catch { }
+            catch
+            {
+
+            }
         }
 
-        private void monthCalendar1_DateSelected(object? sender, DateRangeEventArgs e)
+        private void monthCalendar1_DateSelected(
+            object? sender,
+            DateRangeEventArgs e)
         {
             _selectedDate = e.Start.Date;
+
             UpdateSessionComboBox();
         }
 
@@ -120,22 +144,36 @@ namespace FitnessStudioApp.FORMS
 
             if (_selectedDate.HasValue)
             {
-                filtered = filtered.Where(s => s.StartTime.Date == _selectedDate.Value.Date);
+                filtered = filtered.Where(
+                    s => s.StartTime.Date == _selectedDate.Value.Date);
             }
 
             if (cmb_Trainer.SelectedValue != null)
             {
                 try
                 {
-                    int trainerId = Convert.ToInt32(cmb_Trainer.SelectedValue);
-                    filtered = filtered.Where(s => s.TrainerId == trainerId);
+                    int trainerId =
+                        Convert.ToInt32(cmb_Trainer.SelectedValue);
+
+                    filtered = filtered.Where(
+                        s => s.TrainerId == trainerId);
                 }
-                catch { }
+                catch
+                {
+
+                }
             }
 
-            var list = filtered.OrderBy(s => s.StartTime)
-                               .Select(s => new { Id = s.TrainingSessionId, Name = $"{s.StartTime:dd.MM.yyyy HH:mm} - {s.EndTime:HH:mm} ({s.Description})" })
-                               .ToList();
+            var list = filtered
+                .OrderBy(s => s.StartTime)
+                .Select(s => new
+                {
+                    Id = s.TrainingSessionId,
+                    Name =
+                        $"{s.StartTime:dd.MM.yyyy HH:mm} - " +
+                        $"{s.EndTime:HH:mm} ({s.Description})"
+                })
+                .ToList();
 
             cmb_TrainingSession.DisplayMember = "Name";
             cmb_TrainingSession.ValueMember = "Id";
