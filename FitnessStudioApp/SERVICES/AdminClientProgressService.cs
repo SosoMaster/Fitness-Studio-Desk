@@ -31,6 +31,11 @@ namespace FitnessStudioApp.SERVICES
             return await _progressRepository.GetProgressByClientId(clientId);
         }
 
+        public async Task<Progress> GetByIdAsync(int id)
+        {
+            return await _progressRepository.GetByIdAsync(id);
+        }
+
 
 
     }

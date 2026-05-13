@@ -19,15 +19,28 @@ namespace FitnessStudioApp.FORMS
 
 
         private readonly LoginService _loginService;
-        public LoginForm(LoginService loginService, UserService userService)
+        private readonly RegisterService _registerService;
+        readonly ClientRegisterService _clientRegisterService;
+        readonly TrainerRegisterService _trainerRegisterService;
+        readonly ClientService _clientService;
+        readonly TrainerService _trainerService;
+        readonly AdminClientProgressService _adminClientProgressService;
+
+        public LoginForm(LoginService loginService, UserService userService, RegisterService registerService, ClientRegisterService clientRegisterService, TrainerRegisterService trainerRegisterService, ClientService clientService, TrainerService trainerService, AdminClientProgressService adminClientProgressService)
         {
             _loginService = loginService;
             InitializeComponent();
             _userService = userService;
+            _registerService = registerService;
+            _clientRegisterService = clientRegisterService;
+            _trainerRegisterService = trainerRegisterService;
+            _clientService = clientService;
+            _trainerService = trainerService;
+            _adminClientProgressService = adminClientProgressService;
         }
 
 
-            private void chbShowPassword_CheckedChanged(object sender, EventArgs e)
+        private void chbShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (chbShowPassword.Checked)
             {
@@ -50,21 +63,19 @@ namespace FitnessStudioApp.FORMS
 
                 MessageBox.Show("Login successful!");
 
-                
+
 
                 if (user.Client != null)
                 {
                     this.Hide();
                     new ClientForm(_userService).Show();
                 }
-              /*  else if (user.Role == Role.Trainer)
+                else if (user.Admin != null)
                 {
-                    new TrainerProfileForm(user.UserId).Show();
+                    this.Hide();
+                    new AdminUsersForm(_userService, _clientService, _trainerService, _adminClientProgressService).Show();
                 }
-                else if (user.Role == Role.Admin)
-                {
-                    new AdminProfileForm().Show();
-                }*/
+
             }
             catch (Exception ex)
             {
@@ -72,9 +83,18 @@ namespace FitnessStudioApp.FORMS
             }
         }
 
+
+
         private void lblUser_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            var registerForm = new RegisterForm(_registerService,_clientRegisterService, _trainerRegisterService );
+            registerForm.Show();
+            this.Hide();
         }
     }
 }

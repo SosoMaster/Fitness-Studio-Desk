@@ -21,13 +21,15 @@ namespace FitnessStudioApp.FORMS.АdminForms
         readonly TrainerService _trainerService;
         readonly UserService _userService;
         readonly AdminTrainerService _adminTrainerService;
-        public EditTrainerForm(int userId, TrainerService trainerService, UserService userService, AdminTrainerService adminTrainerService)
+        readonly ClientService _clientService;
+        public EditTrainerForm(int userId, TrainerService trainerService, UserService userService, AdminTrainerService adminTrainerService, ClientService clientService)
         {
             InitializeComponent();
             _userId = userId;
             _trainerService = trainerService;
             _userService = userService;
             _adminTrainerService = adminTrainerService;
+            _clientService = clientService;
         }
 
         private async void EditTrainerForm_Load(object sender, EventArgs e)
@@ -81,30 +83,7 @@ namespace FitnessStudioApp.FORMS.АdminForms
             }
         }
 
-        private async void btnUpdateData_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-                var user = await _userService.GetByIdAsync(_userId);
-                var trainer = await _trainerService.GetClientByUserId(_userId);
-
-                if (UserValidator.InfoFieldsValidate(user))
-                {
-                    user.Username = tbxUsername.Text;
-                    user.Phone = tbxPhone.Text;
-                    user.Email = tbxEmail.Text;
-                    user.Password = tbxPassword.Text;
-                    await _userService.Update(user);
-                }
-                // Update na trainer !~!!!!!
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
+   
 
         private void cbxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
@@ -115,6 +94,28 @@ namespace FitnessStudioApp.FORMS.АdminForms
             else
             {
                 tbxPassword.UseSystemPasswordChar = false;
+            }
+        }
+
+        private async void btnDeleteClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UserValidator.ListBoxIndexChecked(lbClients))
+                {
+                    var clientDTO = lbClients.SelectedItem as ClientAndTrainerDTO;
+                    var client = await _clientService.GetByIdAsync(clientDTO.ModelId);
+                     await _clientService.Delete(client);
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
     }
