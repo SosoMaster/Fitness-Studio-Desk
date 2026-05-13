@@ -1,6 +1,7 @@
 ﻿using FitnessStudioApp.FORMS;
 using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES.Helpers;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,9 @@ namespace FitnessStudioApp.SERVICES
         private readonly UserService _userService;
         private readonly UserRepository _userRepo;
         private readonly AdminRepository _adminRepo;
+        private UserService object1;
+        private IUserRepository object2;
+        private IAdminRepository object3;
 
         public RegisterService(
             UserService userService,
@@ -26,6 +30,13 @@ namespace FitnessStudioApp.SERVICES
             _adminRepo = adminRepo;
         }
 
+        public RegisterService(UserService object1, IUserRepository object2, IAdminRepository object3)
+        {
+            this.object1 = object1;
+            this.object2 = object2;
+            this.object3 = object3;
+        }
+
         /// <summary>
         /// Creates the User row.
         /// Returns the saved User (with its new UserId) so the caller
@@ -33,10 +44,8 @@ namespace FitnessStudioApp.SERVICES
         /// </summary>
         public async Task<User> RegisterAsync(User user, string role)
         {
-            // Validate fields
             UserValidator.InfoFieldsValidate(user);
 
-            // Duplicate check
             var existing = await _userRepo.GetByUsernameAsync(user.Username);
             if (existing != null)
                 throw new Exception("Username already exists.");
@@ -44,17 +53,15 @@ namespace FitnessStudioApp.SERVICES
             if (role != "Client" && role != "Trainer" && role != "Admin")
                 throw new Exception("Please select a valid role.");
 
-            // Persist user — EF will populate UserId after SaveChanges
             await _userService.AddAsync(user);
 
-            // For Admin, finish here (no extra profile form needed)
             if (role == "Admin")
             {
                 Admin admin = new() { UserId = user.UserId };
                 await _adminRepo.AddAsync(admin);
             }
 
-            return user; // UserId is now set
+            return user; 
         }
     }
 }

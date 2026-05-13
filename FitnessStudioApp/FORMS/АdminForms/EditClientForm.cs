@@ -37,7 +37,9 @@ namespace FitnessStudioApp.FORMS.АdminForms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-
+            var adminForm = new AdminUsersForm(_userService, _clientService, null, _progressService);
+            adminForm.Show();
+            this.Close();
         }
 
         private async void EditClientForm_Load(object sender, EventArgs e)
@@ -76,7 +78,7 @@ namespace FitnessStudioApp.FORMS.АdminForms
         {
             if (cbxShowPassword.Checked)
             {
-                tbxPassword.UseSystemPasswordChar = true;
+                tbxPassword.UseSystemPasswordChar = !cbxShowPassword.Checked;
             }
             else
             {
@@ -91,23 +93,22 @@ namespace FitnessStudioApp.FORMS.АdminForms
                 var user = await _userService.GetByIdAsync(_userId);
                 var client = await _clientService.GetClientByUserId(_userId);
 
-                if (UserValidator.InfoFieldsValidate(user))
-                {
-                    user.Username = tbxUsername.Text;
-                    user.Phone = tbxPhone.Text;
-                    user.Email = tbxEmail.Text;
-                    user.Password = tbxPassword.Text;
-                    await _userService.Update(user);
-                }
-                // Update na clinet !~!!!!!
+                user.Username = tbxUsername.Text;
+                user.Phone = tbxPhone.Text;
+                user.Email = tbxEmail.Text;
+                user.Password = tbxPassword.Text;
 
-                 client.MembershipStatus = (MembershipStatus)cbMembershipStatus.SelectedItem;
+                await _userService.Update(user);
+
+                client.MembershipStatus = (MembershipStatus)cbMembershipStatus.SelectedItem;
+
                 await _clientService.Update(client);
-            }
-            catch (Exception)
-            {
 
-                throw;
+                MessageBox.Show("Updated успешно!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }

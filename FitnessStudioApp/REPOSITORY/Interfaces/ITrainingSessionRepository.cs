@@ -1,15 +1,10 @@
 ﻿using FitnessStudioApp.MODELS;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessStudioApp.REPOSITORY.Interfaces
 {
-    public interface ITrainingSessionRepository : IRepository<TrainingSession> 
+    public interface ITrainingSessionRepository : IRepository<TrainingSession>
     {
-
+        Task<IEnumerable<TrainingSession>> GetSessionsByTrainerIdAsync(int trainerId);
+        Task<IEnumerable<TrainingSession>> GetUpcomingSessionsByTrainerIdAsync(int trainerId);
     }
-
 }

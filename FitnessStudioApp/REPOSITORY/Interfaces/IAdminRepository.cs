@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessStudioApp.REPOSITORY.Interfaces;
-
-public interface IUserRepository: IRepository<User>
+namespace FitnessStudioApp.REPOSITORY.Interfaces
 {
-    Task<User> GetByUsernameAsync(string username);
+    public interface IAdminRepository : IRepository<Admin>
+    {
+    }
 }
