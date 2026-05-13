@@ -1,13 +1,13 @@
 ﻿using FitnessStudioApp.MODELS;
-using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.REPOSITORY.Interfaces;
 
 namespace FitnessStudioApp.SERVICES
 {
     public class TrainerRegisterService
     {
-        private readonly TrainerRepository _trainerRepo;
+        private readonly ITrainerRepository _trainerRepo;
 
-        public TrainerRegisterService(TrainerRepository trainerRepo)
+        public TrainerRegisterService(ITrainerRepository trainerRepo)
         {
             _trainerRepo = trainerRepo;
         }
