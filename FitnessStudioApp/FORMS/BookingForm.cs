@@ -21,7 +21,7 @@ namespace FitnessStudioApp.FORMS
         private readonly TrainingSessionService _sessionService;
         private readonly TrainerService _trainerService;
 
-        private readonly BaseRepository<Booking> _bookingRepo;
+        private readonly BookingTrainingService _bookingTrainingService;
 
         private List<TrainingSession> _allSessions = new();
         private DateTime? _selectedDate;
@@ -45,7 +45,12 @@ namespace FitnessStudioApp.FORMS
                 clientRepo,
                 trainerRepo);
 
-            _bookingRepo = new BaseRepository<Booking>(db);
+            var bookingRepo = new BaseRepository<Booking>(db);
+
+            _bookingTrainingService = new BookingTrainingService(
+                bookingRepo,
+                sessionRepo,
+                clientRepo);
 
             this.Load += BookingForm_Load;
 
@@ -105,7 +110,7 @@ namespace FitnessStudioApp.FORMS
                 Status = "Active"
             };
 
-            await _bookingRepo.AddAsync(booking);
+            await _bookingTrainingService.AddAsync(booking);
 
             MessageBox.Show("Успешна резервация!");
 
