@@ -118,10 +118,14 @@ namespace FitnessStudioApp.FORMS.АdminForms
             {
                 if (UserValidator.ListBoxIndexChecked(lbxProgresses))
                 {
-                    var client = await _clientService.GetClientByUserId(_userId);
+                    /*var client = await _clientService.GetClientByUserId(_userId);
                     var progress = await _progressService.GetProgressByClientId(client.ClientId);
-                    await _progressService.DeleteProgressAsync(progress);
-                }
+                    await _progressService.DeleteProgressAsync(progress);*/
+
+                    var  progressDTO = lbxProgresses.SelectedItem as AdminProgressDTO;
+                    var progress = await _progressService.GetByIdAsync(progressDTO.ProgressId);
+                     await _progressService.DeleteProgressAsync(progress);
+                } 
                 else
                 {
 

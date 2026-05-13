@@ -35,6 +35,7 @@
             txtUsername = new TextBox();
             chbShowPassword = new CheckBox();
             btnLogin = new Button();
+            btnRegister = new Button();
             SuspendLayout();
             // 
             // lblLogin
@@ -106,12 +107,23 @@
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
             // 
+            // btnRegister
+            // 
+            btnRegister.Location = new Point(92, 374);
+            btnRegister.Name = "btnRegister";
+            btnRegister.Size = new Size(134, 33);
+            btnRegister.TabIndex = 8;
+            btnRegister.Text = "Register";
+            btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
+            // 
             // LoginForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(935, 450);
+            Controls.Add(btnRegister);
             Controls.Add(btnLogin);
             Controls.Add(chbShowPassword);
             Controls.Add(txtUsername);
@@ -134,5 +146,6 @@
         private TextBox txtUsername;
         private CheckBox chbShowPassword;
         private Button btnLogin;
+        private Button btnRegister;
     }
 }

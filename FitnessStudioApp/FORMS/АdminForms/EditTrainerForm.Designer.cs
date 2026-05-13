@@ -41,8 +41,8 @@
             cbxSpecialty = new ComboBox();
             lblSpecialty = new Label();
             lbClients = new ListBox();
-            button1 = new Button();
-            button2 = new Button();
+            btnDeleteClient = new Button();
+            btnExit = new Button();
             SuspendLayout();
             // 
             // cbxShowPassword
@@ -64,7 +64,6 @@
             btnUpdateData.TabIndex = 22;
             btnUpdateData.Text = "Update data";
             btnUpdateData.UseVisualStyleBackColor = true;
-            btnUpdateData.Click += btnUpdateData_Click_1;
             // 
             // tbxPassword
             // 
@@ -156,31 +155,32 @@
             lbClients.Size = new Size(307, 184);
             lbClients.TabIndex = 26;
             // 
-            // button1
+            // btnDeleteClient
             // 
-            button1.Location = new Point(574, 262);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 27;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnDeleteClient.Location = new Point(574, 262);
+            btnDeleteClient.Name = "btnDeleteClient";
+            btnDeleteClient.Size = new Size(114, 23);
+            btnDeleteClient.TabIndex = 27;
+            btnDeleteClient.Text = "Delete Client";
+            btnDeleteClient.UseVisualStyleBackColor = true;
+            btnDeleteClient.Click += btnDeleteClient_Click;
             // 
-            // button2
+            // btnExit
             // 
-            button2.Location = new Point(280, 349);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 28;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnExit.Location = new Point(280, 349);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(75, 23);
+            btnExit.TabIndex = 28;
+            btnExit.Text = "Exit";
+            btnExit.UseVisualStyleBackColor = true;
             // 
             // EditTrainerForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnExit);
+            Controls.Add(btnDeleteClient);
             Controls.Add(lbClients);
             Controls.Add(lblSpecialty);
             Controls.Add(cbxSpecialty);
@@ -216,7 +216,7 @@
         private ComboBox cbxSpecialty;
         private Label lblSpecialty;
         private ListBox lbClients;
-        private Button button1;
-        private Button button2;
+        private Button btnDeleteClient;
+        private Button btnExit;
     }
 }

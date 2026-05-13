@@ -41,7 +41,7 @@ namespace FitnessStudioApp.FORMS
                     Password = txtPassword.Text,  
                 };
 
-                string role = cmbRoles.Text;
+                string role = cmbRoles.SelectedItem.ToString();
 
                 User savedUser = await _registerService.RegisterAsync(user, role);
 

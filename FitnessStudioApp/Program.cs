@@ -15,46 +15,84 @@ namespace FitnessStudioApp
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
-            ApplicationConfiguration.Initialize();
+            /* // To customize application configuration such as set high DPI settings or default font,
+             // see https://aka.ms/applicationconfiguration.
+             ApplicationConfiguration.Initialize();
 
-            using FitnessStudioAppDbContext dbContext = new FitnessStudioAppDbContext();
+             using FitnessStudioAppDbContext dbContext = new FitnessStudioAppDbContext();
 
-            // FIX: EnsureCreated must run BEFORE anything else touches the DB,
-            // and BEFORE Application.Run() — which blocks until the app closes.
-            dbContext.Database.EnsureCreated();
+             // FIX: EnsureCreated must run BEFORE anything else touches the DB,
+             // and BEFORE Application.Run() — which blocks until the app closes.
+             dbContext.Database.EnsureCreated();
 
-            User user = new User();
+             UserRepository userRepository = new UserRepository(dbContext);
+             UserService userService = new UserService(userRepository);
 
-            UserRepository userRepository = new UserRepository(dbContext);
-            UserService userService = new UserService(userRepository);
+             ClientRepository clientRepository = new ClientRepository(dbContext);
+             ClientRegisterService clientRegisterService = new ClientRegisterService(clientRepository);
+             ClientService clientService = new ClientService( clientRepository);
 
-            ClientRepository clientRepository = new ClientRepository(dbContext);
-            ClientRegisterService clientRegisterService = new ClientRegisterService(clientRepository);
-            ClientRegisterForm clientRegisterForm = new ClientRegisterForm(user.UserId, clientRegisterService);
-            ClientService clientService = new ClientService( clientRepository);
+             TrainerRepository trainerRepository = new TrainerRepository(dbContext);
+             TrainerRegisterService trainerRegisterService = new TrainerRegisterService(trainerRepository);
+             TrainerService trainerService = new TrainerService(userService, trainerRepository);
 
-            TrainerRepository trainerRepository = new TrainerRepository(dbContext);
-            TrainerRegisterService trainerRegisterService = new TrainerRegisterService(trainerRepository);
-            TrainerService trainerService = new TrainerService(userService, trainerRepository);
+             AdminRepository adminRepository = new AdminRepository(dbContext);
+             AdminService adminService = new AdminService(userService,adminRepository);
+             ProgressRepository progressRepository = new ProgressRepository(dbContext);
+             AdminClientProgressService adminClientProgressService = new AdminClientProgressService(progressRepository);
 
-            AdminRepository adminRepository = new AdminRepository(dbContext);
-            AdminService adminService = new AdminService(userService,adminRepository);
-            ProgressRepository progressRepository = new ProgressRepository(dbContext);
-            AdminClientProgressService adminClientProgressService = new AdminClientProgressService(progressRepository);
+             RegisterService registerService = new RegisterService(userService, userRepository, adminRepository);
 
-            RegisterService registerService = new RegisterService(userService, userRepository, adminRepository);
+             LoginService loginService = new LoginService(userRepository);
 
-            LoginService loginService = new LoginService(userRepository);
+             *//*Application.Run(new AdminUsersForm(userService, clientService, trainerService, adminClientProgressService));
 
-            Application.Run(new AdminUsersForm(userService, clientService, trainerService, adminClientProgressService));
-
-            Application.Run(new RegisterForm(registerService, clientRegisterService, trainerRegisterService));
+             Application.Run(new RegisterForm(registerService, clientRegisterService, trainerRegisterService));*/
 
             /*Application.Run(new ClientForm());*/
 
-            /*Application.Run(new LoginForm(loginService));*/
+            /*Application.Run(new LoginForm(loginService));*//*
+
+            Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService));*/
+
+
+            ApplicationConfiguration.Initialize();
+
+            try
+            {
+                using FitnessStudioAppDbContext dbContext = new FitnessStudioAppDbContext();
+                dbContext.Database.EnsureCreated();
+
+                UserRepository userRepository = new UserRepository(dbContext);
+                UserService userService = new UserService(userRepository);
+
+                ClientRepository clientRepository = new ClientRepository(dbContext);
+                ClientRegisterService clientRegisterService = new ClientRegisterService(clientRepository);
+                ClientService clientService = new ClientService(clientRepository);
+
+                TrainerRepository trainerRepository = new TrainerRepository(dbContext);
+                TrainerRegisterService trainerRegisterService = new TrainerRegisterService(trainerRepository);
+                TrainerService trainerService = new TrainerService(userService, trainerRepository);
+
+                AdminRepository adminRepository = new AdminRepository(dbContext);
+                AdminService adminService = new AdminService(userService, adminRepository);
+                ProgressRepository progressRepository = new ProgressRepository(dbContext);
+                AdminClientProgressService adminClientProgressService = new AdminClientProgressService(progressRepository);
+
+                RegisterService registerService = new RegisterService(userService, userRepository, adminRepository);
+                LoginService loginService = new LoginService(userRepository);
+
+                Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService, clientService, trainerService, adminClientProgressService));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.ToString(),
+                    "Startup Error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+            }
         }
     }
 }
