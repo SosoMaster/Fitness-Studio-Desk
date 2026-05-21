@@ -9,6 +9,16 @@ namespace FitnessStudioApp
 {
     internal static class Program
     {
+        /*
+            1. VALIDACIIIIIIII (-55 years of experience), REGEX za imeil
+            2. formClosed += (sender, e) => this.Close()
+            3. LOGGER
+            3. LOGGER
+            3. LOGGER
+            3. LOGGER
+            3. LOGGER
+            3. LOGGER
+        */
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -70,9 +80,13 @@ namespace FitnessStudioApp
                 ClientRegisterService clientRegisterService = new ClientRegisterService(clientRepository);
                 ClientService clientService = new ClientService(clientRepository);
 
+                TrainingSessionRepository trainingSessionRepository = new TrainingSessionRepository(dbContext);
+                BookingRepository bookingRepository = new BookingRepository(dbContext);
+
                 TrainerRepository trainerRepository = new TrainerRepository(dbContext);
                 TrainerRegisterService trainerRegisterService = new TrainerRegisterService(trainerRepository);
                 TrainerService trainerService = new TrainerService(userService, trainerRepository);
+                TrainerFormService trainerFormService = new TrainerFormService(trainerRepository, trainingSessionRepository, bookingRepository);
 
                 AdminRepository adminRepository = new AdminRepository(dbContext);
                 AdminService adminService = new AdminService(userService, adminRepository);
@@ -82,7 +96,7 @@ namespace FitnessStudioApp
                 RegisterService registerService = new RegisterService(userService, userRepository, adminRepository);
                 LoginService loginService = new LoginService(userRepository);
 
-                Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService, clientService, trainerService, adminClientProgressService));
+                Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService, clientService, trainerService, adminClientProgressService, trainerFormService));
             }
             catch (Exception ex)
             {

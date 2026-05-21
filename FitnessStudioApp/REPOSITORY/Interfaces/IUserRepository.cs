@@ -10,4 +10,5 @@ namespace FitnessStudioApp.REPOSITORY.Interfaces;
 public interface IUserRepository: IRepository<User>
 {
     Task<User> GetByUsernameAsync(string username);
+    Task<User> GetUserIncludeAllTables(string username);
 }

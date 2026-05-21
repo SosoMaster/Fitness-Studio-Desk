@@ -40,25 +40,27 @@
             // lblHeader
             // 
             lblHeader.AutoSize = true;
-            lblHeader.Location = new Point(371, 30);
+            lblHeader.Location = new Point(424, 40);
             lblHeader.Name = "lblHeader";
-            lblHeader.Size = new Size(114, 15);
+            lblHeader.Size = new Size(143, 20);
             lblHeader.TabIndex = 1;
             lblHeader.Text = "Admin panel - Users";
             // 
             // lbxTrainers
             // 
             lbxTrainers.FormattingEnabled = true;
-            lbxTrainers.Location = new Point(534, 92);
+            lbxTrainers.Location = new Point(610, 123);
+            lbxTrainers.Margin = new Padding(3, 4, 3, 4);
             lbxTrainers.Name = "lbxTrainers";
-            lbxTrainers.Size = new Size(407, 199);
+            lbxTrainers.Size = new Size(465, 264);
             lbxTrainers.TabIndex = 2;
             // 
             // btnEditClient
             // 
-            btnEditClient.Location = new Point(40, 318);
+            btnEditClient.Location = new Point(46, 424);
+            btnEditClient.Margin = new Padding(3, 4, 3, 4);
             btnEditClient.Name = "btnEditClient";
-            btnEditClient.Size = new Size(135, 35);
+            btnEditClient.Size = new Size(154, 47);
             btnEditClient.TabIndex = 3;
             btnEditClient.Text = "Edit or Update Client";
             btnEditClient.UseVisualStyleBackColor = true;
@@ -66,9 +68,10 @@
             // 
             // btnDeleteClient
             // 
-            btnDeleteClient.Location = new Point(40, 359);
+            btnDeleteClient.Location = new Point(46, 479);
+            btnDeleteClient.Margin = new Padding(3, 4, 3, 4);
             btnDeleteClient.Name = "btnDeleteClient";
-            btnDeleteClient.Size = new Size(95, 35);
+            btnDeleteClient.Size = new Size(109, 47);
             btnDeleteClient.TabIndex = 4;
             btnDeleteClient.Text = "Delete Client";
             btnDeleteClient.UseVisualStyleBackColor = true;
@@ -77,35 +80,39 @@
             // lbxClients
             // 
             lbxClients.FormattingEnabled = true;
-            lbxClients.Location = new Point(40, 92);
+            lbxClients.Location = new Point(46, 123);
+            lbxClients.Margin = new Padding(3, 4, 3, 4);
             lbxClients.Name = "lbxClients";
-            lbxClients.Size = new Size(375, 199);
+            lbxClients.Size = new Size(428, 264);
             lbxClients.TabIndex = 5;
             lbxClients.SelectedIndexChanged += lbxClients_SelectedIndexChanged;
             // 
             // btnEditTrainer
             // 
-            btnEditTrainer.Location = new Point(534, 318);
+            btnEditTrainer.Location = new Point(610, 424);
+            btnEditTrainer.Margin = new Padding(3, 4, 3, 4);
             btnEditTrainer.Name = "btnEditTrainer";
-            btnEditTrainer.Size = new Size(135, 35);
+            btnEditTrainer.Size = new Size(154, 47);
             btnEditTrainer.TabIndex = 6;
             btnEditTrainer.Text = "Edit or Update Trainer";
             btnEditTrainer.UseVisualStyleBackColor = true;
             // 
             // btnDeleteTrainer
             // 
-            btnDeleteTrainer.Location = new Point(534, 359);
+            btnDeleteTrainer.Location = new Point(610, 479);
+            btnDeleteTrainer.Margin = new Padding(3, 4, 3, 4);
             btnDeleteTrainer.Name = "btnDeleteTrainer";
-            btnDeleteTrainer.Size = new Size(95, 35);
+            btnDeleteTrainer.Size = new Size(109, 47);
             btnDeleteTrainer.TabIndex = 7;
             btnDeleteTrainer.Text = "Delete Trainer";
             btnDeleteTrainer.UseVisualStyleBackColor = true;
+            btnDeleteTrainer.Click += btnDeleteTrainer_Click;
             // 
             // AdminUsersForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1013, 494);
+            ClientSize = new Size(1158, 659);
             Controls.Add(btnDeleteTrainer);
             Controls.Add(btnEditTrainer);
             Controls.Add(lbxClients);
@@ -113,6 +120,7 @@
             Controls.Add(btnEditClient);
             Controls.Add(lbxTrainers);
             Controls.Add(lblHeader);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "AdminUsersForm";
             Text = "AdminUsersForm";
             Load += AdminUsersForm_Load;

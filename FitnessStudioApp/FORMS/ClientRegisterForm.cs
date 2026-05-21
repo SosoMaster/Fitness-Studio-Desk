@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,15 +16,17 @@ namespace FitnessStudioApp.FORMS
     public partial class ClientRegisterForm : Form
     {
         private ClientRegisterService _clientRegisterService;
-        private User _user;
+        private int _userId;
+        private readonly TrainerService _trainerService;
 
-        public ClientRegisterForm(int userId, ClientRegisterService clientRegisterService)
+        public ClientRegisterForm(int userId, ClientRegisterService clientRegisterService, TrainerService trainerService)
         {
             InitializeComponent();
-            _user.UserId = userId;
+            _userId = userId;
             _clientRegisterService = clientRegisterService;
+            _trainerService = trainerService;
         }
-        
+
 
         private async void btnFinishRegister_Click(object sender, EventArgs e)
         {
@@ -44,6 +47,14 @@ namespace FitnessStudioApp.FORMS
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private async void ClientRegisterForm_Load(object sender, EventArgs e)
+        {
+            var trainers = await _trainerService.GetAllAsync();
+           
+           
+            cmbTrainers.DataSource = trainers;
         }
     }
 }

@@ -62,5 +62,9 @@ namespace FitnessStudioApp.SERVICES
 
             await _userRepo.UpdateAsync(entity);
         }
+       public async Task<User> GetUserIncludeAllTables(string username)
+        {
+            return await _userRepo.GetUserIncludeAllTables(username);
+        }
     }
 }

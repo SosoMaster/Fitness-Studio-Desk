@@ -202,7 +202,20 @@
 
         private void btn_BookSession_Click(object sender, EventArgs e)
         {
-            
+            var result = MessageBox.Show(
+                "Iskate li da zapazite sesiqta?", 
+                "Save session",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                // loika za zapazvane
+            }
+            else
+            {
+
+            }
         }
         private void btn_CancelBooking_Click(object sender, EventArgs e)
         {
