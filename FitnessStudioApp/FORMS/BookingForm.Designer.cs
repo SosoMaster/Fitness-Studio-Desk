@@ -62,7 +62,6 @@
             cmb_TrainingSession.Name = "cmb_TrainingSession";
             cmb_TrainingSession.Size = new Size(121, 23);
             cmb_TrainingSession.TabIndex = 2;
-            cmb_TrainingSession.SelectedIndexChanged += cmb_TrainingType_SelectedIndexChanged;
             // 
             // cmb_Trainer
             // 

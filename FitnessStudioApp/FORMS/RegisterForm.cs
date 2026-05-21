@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,16 +18,18 @@ namespace FitnessStudioApp.FORMS
         private readonly RegisterService _registerService;
         private readonly ClientRegisterService _clientRegisterService;
         private readonly TrainerRegisterService _trainerRegisterService;
+        private readonly TrainerService _trainerService;
 
         public RegisterForm(
             RegisterService registerService,
             ClientRegisterService clientRegisterService,
-            TrainerRegisterService trainerRegisterService)
+            TrainerRegisterService trainerRegisterService, TrainerService trainerService)
         {
             InitializeComponent();
             _registerService = registerService;
             _clientRegisterService = clientRegisterService;
             _trainerRegisterService = trainerRegisterService;
+            _trainerService = trainerService;
         }
 
         private async void btnRegister_Click(object sender, EventArgs e)
@@ -50,7 +53,7 @@ namespace FitnessStudioApp.FORMS
                 {
                     case "Client":
                         var clientForm = new ClientRegisterForm(
-                            savedUser.UserId, _clientRegisterService);
+                            savedUser.UserId, _clientRegisterService, _trainerService);
                         clientForm.Show();
                         this.Hide();
                         break;

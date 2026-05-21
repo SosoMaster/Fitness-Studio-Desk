@@ -17,7 +17,7 @@ public class User
     public string Password { get; set; }
 
 
-    public Client Client { get; set; }
+    public Client Client { get; set; } 
     public Admin Admin { get; set; }
     public Trainer Trainer { get; set; }
 }

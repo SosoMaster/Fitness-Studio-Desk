@@ -25,12 +25,14 @@ namespace FitnessStudioApp.FORMS
             try
             {
                 if (cmbSpecialty.SelectedItem is null)
+                {
                     throw new Exception("Please select a specialty.");
+                }
 
                 Trainer trainer = new()
                 {
                     UserId = _userId,
-                    Specialty = (Specialty)cmbSpecialty.SelectedItem, 
+                    Specialty = (Specialty)cmbSpecialty.SelectedItem,
                 };
 
                 await _trainerRegisterService.RegisterTrainerAsync(trainer);
