@@ -64,6 +64,7 @@
             btnUpdateData.TabIndex = 22;
             btnUpdateData.Text = "Update data";
             btnUpdateData.UseVisualStyleBackColor = true;
+            btnUpdateData.Click += btnUpdateData_Click;
             // 
             // tbxPassword
             // 
@@ -173,6 +174,7 @@
             btnExit.TabIndex = 28;
             btnExit.Text = "Exit";
             btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // EditTrainerForm
             // 

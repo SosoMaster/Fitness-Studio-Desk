@@ -10,13 +10,37 @@ namespace FitnessStudioApp.FORMS
         private readonly TrainerRegisterService _trainerRegisterService;
         private readonly int _userId;
 
-        public TrainerRegisterForm(int userId, TrainerRegisterService trainerRegisterService)
+        private readonly LoginService _loginService;
+        private readonly UserService _userService;
+
+        private readonly RegisterService _registerService;
+        private readonly ClientRegisterService _clientRegisterService;
+        private readonly TrainerService _trainerService;
+        private readonly ClientService _clientService;
+        readonly AdminClientProgressService _adminClientProgressService;
+        readonly AdminTrainerService _adminTrainerService;
+        readonly TrainerFormService _trainerFormService;
+
+
+        public TrainerRegisterForm(int userId, TrainerRegisterService trainerRegisterService, LoginService loginService, UserService userService, RegisterService registerService, ClientRegisterService clientRegisterService,
+            TrainerService trainerService, ClientService clientService, AdminClientProgressService adminClientProgressService, AdminTrainerService adminTrainerService, TrainerFormService trainerFormService)
         {
             InitializeComponent();
             _userId = userId;
             _trainerRegisterService = trainerRegisterService;
+            _loginService = loginService;
+            _userService = userService;
+            _registerService = registerService;
+            _clientRegisterService = clientRegisterService;
+            _trainerService = trainerService;
+            _clientService = clientService;
+            _adminClientProgressService = adminClientProgressService;
+            _adminTrainerService = adminTrainerService;
+            _trainerFormService = trainerFormService;
 
-            
+
+
+
             cmbSpecialty.DataSource = Enum.GetValues(typeof(Specialty));
         }
 
@@ -44,7 +68,10 @@ namespace FitnessStudioApp.FORMS
                     MessageBoxIcon.Information);
 
                 // TODO: open LoginForm here
-                this.Close();
+
+                var loginForm = new LoginForm(_loginService, _userService, _registerService, _clientRegisterService, _trainerRegisterService, _clientService, _trainerService, _adminClientProgressService, _trainerFormService, _adminTrainerService);
+                loginForm.FormClosed += (s, e) => this.Close();
+                loginForm.Show();
             }
             catch (Exception ex)
             {

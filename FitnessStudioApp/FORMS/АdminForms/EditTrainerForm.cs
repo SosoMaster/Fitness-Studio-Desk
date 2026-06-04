@@ -21,8 +21,9 @@ namespace FitnessStudioApp.FORMS.АdminForms
         readonly TrainerService _trainerService;
         readonly UserService _userService;
         readonly AdminTrainerService _adminTrainerService;
+        readonly AdminClientProgressService _adminClientProgressService;
         readonly ClientService _clientService;
-        public EditTrainerForm(int userId, TrainerService trainerService, UserService userService, AdminTrainerService adminTrainerService, ClientService clientService)
+        public EditTrainerForm(int userId, TrainerService trainerService, UserService userService, AdminTrainerService adminTrainerService, ClientService clientService, AdminClientProgressService adminClientProgressService)
         {
             InitializeComponent();
             _userId = userId;
@@ -30,6 +31,7 @@ namespace FitnessStudioApp.FORMS.АdminForms
             _userService = userService;
             _adminTrainerService = adminTrainerService;
             _clientService = clientService;
+            _adminClientProgressService = adminClientProgressService;
         }
 
         private async void EditTrainerForm_Load(object sender, EventArgs e)
@@ -83,17 +85,17 @@ namespace FitnessStudioApp.FORMS.АdminForms
             }
         }
 
-   
+
 
         private void cbxShowPassword_CheckedChanged(object sender, EventArgs e)
         {
             if (cbxShowPassword.Checked)
             {
-                tbxPassword.UseSystemPasswordChar = true;
+                tbxPassword.UseSystemPasswordChar = false;
             }
             else
             {
-                tbxPassword.UseSystemPasswordChar = false;
+                tbxPassword.UseSystemPasswordChar = true;
             }
         }
 
@@ -105,7 +107,7 @@ namespace FitnessStudioApp.FORMS.АdminForms
                 {
                     var clientDTO = lbClients.SelectedItem as ClientAndTrainerDTO;
                     var client = await _clientService.GetByIdAsync(clientDTO.ModelId);
-                     await _clientService.Delete(client);
+                    await _clientService.Delete(client);
                 }
                 else
                 {
@@ -117,6 +119,13 @@ namespace FitnessStudioApp.FORMS.АdminForms
 
                 throw;
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            var adminForm = new AdminUsersForm(_userService, _clientService, _trainerService, _adminClientProgressService, _adminTrainerService);
+            adminForm.Show();
+            this.Close();
         }
     }
 }

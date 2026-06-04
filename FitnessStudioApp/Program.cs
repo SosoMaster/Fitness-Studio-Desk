@@ -92,11 +92,12 @@ namespace FitnessStudioApp
                 AdminService adminService = new AdminService(userService, adminRepository);
                 ProgressRepository progressRepository = new ProgressRepository(dbContext);
                 AdminClientProgressService adminClientProgressService = new AdminClientProgressService(progressRepository);
+                AdminTrainerService adminTrainerService = new AdminTrainerService(clientRepository);
 
                 RegisterService registerService = new RegisterService(userService, userRepository, adminRepository);
                 LoginService loginService = new LoginService(userRepository);
 
-                Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService, clientService, trainerService, adminClientProgressService, trainerFormService));
+                Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService, clientService, trainerService, adminClientProgressService, trainerFormService, adminTrainerService));
             }
             catch (Exception ex)
             {
