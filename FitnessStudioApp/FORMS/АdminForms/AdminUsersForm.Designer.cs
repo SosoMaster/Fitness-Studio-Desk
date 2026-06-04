@@ -81,7 +81,6 @@
             lbxClients.Name = "lbxClients";
             lbxClients.Size = new Size(375, 199);
             lbxClients.TabIndex = 5;
-            lbxClients.SelectedIndexChanged += lbxClients_SelectedIndexChanged;
             // 
             // btnEditTrainer
             // 

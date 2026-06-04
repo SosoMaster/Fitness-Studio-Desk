@@ -4,6 +4,9 @@ using FitnessStudioApp.MODELS.Enums;
 using FitnessStudioApp.REPOSITORY.Classes;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES;
+using log4net;
+using log4net.Config;
+using System.Reflection;
 
 namespace FitnessStudioApp
 {
@@ -67,6 +70,9 @@ namespace FitnessStudioApp
 
 
             ApplicationConfiguration.Initialize();
+
+            var repository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(repository);
 
             try
             {
