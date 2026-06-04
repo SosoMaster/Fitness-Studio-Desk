@@ -27,8 +27,19 @@ public class TrainerRepository: BaseRepository<Trainer>, ITrainerRepository
         }).ToListAsync();
     }
 
+    public async Task<IEnumerable<TrainerDTO>> GetAllTrainerForClientRegister()
+    {
+        return await _dbSet.Include(t => t.User).Select(t => new TrainerDTO
+        {
+            Specialty = t.Specialty,
+            Name = t.User.Username
+        }).ToListAsync();
+    }
+
     public async Task<Trainer> GetClientByUserId(int userId)
     {
         return await _dbSet.Where(c => c.UserId == userId).FirstOrDefaultAsync();
     }
+
+    
 }

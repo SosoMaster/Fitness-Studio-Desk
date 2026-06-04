@@ -13,4 +13,6 @@ public interface ITrainerRepository: IRepository<Trainer>
     Task<IEnumerable<ClientAndTrainerDTO>> GetAddTrainerWithUserInfo();
 
     Task<Trainer> GetClientByUserId(int userId);
+
+    Task<IEnumerable<TrainerDTO>> GetAllTrainerForClientRegister();
 }

@@ -79,4 +79,9 @@ public class TrainerService
         return await _trainerRepo.GetClientByUserId(userId);
     }
 
+    public async Task<IEnumerable<TrainerDTO>> GetAllTrainerForClientRegister()
+    {
+        return await _trainerRepo.GetAllTrainerForClientRegister();
+    }
+
 }

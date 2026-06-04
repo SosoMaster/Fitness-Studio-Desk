@@ -32,16 +32,21 @@ namespace FitnessStudioApp.FORMS
         {
             try
             {
+                Trainer trainer = cmbTrainers.SelectedItem as Trainer;
                 Client client = new()
                 {
                     Age = int.Parse(txtAge.Text),
                     Gender = _clientRegisterService.Gender(rdbMale, rdbFemale),
                     Height = int.Parse(txtHeight.Text),
                     Weight = int.Parse(txtWeight.Text),
+                    TrainerId = trainer.TrainerId,
+                    UserId = _userId
                 };
                 await _clientRegisterService.RegisterClientAsync(client);
 
                 MessageBox.Show("Registered успешно!");
+
+                
             }
             catch (Exception ex)
             {
@@ -51,9 +56,7 @@ namespace FitnessStudioApp.FORMS
 
         private async void ClientRegisterForm_Load(object sender, EventArgs e)
         {
-            var trainers = await _trainerService.GetAllAsync();
-           
-           
+            var trainers = await _trainerService.GetAllTrainerForClientRegister();
             cmbTrainers.DataSource = trainers;
         }
     }

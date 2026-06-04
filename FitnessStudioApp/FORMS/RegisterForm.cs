@@ -20,16 +20,25 @@ namespace FitnessStudioApp.FORMS
         private readonly TrainerRegisterService _trainerRegisterService;
         private readonly TrainerService _trainerService;
 
+        private readonly UserService _userService;
+        private readonly ClientService _clientService;
+
+        private readonly LoginService _loginService;
+        readonly AdminClientProgressService _adminClientProgressService;
+        readonly AdminTrainerService _adminTrainerService;
+        readonly TrainerFormService _trainerFormService;
+
         public RegisterForm(
             RegisterService registerService,
             ClientRegisterService clientRegisterService,
-            TrainerRegisterService trainerRegisterService, TrainerService trainerService)
+            TrainerRegisterService trainerRegisterService, TrainerService trainerService, LoginService loginService, AdminClientProgressService adminClientProgressService, AdminTrainerService adminTrainerService, TrainerFormService trainerFormService, ClientService clientService  )
         {
             InitializeComponent();
             _registerService = registerService;
             _clientRegisterService = clientRegisterService;
             _trainerRegisterService = trainerRegisterService;
             _trainerService = trainerService;
+            _clientService = clientService;
         }
 
         private async void btnRegister_Click(object sender, EventArgs e)
@@ -41,7 +50,7 @@ namespace FitnessStudioApp.FORMS
                     Username = txtUsername.Text.Trim(),
                     Email = txtEmail.Text.Trim(),
                     Phone = txtPhone.Text.Trim(),
-                    Password = txtPassword.Text,  
+                    Password = txtPassword.Text,
                 };
 
                 string role = cmbRoles.SelectedItem.ToString();
@@ -60,7 +69,7 @@ namespace FitnessStudioApp.FORMS
 
                     case "Trainer":
                         var trainerForm = new TrainerRegisterForm(
-                            savedUser.UserId, _trainerRegisterService);
+                            savedUser.UserId, _trainerRegisterService, _loginService, _userService, _registerService, _clientRegisterService, _trainerService, _clientService, _adminClientProgressService, _adminTrainerService, _trainerFormService);
                         trainerForm.Show();
                         this.Hide();
                         break;
@@ -83,5 +92,10 @@ namespace FitnessStudioApp.FORMS
         }
 
         private void RegisterForm_Load(object sender, EventArgs e) { }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            var login = new LoginForm(_loginService, _userService, _registerService, _clientRegisterService, _trainerRegisterService, _clientService, _trainerService, _adminClientProgressService, _trainerFormService, _adminTrainerService);
+        }
     }
 }

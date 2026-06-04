@@ -21,14 +21,15 @@ namespace FitnessStudioApp.FORMS
         readonly private ClientService _clientService;
         readonly private TrainerService _trainerService;
         readonly private AdminClientProgressService _adminClientProgressService;
-        public AdminUsersForm(UserService userService, ClientService clientService, TrainerService trainerService, AdminClientProgressService adminClientProgressService)
+        readonly private AdminTrainerService _adminTrainerService;
+        public AdminUsersForm(UserService userService, ClientService clientService, TrainerService trainerService, AdminClientProgressService adminClientProgressService, AdminTrainerService adminTrainerService)
         {
             InitializeComponent();
             _userService = userService;
             _clientService = clientService;
             _trainerService = trainerService;
             _adminClientProgressService = adminClientProgressService;
-
+            _adminTrainerService = adminTrainerService;
         }
 
         private void lbxClients_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace FitnessStudioApp.FORMS
                 if (UserValidator.ListBoxIndexChecked(lbxClients))
                 {
                     var client = lbxClients.SelectedItem as ClientAndTrainerDTO;
-                    var editClientForm = new EditClientForm(client.UserId, _adminClientProgressService, _userService, _clientService);
+                    var editClientForm = new EditClientForm(client.UserId, _adminClientProgressService, _userService, _clientService, _adminTrainerService, _trainerService);
                     editClientForm.Show();
                     this.Hide();
                 }
@@ -96,9 +97,38 @@ namespace FitnessStudioApp.FORMS
             }
         }
 
-        private void btnDeleteTrainer_Click(object sender, EventArgs e)
+        private async void btnDeleteTrainer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (UserValidator.ListBoxIndexChecked(lbxTrainers))
+                {
+                    var trainerDTO = lbxTrainers.Items[lbxTrainers.SelectedIndex] as ClientAndTrainerDTO;
+                    lbxTrainers.Items.RemoveAt(lbxTrainers.SelectedIndex);
+
+                    var user = await _userService.GetByIdAsync(trainerDTO.UserId);
+                    var trainer = await _trainerService.GetByIdAsync(trainerDTO.ModelId);
+                    await _trainerService.Delete(trainer);
+                    await _userService.Delete(user);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        private void btnEditTrainer_Click(object sender, EventArgs e)
         {
 
+            if (UserValidator.ListBoxIndexChecked(lbxTrainers))
+            {
+                var trainer = lbxTrainers.SelectedItem as ClientAndTrainerDTO;
+                var editTrainerForm = new EditTrainerForm(trainer.UserId, _trainerService, _userService, _adminTrainerService, _clientService, _adminClientProgressService);
+                editTrainerForm.Show();
+                this.Hide();
+            }
         }
     }
 }

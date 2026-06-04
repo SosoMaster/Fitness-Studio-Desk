@@ -17,17 +17,21 @@ namespace FitnessStudioApp.FORMS.АdminForms
 {
     public partial class EditClientForm : Form
     {
-        readonly AdminClientProgressService _progressService;
+        readonly AdminClientProgressService _adminClientProgressService;
+        readonly AdminTrainerService _adminTrainerService;
         readonly UserService _userService;
         readonly ClientService _clientService;
+        readonly TrainerService _trainerService;
         private int _userId;
-        public EditClientForm(int userId, AdminClientProgressService adminClientProgressService, UserService userService, ClientService clientService)
+        public EditClientForm(int userId, AdminClientProgressService adminClientProgressService, UserService userService, ClientService clientService, AdminTrainerService adminTrainerService, TrainerService trainerService)
         {
             InitializeComponent();
-            _progressService = adminClientProgressService;
+            _adminClientProgressService = adminClientProgressService;
             _userService = userService;
             _clientService = clientService;
             _userId = userId;
+            _adminTrainerService = adminTrainerService;
+            _trainerService = trainerService;
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,7 +41,7 @@ namespace FitnessStudioApp.FORMS.АdminForms
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            var adminForm = new AdminUsersForm(_userService, _clientService, null, _progressService);
+            var adminForm = new AdminUsersForm(_userService, _clientService, _trainerService, _adminClientProgressService, _adminTrainerService);
             adminForm.Show();
             this.Close();
         }
@@ -48,7 +52,7 @@ namespace FitnessStudioApp.FORMS.АdminForms
             {
                 var user = await _userService.GetByIdAsync(_userId);
                 var client = await _clientService.GetClientByUserId(_userId);
-                List<AdminProgressDTO> progresses = await _progressService.GetAllProgressToClient(client.ClientId);
+                List<AdminProgressDTO> progresses = await _adminClientProgressService.GetAllProgressToClient(client.ClientId);
 
                 foreach (var prog in progresses)
                 {
@@ -124,8 +128,8 @@ namespace FitnessStudioApp.FORMS.АdminForms
                     await _progressService.DeleteProgressAsync(progress);*/
 
                     var  progressDTO = lbxProgresses.SelectedItem as AdminProgressDTO;
-                    var progress = await _progressService.GetByIdAsync(progressDTO.ProgressId);
-                     await _progressService.DeleteProgressAsync(progress);
+                    var progress = await _adminClientProgressService.GetByIdAsync(progressDTO.ProgressId);
+                     await _adminClientProgressService.DeleteProgressAsync(progress);
                 } 
                 else
                 {

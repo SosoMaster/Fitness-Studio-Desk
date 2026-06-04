@@ -42,6 +42,7 @@
             lblTitle = new Label();
             lblRegisterAs = new Label();
             cmbRoles = new ComboBox();
+            btnLogin = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -163,11 +164,23 @@
             cmbRoles.Size = new Size(157, 23);
             cmbRoles.TabIndex = 12;
             // 
+            // btnLogin
+            // 
+            btnLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLogin.Location = new Point(46, 381);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(157, 57);
+            btnLogin.TabIndex = 13;
+            btnLogin.Text = "Login";
+            btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
+            // 
             // RegisterForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnLogin);
             Controls.Add(cmbRoles);
             Controls.Add(lblRegisterAs);
             Controls.Add(lblTitle);
@@ -204,5 +217,6 @@
         private Label lblTitle;
         private Label lblRegisterAs;
         private ComboBox cmbRoles;
+        private Button btnLogin;
     }
 }

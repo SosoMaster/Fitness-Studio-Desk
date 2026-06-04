@@ -25,9 +25,10 @@ namespace FitnessStudioApp.FORMS
         readonly ClientService _clientService;
         readonly TrainerService _trainerService;
         readonly AdminClientProgressService _adminClientProgressService;
+        readonly AdminTrainerService _adminTrainerService;
         readonly TrainerFormService _trainerFormService;
 
-        public LoginForm(LoginService loginService, UserService userService, RegisterService registerService, ClientRegisterService clientRegisterService, TrainerRegisterService trainerRegisterService, ClientService clientService, TrainerService trainerService, AdminClientProgressService adminClientProgressService, TrainerFormService trainerFormService)
+        public LoginForm(LoginService loginService, UserService userService, RegisterService registerService, ClientRegisterService clientRegisterService, TrainerRegisterService trainerRegisterService, ClientService clientService, TrainerService trainerService, AdminClientProgressService adminClientProgressService, TrainerFormService trainerFormService, AdminTrainerService adminTrainerService)
         {
             _loginService = loginService;
             InitializeComponent();
@@ -39,6 +40,7 @@ namespace FitnessStudioApp.FORMS
             _trainerService = trainerService;
             _adminClientProgressService = adminClientProgressService;
             _trainerFormService = trainerFormService;
+            _adminTrainerService = adminTrainerService;
         }
 
 
@@ -98,7 +100,7 @@ namespace FitnessStudioApp.FORMS
                 else if (checkUser.Admin != null)
                 {
                     this.Hide();
-                    var form = new AdminUsersForm(_userService, _clientService, _trainerService, _adminClientProgressService);
+                    var form = new AdminUsersForm(_userService, _clientService, _trainerService, _adminClientProgressService, _adminTrainerService);
                     form.FormClosed += (s, e) => this.Close();
                     form.Show();
                 }
@@ -125,7 +127,7 @@ namespace FitnessStudioApp.FORMS
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            var registerForm = new RegisterForm(_registerService,_clientRegisterService, _trainerRegisterService , _trainerService);
+            var registerForm = new RegisterForm(_registerService,_clientRegisterService, _trainerRegisterService , _trainerService, _loginService,_adminClientProgressService, _adminTrainerService, _trainerFormService, _clientService );
             registerForm.Show();
             this.Hide();
         }
