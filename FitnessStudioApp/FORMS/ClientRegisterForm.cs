@@ -1,5 +1,6 @@
 ﻿using FitnessStudioApp.Logger;
 using FitnessStudioApp.MODELS;
+using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.SERVICES;
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,8 @@ public partial class ClientRegisterForm : Form
         {
             _logger.Info($"Регистрация на клиент за UserId={_userId}");
 
-            Trainer trainer = cmbTrainers.SelectedItem as Trainer;
+            TrainerDTO trainerDTO = cmbTrainers.SelectedItem as TrainerDTO;
+            Trainer trainer =  await _trainerService.GetTrainerByNameAsync(trainerDTO.Name);
 
             if (trainer == null)
             {

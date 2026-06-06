@@ -167,4 +167,19 @@ public class TrainerService
             throw;
         }
     }
+
+    public async Task<Trainer> GetTrainerByNameAsync(string name)
+    {
+        try
+        {
+            _logger.Debug($"Търсене на треньор по Name={name}");
+            return await _trainerRepo.GetTrainerByNameAsync(name);
+        }
+        catch (Exception ex)
+        {
+
+            _logger.Error($"Грешка при търсене на треньор с Name={name}", ex);
+            throw;
+        }
+    }
 }
