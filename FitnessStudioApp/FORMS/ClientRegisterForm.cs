@@ -86,4 +86,6 @@ public partial class ClientRegisterForm : Form
             MessageBox.Show(ex.Message, "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
+
+    
 }
