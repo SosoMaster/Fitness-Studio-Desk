@@ -15,6 +15,7 @@
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             lblLogin = new Label();
             lblSubtitle = new Label();
             pnlCard = new Panel();
@@ -27,8 +28,10 @@
             pnlButtons = new Panel();
             btnLogin = new Button();
             btnRegister = new Button();
+            pictureBox1 = new PictureBox();
             pnlCard.SuspendLayout();
             pnlButtons.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lblLogin
@@ -36,7 +39,7 @@
             lblLogin.AutoSize = true;
             lblLogin.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
             lblLogin.ForeColor = Color.FromArgb(230, 241, 251);
-            lblLogin.Location = new Point(36, 28);
+            lblLogin.Location = new Point(103, 28);
             lblLogin.Name = "lblLogin";
             lblLogin.Size = new Size(181, 37);
             lblLogin.TabIndex = 0;
@@ -47,7 +50,7 @@
             lblSubtitle.AutoSize = true;
             lblSubtitle.Font = new Font("Segoe UI", 9.5F);
             lblSubtitle.ForeColor = Color.FromArgb(55, 138, 221);
-            lblSubtitle.Location = new Point(38, 58);
+            lblSubtitle.Location = new Point(103, 61);
             lblSubtitle.Name = "lblSubtitle";
             lblSubtitle.Size = new Size(142, 17);
             lblSubtitle.TabIndex = 1;
@@ -181,10 +184,21 @@
             btnRegister.UseVisualStyleBackColor = false;
             btnRegister.Click += btnRegister_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(45, 28);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(52, 50);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 3;
+            pictureBox1.TabStop = false;
+            // 
             // LoginForm
             // 
             BackColor = Color.FromArgb(15, 27, 45);
             ClientSize = new Size(480, 400);
+            Controls.Add(pictureBox1);
             Controls.Add(lblLogin);
             Controls.Add(lblSubtitle);
             Controls.Add(pnlCard);
@@ -196,6 +210,7 @@
             pnlCard.ResumeLayout(false);
             pnlCard.PerformLayout();
             pnlButtons.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -214,5 +229,6 @@
         private Panel pnlButtons;
         private Button btnLogin;
         private Button btnRegister;
+        private PictureBox pictureBox1;
     }
 }
