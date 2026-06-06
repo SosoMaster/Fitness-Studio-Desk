@@ -2,6 +2,7 @@
 using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -84,4 +85,19 @@ public class TrainerRepository : BaseRepository<Trainer>, ITrainerRepository
             throw;
         }
     }
+
+    public async Task<Trainer> GetTrainerByNameAsync(string name) 
+    {
+        try
+        {
+            _logger.Debug($"Търсене на треньор по Name={name}");
+            return await _dbSet.Include(t => t.User).Where(t => t.User.Username == name).FirstOrDefaultAsync();
+        }
+        catch (Exception ex)
+        {
+
+            _logger.Error($"Грешка при търсене на треньор с Name={name}", ex);
+            throw;
+        }
+    } 
 }
