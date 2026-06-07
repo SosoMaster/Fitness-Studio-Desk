@@ -57,6 +57,9 @@ namespace FitnessStudioApp.FORMS
                 {
                     UserId = _userId,
                     Specialty = (Specialty)cmbSpecialty.SelectedItem,
+                    Age = int.Parse(txtAge.Text),
+                    Gender = _trainerRegisterService.Gender(rdbMale, rdbFemale),
+                    YearsOfExperience = int.Parse(txtExperienceYears.Text)
                 };
 
                 await _trainerRegisterService.RegisterTrainerAsync(trainer);
