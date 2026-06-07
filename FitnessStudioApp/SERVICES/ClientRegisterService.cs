@@ -32,26 +32,7 @@ public class ClientRegisterService
         {
             _logger.Info($"Регистрация на клиент с UserId={client?.UserId}");
 
-            if (client.Age <= 0 || client.Age > 120)
-            {
-                _logger.Warn($"Невалидна възраст: {client.Age}");
-                throw new Exception("Please enter a valid age (1-120).");
-            }
-            if (client.Height <= 0)
-            {
-                _logger.Warn($"Невалиден ръст: {client.Height}");
-                throw new Exception("Please enter a valid height.");
-            }
-            if (client.Weight <= 0)
-            {
-                _logger.Warn($"Невалидно тегло: {client.Weight}");
-                throw new Exception("Please enter a valid weight.");
-            }
-            if (string.IsNullOrEmpty(client.Gender))
-            {
-                _logger.Warn("Не е избран пол при регистрация");
-                throw new Exception("Please select a gender.");
-            }
+            ValidateClient(client);
 
             client.MembershipStatus = MembershipStatus.Inactive;
 
@@ -62,6 +43,44 @@ public class ClientRegisterService
         {
             _logger.Error($"Грешка при регистрация на клиент с UserId={client?.UserId}", ex);
             throw;
+        }
+    }
+
+    private void ValidateClient(Client client)
+    {
+        // Age — under 18 needs parent approval message
+        if (client.Age < 16)
+        {
+            _logger.Warn($"Невалидна възраст: {client.Age}");
+            throw new Exception("Age must be at least 16.");
+        }
+
+        if (client.Age < 18)
+        {
+            _logger.Warn($"Клиент под 18 години: {client.Age}");
+            throw new Exception(
+                "Clients under 18 require parental approval.\n" +
+                "Please visit one of our physical fitness locations to complete registration.");
+        }
+
+        // Height — 120 cm to 272 cm
+        if (client.Height < 120 || client.Height > 272)
+        {
+            _logger.Warn($"Невалиден ръст: {client.Height}");
+            throw new Exception("Height must be between 120 cm and 272 cm.");
+        }
+
+        // Weight — 40 kg to 200 kg
+        if (client.Weight < 40 || client.Weight > 200)
+        {
+            _logger.Warn($"Невалидно тегло: {client.Weight}");
+            throw new Exception("Weight must be between 40 kg and 200 kg.");
+        }
+
+        if (string.IsNullOrEmpty(client.Gender))
+        {
+            _logger.Warn("Не е избран пол при регистрация");
+            throw new Exception("Please select a gender.");
         }
     }
 }

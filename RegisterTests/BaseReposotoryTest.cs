@@ -47,11 +47,5 @@ namespace FitnessStudioApp.Tests
             Assert.That(allAfter, Is.EqualTo(allBefore + 1));
         }
 
-        public void 
-
-
-
-
-
     }
 }
