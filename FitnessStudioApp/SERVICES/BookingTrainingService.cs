@@ -1,6 +1,7 @@
 ﻿using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY;
 using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.REPOSITORY.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,14 @@ namespace FitnessStudioApp.SERVICES
 {
     public class BookingTrainingService
     {
-        private readonly BaseRepository<Booking> _bookingRepo;
-        private readonly TrainingSessionRepository _sessionRepo;
-        private readonly ClientRepository _clientRepo;
+        private readonly IRepository<Booking> _bookingRepo;
+        private readonly ITrainingSessionRepository _sessionRepo;
+        private readonly IClientRepository _clientRepo;
 
         public BookingTrainingService(
-            BaseRepository<Booking> bookingRepo,
-            TrainingSessionRepository sessionRepo,
-            ClientRepository clientRepo)
+            IRepository<Booking> bookingRepo,
+            ITrainingSessionRepository sessionRepo,
+            IClientRepository clientRepo)
         {
             _bookingRepo = bookingRepo;
             _sessionRepo = sessionRepo;
