@@ -1,4 +1,5 @@
-﻿using FitnessStudioApp.MODELS;
+﻿using FitnessStudioApp.Logger;
+using FitnessStudioApp.MODELS;
 using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.MODELS.Enums;
 using FitnessStudioApp.SERVICES;
@@ -13,130 +14,125 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FitnessStudioApp.FORMS.АdminForms
+namespace FitnessStudioApp.FORMS.АdminForms;
+
+public partial class EditClientForm : Form
 {
-    public partial class EditClientForm : Form
+    readonly AdminClientProgressService _adminClientProgressService;
+    readonly AdminTrainerService _adminTrainerService;
+    readonly UserService _userService;
+    readonly ClientService _clientService;
+    readonly TrainerService _trainerService;
+    private readonly ILoggerService _logger;
+    private int _userId;
+
+    public EditClientForm(int userId, AdminClientProgressService adminClientProgressService, UserService userService, ClientService clientService, AdminTrainerService adminTrainerService, TrainerService trainerService)
     {
-        readonly AdminClientProgressService _progressService;
-        readonly UserService _userService;
-        readonly ClientService _clientService;
-        private int _userId;
-        public EditClientForm(int userId, AdminClientProgressService adminClientProgressService, UserService userService, ClientService clientService)
+        InitializeComponent();
+        _adminClientProgressService = adminClientProgressService;
+        _userService = userService;
+        _clientService = clientService;
+        _userId = userId;
+        _adminTrainerService = adminTrainerService;
+        _trainerService = trainerService;
+        _logger = new LoggerService(typeof(EditClientForm));
+    }
+
+    private void listBox1_SelectedIndexChanged(object sender, EventArgs e) { }
+
+    private void btnExit_Click(object sender, EventArgs e)
+    {
+        var adminForm = new AdminUsersForm(_userService, _clientService, _trainerService, _adminClientProgressService, _adminTrainerService);
+        adminForm.Show();
+        this.Close();
+    }
+
+    private async void EditClientForm_Load(object sender, EventArgs e)
+    {
+        try
         {
-            InitializeComponent();
-            _progressService = adminClientProgressService;
-            _userService = userService;
-            _clientService = clientService;
-            _userId = userId;
+            _logger.Debug($"Зареждане на EditClientForm за UserId={_userId}");
+
+            var user = await _userService.GetByIdAsync(_userId);
+            var client = await _clientService.GetClientByUserId(_userId);
+            List<AdminProgressDTO> progresses = await _adminClientProgressService.GetAllProgressToClient(client.ClientId);
+
+            foreach (var prog in progresses)
+                lbxProgresses.Items.Add(prog);
+
+            tbxEmail.Text = user.Email;
+            tbxPassword.Text = user.Password;
+            tbxPhone.Text = user.Phone;
+            tbxUsername.Text = user.Username;
+
+            cbMembershipStatus.DataSource = Enum.GetValues(typeof(MembershipStatus));
         }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        catch (Exception ex)
         {
-
+            _logger.Error($"Грешка при зареждане на EditClientForm за UserId={_userId}", ex);
+            MessageBox.Show(ex.Message, "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
 
-        private void btnExit_Click(object sender, EventArgs e)
+    private void cbxShowPassword_CheckedChanged(object sender, EventArgs e)
+    {
+        tbxPassword.UseSystemPasswordChar = !cbxShowPassword.Checked;
+    }
+
+    private async void btnUpdateData_Click(object sender, EventArgs e)
+    {
+        try
         {
-            var adminForm = new AdminUsersForm(_userService, _clientService, null, _progressService);
-            adminForm.Show();
-            this.Close();
+            _logger.Info($"Обновяване на данни за UserId={_userId}");
+
+            var user = await _userService.GetByIdAsync(_userId);
+            var client = await _clientService.GetClientByUserId(_userId);
+
+            user.Username = tbxUsername.Text;
+            user.Phone = tbxPhone.Text;
+            user.Email = tbxEmail.Text;
+            user.Password = tbxPassword.Text;
+
+            await _userService.Update(user);
+
+            client.MembershipStatus = (MembershipStatus)cbMembershipStatus.SelectedItem;
+            await _clientService.Update(client);
+
+            _logger.Info($"Данните за UserId={_userId} са обновени успешно");
+            MessageBox.Show("Данните са обновени успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private async void EditClientForm_Load(object sender, EventArgs e)
+        catch (Exception ex)
         {
-            try
-            {
-                var user = await _userService.GetByIdAsync(_userId);
-                var client = await _clientService.GetClientByUserId(_userId);
-                List<AdminProgressDTO> progresses = await _progressService.GetAllProgressToClient(client.ClientId);
-
-                foreach (var prog in progresses)
-                {
-                    lbxProgresses.Items.Add(prog);
-                }
-
-                tbxEmail.Text = user.Email;
-                tbxPassword.Text = user.Password;
-                tbxPhone.Text = user.Phone;
-                tbxUsername.Text = user.Username;
-
-                cbMembershipStatus.DataSource = Enum.GetValues(typeof(MembershipStatus));
-
-               
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-
-
+            _logger.Error($"Грешка при обновяване на данни за UserId={_userId}", ex);
+            MessageBox.Show(ex.Message, "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+    }
 
-        private void cbxShowPassword_CheckedChanged(object sender, EventArgs e)
+    private async void btnDeleteProgress_Click(object sender, EventArgs e)
+    {
+        try
         {
-            if (cbxShowPassword.Checked)
+            if (!UserValidator.ListBoxIndexChecked(lbxProgresses))
             {
-                tbxPassword.UseSystemPasswordChar = !cbxShowPassword.Checked;
+                MessageBox.Show("Моля изберете прогрес.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-            else
-            {
-                tbxPassword.UseSystemPasswordChar = false;
-            }
+
+            var progressDTO = lbxProgresses.SelectedItem as AdminProgressDTO;
+            _logger.Info($"Изтриване на прогрес Id={progressDTO.ProgressId}");
+
+            var progress = await _adminClientProgressService.GetByIdAsync(progressDTO.ProgressId);
+            await _adminClientProgressService.DeleteProgressAsync(progress);
+
+            lbxProgresses.Items.RemoveAt(lbxProgresses.SelectedIndex);
+
+            _logger.Info($"Прогрес Id={progressDTO.ProgressId} е изтрит успешно");
+            MessageBox.Show("Прогресът е изтрит успешно.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private async void btnUpdateData_Click(object sender, EventArgs e)
+        catch (Exception ex)
         {
-            try
-            {
-                var user = await _userService.GetByIdAsync(_userId);
-                var client = await _clientService.GetClientByUserId(_userId);
-
-                user.Username = tbxUsername.Text;
-                user.Phone = tbxPhone.Text;
-                user.Email = tbxEmail.Text;
-                user.Password = tbxPassword.Text;
-
-                await _userService.Update(user);
-
-                client.MembershipStatus = (MembershipStatus)cbMembershipStatus.SelectedItem;
-
-                await _clientService.Update(client);
-
-                MessageBox.Show("Updated успешно!");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-        }
-
-        private async void btnDeleteProgress_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (UserValidator.ListBoxIndexChecked(lbxProgresses))
-                {
-                    /*var client = await _clientService.GetClientByUserId(_userId);
-                    var progress = await _progressService.GetProgressByClientId(client.ClientId);
-                    await _progressService.DeleteProgressAsync(progress);*/
-
-                    var  progressDTO = lbxProgresses.SelectedItem as AdminProgressDTO;
-                    var progress = await _progressService.GetByIdAsync(progressDTO.ProgressId);
-                     await _progressService.DeleteProgressAsync(progress);
-                } 
-                else
-                {
-
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }    
+            _logger.Error("Грешка при изтриване на прогрес", ex);
+            MessageBox.Show(ex.Message, "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

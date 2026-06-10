@@ -4,6 +4,9 @@ using FitnessStudioApp.MODELS.Enums;
 using FitnessStudioApp.REPOSITORY.Classes;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES;
+using log4net;
+using log4net.Config;
+using System.Reflection;
 
 namespace FitnessStudioApp
 {
@@ -68,6 +71,9 @@ namespace FitnessStudioApp
 
             ApplicationConfiguration.Initialize();
 
+            var repository = LogManager.GetRepository(Assembly.GetEntryAssembly());
+            XmlConfigurator.Configure(repository);
+
             try
             {
                 using FitnessStudioAppDbContext dbContext = new FitnessStudioAppDbContext();
@@ -92,11 +98,12 @@ namespace FitnessStudioApp
                 AdminService adminService = new AdminService(userService, adminRepository);
                 ProgressRepository progressRepository = new ProgressRepository(dbContext);
                 AdminClientProgressService adminClientProgressService = new AdminClientProgressService(progressRepository);
+                AdminTrainerService adminTrainerService = new AdminTrainerService(clientRepository);
 
                 RegisterService registerService = new RegisterService(userService, userRepository, adminRepository);
                 LoginService loginService = new LoginService(userRepository);
 
-                Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService, clientService, trainerService, adminClientProgressService, trainerFormService));
+                Application.Run(new LoginForm(loginService, userService, registerService, clientRegisterService, trainerRegisterService, clientService, trainerService, adminClientProgressService, trainerFormService, adminTrainerService));
             }
             catch (Exception ex)
             {
