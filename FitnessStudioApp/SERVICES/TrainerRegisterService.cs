@@ -35,7 +35,11 @@ public class TrainerRegisterService
                 throw new Exception("Invalid user reference.");
             }
 
-            ValidateTrainer(trainer.Age,trainer.Gender, trainer.YearsOfExperience);
+            // Only validate detailed trainer info if any of those fields are provided
+            if (trainer.Age != 0 || !string.IsNullOrEmpty(trainer.Gender) || trainer.YearsOfExperience != 0)
+            {
+                ValidateTrainer(trainer.Age, trainer.Gender, trainer.YearsOfExperience);
+            }
 
             await _trainerRepo.AddAsync(trainer);
             _logger.Info($"Треньорът е регистриран успешно с UserId={trainer.UserId}");
