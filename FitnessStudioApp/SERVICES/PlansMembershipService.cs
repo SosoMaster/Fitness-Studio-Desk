@@ -1,5 +1,7 @@
 ﻿using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.REPOSITORY.Interfaces;
+using FitnessStudioApp.SERVICES.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +12,9 @@ namespace FitnessStudioApp.SERVICES
 {
     public class PlansMembershipService : IPlansMembershipService
     {
-        private readonly MembershipRepository _membershipRepo;
+        private readonly IMembershipRepository _membershipRepo;
 
-        public PlansMembershipService(MembershipRepository membershipRepo)
+        public PlansMembershipService(IMembershipRepository membershipRepo)
         {
             _membershipRepo = membershipRepo;
         }
