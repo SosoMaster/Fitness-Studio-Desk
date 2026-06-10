@@ -9,21 +9,16 @@ namespace FitnessStudioApp.Tests
     [TestFixture]
     public class PlansMembershipServiceTests
     {
-        private Mock<MembershipRepository> _membershipRepoMock;
+        private Mock<FitnessStudioApp.REPOSITORY.Interfaces.IMembershipRepository> _membershipRepoMock;
 
         private PlansMembershipService _service;
 
         [SetUp]
         public void Setup()
         {
-            var db = new FitnessStudioAppDbContext();
+            _membershipRepoMock = new Mock<FitnessStudioApp.REPOSITORY.Interfaces.IMembershipRepository>();
 
-            _membershipRepoMock =
-                new Mock<MembershipRepository>(db);
-
-            _service =
-                new PlansMembershipService(
-                    _membershipRepoMock.Object);
+            _service = new PlansMembershipService(_membershipRepoMock.Object);
         }
 
         [Test]

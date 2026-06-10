@@ -2,6 +2,7 @@
 using FitnessStudioApp.REPOSITORY.Classes;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES;
+using FitnessStudioApp.SERVICES.Interfaces;
 using Moq;
 using NUnit.Framework;
 
@@ -12,7 +13,7 @@ namespace FitnessStudioApp.Tests
     {
         private Mock<IUserRepository> _mockUserRepo;
         private Mock<IAdminRepository> _mockAdminRepo;
-        private Mock<UserService> _mockUserService;
+        private Mock<IUserService> _mockUserService;
         private RegisterService _registerService;
         private User _validUser;
 
@@ -21,7 +22,7 @@ namespace FitnessStudioApp.Tests
         {
             _mockUserRepo = new Mock<IUserRepository>();
             _mockAdminRepo = new Mock<IAdminRepository>();
-            _mockUserService = new Mock<UserService>(_mockUserRepo.Object);
+            _mockUserService = new Mock<IUserService>();
 
             _registerService = new RegisterService(
                 _mockUserService.Object,
@@ -37,7 +38,7 @@ namespace FitnessStudioApp.Tests
             };
         }
 
-        [Test]
+                [Test]
         public async Task RegisterAsync_DuplicateUsername_ThrowsException()
         {
             _mockUserRepo

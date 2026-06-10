@@ -35,12 +35,14 @@
             txtb_Email = new TextBox();
             txtb_Phone = new TextBox();
             btn_EditProfile = new Button();
-            listBox1 = new ListBox();
-            btn_BookSession = new Button();
-            btn_CancelBooking = new Button();
             chb_ShowPassword_clientform = new CheckBox();
             lbl_Password_clientform = new Label();
             txtb_Password_form = new TextBox();
+            monthCalendar1 = new MonthCalendar();
+            cmb_Trainer = new ComboBox();
+            cmb_TrainingSession = new ComboBox();
+            btn_Cancel = new Button();
+            btn_Create = new Button();
             SuspendLayout();
             // 
             // lbl_Name
@@ -99,36 +101,6 @@
             btn_EditProfile.TabIndex = 8;
             btn_EditProfile.Text = "Edit Profile";
             btn_EditProfile.UseVisualStyleBackColor = true;
-            btn_EditProfile.Click += btn_EditProfile_Click;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Items.AddRange(new object[] { "Trainer:", "", "", "Date:", "", "", "Time:" });
-            listBox1.Location = new Point(420, 63);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(224, 154);
-            listBox1.TabIndex = 9;
-            // 
-            // btn_BookSession
-            // 
-            btn_BookSession.Location = new Point(420, 243);
-            btn_BookSession.Name = "btn_BookSession";
-            btn_BookSession.Size = new Size(109, 23);
-            btn_BookSession.TabIndex = 10;
-            btn_BookSession.Text = "BookSession";
-            btn_BookSession.UseVisualStyleBackColor = true;
-            btn_BookSession.Click += btn_BookSession_Click;
-            // 
-            // btn_CancelBooking
-            // 
-            btn_CancelBooking.Location = new Point(535, 243);
-            btn_CancelBooking.Name = "btn_CancelBooking";
-            btn_CancelBooking.Size = new Size(109, 23);
-            btn_CancelBooking.TabIndex = 11;
-            btn_CancelBooking.Text = "CancelBooking";
-            btn_CancelBooking.UseVisualStyleBackColor = true;
-            btn_CancelBooking.Click += btn_CancelBooking_Click;
             // 
             // chb_ShowPassword_clientform
             // 
@@ -158,17 +130,59 @@
             txtb_Password_form.TabIndex = 14;
             txtb_Password_form.UseSystemPasswordChar = true;
             // 
+            // monthCalendar1
+            // 
+            monthCalendar1.Location = new Point(464, 130);
+            monthCalendar1.Name = "monthCalendar1";
+            monthCalendar1.TabIndex = 19;
+            // 
+            // cmb_Trainer
+            // 
+            cmb_Trainer.FormattingEnabled = true;
+            cmb_Trainer.Location = new Point(521, 94);
+            cmb_Trainer.Name = "cmb_Trainer";
+            cmb_Trainer.Size = new Size(121, 23);
+            cmb_Trainer.TabIndex = 18;
+            // 
+            // cmb_TrainingSession
+            // 
+            cmb_TrainingSession.FormattingEnabled = true;
+            cmb_TrainingSession.Location = new Point(521, 45);
+            cmb_TrainingSession.Name = "cmb_TrainingSession";
+            cmb_TrainingSession.Size = new Size(121, 23);
+            cmb_TrainingSession.TabIndex = 17;
+            // 
+            // btn_Cancel
+            // 
+            btn_Cancel.Location = new Point(537, 375);
+            btn_Cancel.Name = "btn_Cancel";
+            btn_Cancel.Size = new Size(75, 23);
+            btn_Cancel.TabIndex = 16;
+            btn_Cancel.Text = "Cancel";
+            btn_Cancel.UseVisualStyleBackColor = true;
+            // 
+            // btn_Create
+            // 
+            btn_Create.Location = new Point(498, 335);
+            btn_Create.Name = "btn_Create";
+            btn_Create.Size = new Size(152, 23);
+            btn_Create.TabIndex = 15;
+            btn_Create.Text = "Create Reservation";
+            btn_Create.UseVisualStyleBackColor = true;
+            // 
             // ClientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(monthCalendar1);
+            Controls.Add(cmb_Trainer);
+            Controls.Add(cmb_TrainingSession);
+            Controls.Add(btn_Cancel);
+            Controls.Add(btn_Create);
             Controls.Add(txtb_Password_form);
             Controls.Add(lbl_Password_clientform);
             Controls.Add(chb_ShowPassword_clientform);
-            Controls.Add(btn_CancelBooking);
-            Controls.Add(btn_BookSession);
-            Controls.Add(listBox1);
             Controls.Add(btn_EditProfile);
             Controls.Add(txtb_Phone);
             Controls.Add(txtb_Email);
@@ -196,9 +210,6 @@
         private Button btn_EditProfile;
         private TextBox textBox4;
         private Button button1;
-        private ListBox listBox1;
-        private Button btn_BookSession;
-        private Button btn_CancelBooking;
 
         private void btn_BookSession_Click(object sender, EventArgs e)
         {
@@ -227,6 +238,10 @@
         private CheckBox chb_ShowPassword_clientform;
         private Label lbl_Password_clientform;
         private TextBox txtb_Password_form;
-
+        private MonthCalendar monthCalendar1;
+        private ComboBox cmb_Trainer;
+        private ComboBox cmb_TrainingSession;
+        private Button btn_Cancel;
+        private Button btn_Create;
     }
 }

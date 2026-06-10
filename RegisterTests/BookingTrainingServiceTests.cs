@@ -5,26 +5,25 @@ using FitnessStudioApp.SERVICES;
 using Moq;
 using NUnit.Framework;
 using System.Security.Policy;
+using FitnessStudioApp.REPOSITORY.Interfaces;
 
 namespace FitnessStudioApp.Tests
 {
     [TestFixture]
     public class BookingTrainingServiceTests
     {
-        private Mock<BaseRepository<Booking>> _bookingRepoMock;
-        private Mock<TrainingSessionRepository> _sessionRepoMock;
-        private Mock<ClientRepository> _clientRepoMock;
+        private Mock<IRepository<Booking>> _bookingRepoMock;
+        private Mock<ITrainingSessionRepository> _sessionRepoMock;
+        private Mock<IClientRepository> _clientRepoMock;
 
         private BookingTrainingService _service;
 
         [SetUp]
         public void Setup()
         {
-            var db = new FitnessStudioAppDbContext();
-
-            _bookingRepoMock = new Mock<BaseRepository<Booking>>(db);
-            _sessionRepoMock = new Mock<TrainingSessionRepository>(db);
-            _clientRepoMock = new Mock<ClientRepository>(db);
+            _bookingRepoMock = new Mock<IRepository<Booking>>();
+            _sessionRepoMock = new Mock<ITrainingSessionRepository>();
+            _clientRepoMock = new Mock<IClientRepository>();
 
             _service = new BookingTrainingService(
                 _bookingRepoMock.Object,

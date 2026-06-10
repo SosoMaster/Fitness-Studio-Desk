@@ -48,38 +48,36 @@ public class ClientRegisterService
 
     private void ValidateClient(Client client)
     {
-        // Age — under 18 needs parent approval message
-        if (client.Age < 16)
+        if (client == null)
         {
-            _logger.Warn($"Невалидна възраст: {client.Age}");
-            throw new Exception("Age must be at least 16.");
+            _logger.Warn("Client is null during validation");
+            throw new Exception("Invalid client.");
         }
 
-        if (client.Age < 18)
+        // Age must be a reasonable positive value (1-120)
+        if (client.Age <= 0 || client.Age > 120)
         {
-            _logger.Warn($"Клиент под 18 години: {client.Age}");
-            throw new Exception(
-                "Clients under 18 require parental approval.\n" +
-                "Please visit one of our physical fitness locations to complete registration.");
+            _logger.Warn($"Invalid age: {client.Age}");
+            throw new Exception("Please provide a valid age.");
         }
 
-        // Height — 120 cm to 272 cm
-        if (client.Height < 120 || client.Height > 272)
+        // Height must be positive
+        if (client.Height <= 0)
         {
-            _logger.Warn($"Невалиден ръст: {client.Height}");
-            throw new Exception("Height must be between 120 cm and 272 cm.");
+            _logger.Warn($"Invalid height: {client.Height}");
+            throw new Exception("Please provide a valid height.");
         }
 
-        // Weight — 40 kg to 200 kg
-        if (client.Weight < 40 || client.Weight > 200)
+        // Weight must be positive
+        if (client.Weight <= 0)
         {
-            _logger.Warn($"Невалидно тегло: {client.Weight}");
-            throw new Exception("Weight must be between 40 kg and 200 kg.");
+            _logger.Warn($"Invalid weight: {client.Weight}");
+            throw new Exception("Please provide a valid weight.");
         }
 
         if (string.IsNullOrEmpty(client.Gender))
         {
-            _logger.Warn("Не е избран пол при регистрация");
+            _logger.Warn("Gender not selected during registration");
             throw new Exception("Please select a gender.");
         }
     }

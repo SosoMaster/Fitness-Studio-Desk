@@ -1,5 +1,4 @@
-﻿using FitnessStudioApp.Logger;
-using FitnessStudioApp.MODELS;
+﻿using FitnessStudioApp.MODELS;
 using FitnessStudioApp.SERVICES;
 using System;
 using System.Collections.Generic;
@@ -11,74 +10,209 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FitnessStudioApp.FORMS;
-
-public partial class ClientForm : Form
+namespace FitnessStudioApp.FORMS
 {
-    private readonly ClientService _clientService;
-    private readonly UserService _userService;
-    private readonly ILoggerService _logger;
-    private int _userId;
-    private Client _client;
-
-    public ClientForm(int userId, ClientService clientService, UserService userService)
+    public partial class ClientForm : Form
     {
-        InitializeComponent();
-        _userId = userId;
-        _clientService = clientService;
-        _userService = userService;
-        _logger = new LoggerService(typeof(ClientForm));
-    }
+        private readonly ClientService _clientService;
+        private readonly UserService _userService;
+        private int _userId;
+        private Client _client;
 
-    private async void ClientForm_Load(object sender, EventArgs e)
-    {
-        try
+        private readonly int _currentClientId;
+        private readonly TrainingSessionService _sessionService;
+        private readonly TrainerService _trainerService;
+        private readonly BookingTrainingService _bookingTrainingService;
+        private List<TrainingSession> _allSessions = new();
+        private DateTime? _selectedDate;
+
+        public ClientForm(int userId,
+            ClientService clientService,
+            UserService userService,
+            TrainingSessionService sessionService,
+            TrainerService trainerService,
+            BookingTrainingService bookingService)
         {
-            _logger.Debug($"Зареждане на ClientForm за UserId={_userId}");
+            InitializeComponent();
 
-            _client = await _clientService.GetClientByUserId(_userId);
-            var user = await _userService.GetByIdAsync(_userId);
+            _userId = userId;
+            _clientService = clientService;
+            _userService = userService;
 
-            textBox1.Text = user.Username;
-            txtb_Email.Text = user.Email;
-            txtb_Phone.Text = user.Phone;
-            txtb_Password_form.Text = user.Password;
-            txtb_Password_form.UseSystemPasswordChar = true;
+            _sessionService = sessionService;
+            _trainerService = trainerService;
+            _bookingTrainingService = bookingService;
+
+            _currentClientId = userId;
+
+            this.Load += ClientForm_Load;
+            monthCalendar1.DateSelected += monthCalendar1_DateSelected;
+            cmb_Trainer.SelectedIndexChanged += cmb_Trainer_SelectedIndexChanged;
+            btn_Create.Click += btn_Create_Click;
+            btn_Cancel.Click += btn_Cancel_Click;
         }
-        catch (Exception ex)
+
+        private async void ClientForm_Load(object? sender, EventArgs e)
         {
-            _logger.Error($"Грешка при зареждане на ClientForm за UserId={_userId}", ex);
-            MessageBox.Show(ex.Message, "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            await LoadDataAsync();
         }
-    }
 
-    private void checkBox1_CheckedChanged(object sender, EventArgs e)
-    {
-        txtb_Password_form.UseSystemPasswordChar = !chb_ShowPassword_clientform.Checked;
-    }
-
-    private async void btn_EditProfile_Click(object sender, EventArgs e)
-    {
-        try
+        private async Task LoadDataAsync()
         {
-            _logger.Info($"Обновяване на профил за UserId={_userId}");
+            var trainers = await _trainerService.GetAddTrainerWithUserInfo();
 
-            var user = await _userService.GetByIdAsync(_userId);
+            cmb_Trainer.DisplayMember = "Name";
+            cmb_Trainer.ValueMember = "ModelId";
+            cmb_Trainer.DataSource = trainers.ToList();
 
-            user.Username = textBox1.Text;
-            user.Email = txtb_Email.Text;
-            user.Phone = txtb_Phone.Text;
-            user.Password = txtb_Password_form.Text;
+            var sessions = await _sessionService.GetAllAsync();
 
-            await _userService.Update(user);
+            _allSessions = sessions.ToList();
 
-            _logger.Info($"Профилът за UserId={_userId} е обновен успешно");
-            MessageBox.Show("Профилът е обновен успешно!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            UpdateSessionComboBox();
+
+            monthCalendar1.MinDate = DateTime.Today;
+            monthCalendar1.MaxDate = DateTime.Today.AddMonths(6);
         }
-        catch (Exception ex)
+
+        private async void btn_Create_Click(object sender, EventArgs e)
         {
-            _logger.Error($"Грешка при обновяване на профил за UserId={_userId}", ex);
-            MessageBox.Show(ex.Message, "Грешка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (cmb_TrainingSession.SelectedIndex == -1 ||
+                cmb_TrainingSession.SelectedValue == null)
+            {
+                MessageBox.Show("Моля, изберете тренировка!");
+                return;
+            }
+
+            int trainingSessionId =
+                Convert.ToInt32(cmb_TrainingSession.SelectedValue);
+
+            var session = _allSessions
+                .FirstOrDefault(s => s.TrainingSessionId == trainingSessionId);
+
+            if (session == null)
+            {
+                MessageBox.Show("Невалидна тренировка!");
+                return;
+            }
+
+            Booking booking = new()
+            {
+                ClientId = _currentClientId,
+                TrainingSessionId = trainingSessionId,
+                BookingDate = session.StartTime,
+                Status = "Active"
+            };
+
+            await _bookingTrainingService.AddAsync(booking);
+
+            MessageBox.Show("Успешна резервация!");
+
+            this.Close();
+        }
+
+        private void btn_Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void cmb_Trainer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateSessionComboBox();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void monthCalendar1_DateSelected(
+            object? sender,
+            DateRangeEventArgs e)
+        {
+            _selectedDate = e.Start.Date;
+
+            UpdateSessionComboBox();
+        }
+
+        private void UpdateSessionComboBox()
+        {
+            IEnumerable<TrainingSession> filtered = _allSessions;
+
+            if (_selectedDate.HasValue)
+            {
+                filtered = filtered.Where(
+                    s => s.StartTime.Date == _selectedDate.Value.Date);
+            }
+
+            if (cmb_Trainer.SelectedValue != null)
+            {
+                try
+                {
+                    int trainerId =
+                        Convert.ToInt32(cmb_Trainer.SelectedValue);
+
+                    filtered = filtered.Where(
+                        s => s.TrainerId == trainerId);
+                }
+                catch
+                {
+
+                }
+            }
+
+            var list = filtered
+                .OrderBy(s => s.StartTime)
+                .Select(s => new
+                {
+                    Id = s.TrainingSessionId,
+                    Name =
+                        $"{s.StartTime:dd.MM.yyyy HH:mm} - " +
+                        $"{s.EndTime:HH:mm} ({s.Description})"
+                })
+                .ToList();
+
+            cmb_TrainingSession.DisplayMember = "Name";
+            cmb_TrainingSession.ValueMember = "Id";
+            cmb_TrainingSession.DataSource = list;
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chb_ShowPassword_clientform.Checked)
+            {
+                txtb_Password_form.UseSystemPasswordChar = false;
+            }
+            else
+            {
+                txtb_Password_form.UseSystemPasswordChar = true;
+            }
+        }
+
+        private async void btn_EditProfile_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_client == null)
+                    return;
+
+                var user = _client.User;
+
+                user.Username = textBox1.Text;
+                user.Email = txtb_Email.Text;
+                user.Phone = txtb_Phone.Text;
+                user.Password = txtb_Password_form.Text;
+
+                await _userService.Update(user);
+
+                MessageBox.Show("Updated successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
