@@ -1,11 +1,10 @@
 ﻿using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using FitnessStudioApp.SERVICES.Helpers;
-using FitnessStudioApp.SERVICES.Interfaces;
 
 namespace FitnessStudioApp.SERVICES
 {
-    public class UserService : IUserService
+    public class UserService
     {
         private readonly IUserRepository _userRepo;
 

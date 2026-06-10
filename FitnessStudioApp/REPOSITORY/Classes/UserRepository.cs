@@ -13,6 +13,8 @@ public class UserRepository: BaseRepository<User>, IUserRepository
 {
     public async Task<User> GetByUsernameAsync(string username)
     {
+       
+
         return await _dbSet.Where(u=> u.Username == username).FirstOrDefaultAsync();
     }
 

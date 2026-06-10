@@ -93,7 +93,7 @@ namespace FitnessStudioApp.FORMS
                 if (checkUser.Client != null)
                 {
                     this.Hide();
-                    new ClientForm(checkUser.UserId, _clientService, _userService, null!, _trainerService, null!).Show();
+                    new ClientForm(_userService).Show();
                 }
                 else if (checkUser.Admin != null)
                 {
