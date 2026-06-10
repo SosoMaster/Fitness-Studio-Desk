@@ -8,49 +8,72 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FitnessStudioApp.REPOSITORY.Classes
+namespace FitnessStudioApp.REPOSITORY.Classes;
+public class ProgressRepository : BaseRepository<Progress>, IProgressRepository
 {
-    public class ProgressRepository : BaseRepository<Progress>, IProgressRepository
+    public ProgressRepository(FitnessStudioAppDbContext db) : base(db)
     {
-        public ProgressRepository(FitnessStudioAppDbContext db):base(db)
+    }
+
+    public Task GainMuscle()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task GainWeight()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task LoseWeight()
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<List<AdminProgressDTO>> GetAllProgressToClient(int clientId)
+    {
+        try
         {
+            _logger.Debug($"Зареждане на прогрес за клиент Id={clientId}");
 
+            var result = await _dbSet
+                .Where(p => p.ClientId == clientId)
+                .Select(p => new AdminProgressDTO()
+                {
+                    ProgressId = p.ProgressId,
+                    Weight = p.Weight,
+                    Height = p.Height,
+                }).ToListAsync();
+
+            if (!result.Any())
+                _logger.Warn($"Няма намерен прогрес за клиент Id={clientId}");
+
+            return result;
         }
-
-     
-
-        public Task GainMuscle()
+        catch (Exception ex)
         {
-            throw new NotImplementedException();
+            _logger.Error($"Грешка при зареждане на прогрес за клиент Id={clientId}", ex);
+            throw;
         }
+    }
 
-        public Task GainWeight()
+    public async Task<Progress> GetProgressByClientId(int clientId)
+    {
+        try
         {
-            throw new NotImplementedException();
-        }
+            _logger.Debug($"Търсене на прогрес за клиент Id={clientId}");
 
-        public async Task<List<AdminProgressDTO>> GetAllProgressToClient(int clientId)
+            var result = await _dbSet.Where(c => c.ClientId == clientId).FirstOrDefaultAsync();
+
+            if (result == null)
+                _logger.Warn($"Не е намерен прогрес за клиент Id={clientId}");
+
+            return result;
+        }
+        catch (Exception ex)
         {
-            return await _dbSet.Where(p => p.ClientId == clientId).Select(p => new AdminProgressDTO()
-            {
-                ProgressId = p.ProgressId,
-                Weight = p.Weight,
-                Height = p.Height,
-            }).ToListAsync();
+            _logger.Error($"Грешка при търсене на прогрес за клиент Id={clientId}", ex);
+            throw;
         }
-
-        public async Task<Progress> GetProgressByClientId(int clientId)
-        {
-           return await _dbSet.Where(c => c.ClientId == clientId).FirstOrDefaultAsync();
-        }
-
-        public Task LoseWeight()
-        {
-            throw new NotImplementedException();
-        }
-        /*public async Task<> GainWeight()
-{
-
-}*/
     }
 }

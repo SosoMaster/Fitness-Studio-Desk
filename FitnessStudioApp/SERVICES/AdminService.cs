@@ -1,4 +1,5 @@
-﻿using FitnessStudioApp.MODELS;
+﻿using FitnessStudioApp.Logger;
+using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
 using FitnessStudioApp.SERVICES.Helpers;
 using System;
@@ -12,60 +13,107 @@ namespace FitnessStudioApp.SERVICES;
 public class AdminService
 {
     private readonly AdminRepository _adminRepo;
+    private readonly ILoggerService _logger;
 
     public AdminService(UserService userService, AdminRepository adminRepository)
     {
         _adminRepo = adminRepository;
+        _logger = new LoggerService(typeof(AdminService));
     }
 
     public async Task Delete(Admin entity)
     {
-        if (entity == null)
+        try
         {
-            throw new Exception("User is null");
+            _logger.Info($"Изтриване на админ Id={entity?.AdminId}");
+
+            if (entity == null)
+            {
+                _logger.Warn("Опит за изтриване на null админ");
+                throw new Exception("User is null");
+            }
+
+            var existing = await _adminRepo.GetByIdAsync(entity.AdminId);
+            if (existing == null)
+            {
+                _logger.Warn($"Не е намерен админ Id={entity.AdminId} за изтриване");
+                throw new Exception("No admin found! Can not delete.");
+            }
+
+            await _adminRepo.DeleteAsync(existing);
+            _logger.Info($"Админ Id={entity.AdminId} е изтрит успешно");
         }
-
-        var existing = await _adminRepo.GetByIdAsync(entity.AdminId);
-
-        if (existing == null)
+        catch (Exception ex)
         {
-            throw new Exception("No admin found! Can not delete.");
+            _logger.Error($"Грешка при изтриване на админ Id={entity?.AdminId}", ex);
+            throw;
         }
-        await _adminRepo.DeleteAsync(existing);
     }
 
     public async Task<IEnumerable<Admin>> GetAllAsync()
     {
-        var clients = await _adminRepo.GetAllAsync();
+        try
+        {
+            _logger.Debug("Зареждане на всички админи");
 
-        if (!clients.Any())
-            throw new Exception("No clients found");   // може и без това?
+            var admins = await _adminRepo.GetAllAsync();
+            if (!admins.Any())
+            {
+                _logger.Warn("Няма намерени админи");
+                throw new Exception("No clients found");
+            }
 
-        return clients;
+            return admins;
+        }
+        catch (Exception ex)
+        {
+            _logger.Error("Грешка при зареждане на админи", ex);
+            throw;
+        }
     }
 
     public async Task<Admin> GetByIdAsync(int id)
     {
-        var admin = await _adminRepo.GetByIdAsync(id);
-
-        if (admin == null)
+        try
         {
-            throw new Exception("No client user");
+            _logger.Debug($"Търсене на админ Id={id}");
+
+            var admin = await _adminRepo.GetByIdAsync(id);
+            if (admin == null)
+            {
+                _logger.Warn($"Не е намерен админ Id={id}");
+                throw new Exception("No client user");
+            }
+
+            return admin;
         }
-        return admin;
+        catch (Exception ex)
+        {
+            _logger.Error($"Грешка при търсене на админ Id={id}", ex);
+            throw;
+        }
     }
 
     public async Task Update(Admin entity)
     {
-        /*ClientValidator.InfoFieldsValidate(entity);*/
-
-        var client = await _adminRepo.GetByIdAsync(entity.AdminId);
-        if (client == null)
+        try
         {
-            throw new Exception("No client found");
+            _logger.Info($"Обновяване на админ Id={entity?.AdminId}");
+
+            var admin = await _adminRepo.GetByIdAsync(entity.AdminId);
+            if (admin == null)
+            {
+                _logger.Warn($"Не е намерен админ Id={entity.AdminId} за обновяване");
+                throw new Exception("No client found");
+            }
+
+            await _adminRepo.UpdateAsync(entity);
+            _logger.Info($"Админ Id={entity.AdminId} е обновен успешно");
         }
-
-        await _adminRepo.UpdateAsync(entity);
+        catch (Exception ex)
+        {
+            _logger.Error($"Грешка при обновяване на админ Id={entity?.AdminId}", ex);
+            throw;
+        }
     }
-
 }

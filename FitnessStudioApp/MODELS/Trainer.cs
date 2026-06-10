@@ -10,6 +10,9 @@ namespace FitnessStudioApp.MODELS;
 public class Trainer
 {
     public int TrainerId { get; set; }
+    public int Age { get; set; }
+    public string Gender { get; set; }
+    public int YearsOfExperience { get; set; }
     public Specialty Specialty { get; set; }
     public List<Client> Clients { get; set; } = new List<Client>();
 
