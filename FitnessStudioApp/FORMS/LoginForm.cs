@@ -101,11 +101,11 @@ namespace FitnessStudioApp.FORMS
                 {
                     this.Hide();
                     var form = new AdminUsersForm(
-    _userService,
-    _clientService,
-    _trainerService,
-    _adminClientProgressService,
-    _adminTrainerService);
+                        _userService,
+                        _clientService,
+                        _trainerService,
+                        _adminClientProgressService,
+                        _adminTrainerService);
                     form.FormClosed += (s, e) => this.Close();
                     form.Show();
                 }

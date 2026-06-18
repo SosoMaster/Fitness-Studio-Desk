@@ -2,6 +2,7 @@
 using FitnessStudioApp.MODELS;
 using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.SERVICES;
+using FitnessStudioApp.SERVICES.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +14,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FitnessStudioApp.FORMS;
+namespace FitnessStudioApp.FORMS; //_adminClientProgressService, _trainerFormService, _adminTrainerService
 
 public partial class ClientRegisterForm : Form
 {
     private readonly ClientRegisterService _clientRegisterService;
+    private readonly ClientService _clientService;
     private readonly TrainerService _trainerService;
+    private readonly TrainerFormService _trainerFormService;
+    private readonly AdminTrainerService _adminTrainerService;
+    private readonly TrainerRegisterService _trainerRegisterService;
+    private readonly AdminClientProgressService _adminClientProgressService;
+    private readonly LoginService _loginService;
+    private readonly UserService _userService;
+    private readonly RegisterService _registerService;
     private readonly ILoggerService _logger;
     private int _userId;
 
@@ -76,6 +85,11 @@ public partial class ClientRegisterForm : Form
 
             _logger.Info($"Клиентът за UserId={_userId} е регистриран успешно");
             MessageBox.Show("Регистрацията е успешна!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            this.Hide();
+            
+            var loginForm = new LoginForm(_loginService, _userService, _registerService, _clientRegisterService, _trainerRegisterService, _clientService, _trainerService, _adminClientProgressService, _trainerFormService, _adminTrainerService);
+            loginForm.FormClosed += (s, e) => this.Close();
+            loginForm.Show();
         }
         catch (FormatException ex)
         {

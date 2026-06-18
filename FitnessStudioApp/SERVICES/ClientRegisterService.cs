@@ -54,21 +54,18 @@ public class ClientRegisterService
             throw new Exception("Invalid client.");
         }
 
-        // Age must be a reasonable positive value (1-120)
         if (client.Age <= 0 || client.Age > 120)
         {
             _logger.Warn($"Invalid age: {client.Age}");
             throw new Exception("Please provide a valid age.");
         }
 
-        // Height must be positive
         if (client.Height <= 0)
         {
             _logger.Warn($"Invalid height: {client.Height}");
             throw new Exception("Please provide a valid height.");
         }
 
-        // Weight must be positive
         if (client.Weight <= 0)
         {
             _logger.Warn($"Invalid weight: {client.Weight}");

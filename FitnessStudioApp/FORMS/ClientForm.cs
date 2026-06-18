@@ -214,5 +214,10 @@ namespace FitnessStudioApp.FORMS
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btn_EditProfile_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

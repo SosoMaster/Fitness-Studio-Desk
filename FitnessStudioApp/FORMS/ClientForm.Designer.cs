@@ -101,6 +101,7 @@
             btn_EditProfile.TabIndex = 8;
             btn_EditProfile.Text = "Edit Profile";
             btn_EditProfile.UseVisualStyleBackColor = true;
+            btn_EditProfile.Click += btn_EditProfile_Click_1;
             // 
             // chb_ShowPassword_clientform
             // 
