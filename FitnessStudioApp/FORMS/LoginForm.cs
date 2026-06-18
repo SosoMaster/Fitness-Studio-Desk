@@ -20,6 +20,9 @@ namespace FitnessStudioApp.FORMS
 
         private readonly LoginService _loginService;
         private readonly RegisterService _registerService;
+        private readonly TrainingSessionService _trainingsessionService;
+        private readonly BookingTrainingService _bookingTrainingService;
+        private readonly ProgressService _progressService;
         readonly ClientRegisterService _clientRegisterService;
         readonly TrainerRegisterService _trainerRegisterService;
         readonly ClientService _clientService;
@@ -95,7 +98,8 @@ namespace FitnessStudioApp.FORMS
                 if (checkUser.Client != null)
                 {
                     this.Hide();
-                    new ClientForm(checkUser.UserId, _clientService, _userService, null!, _trainerService, null!).Show();
+                    new ClientForm(checkUser.UserId, _clientService, _userService,
+                    _trainingsessionService, _trainerService, _bookingTrainingService, _progressService).Show();
                 }
                 else if (checkUser.Admin != null)
                 {
