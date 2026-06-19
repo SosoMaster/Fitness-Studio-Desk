@@ -20,6 +20,7 @@ namespace FitnessStudioApp.FORMS
         private Client _client;
 
         private readonly int _currentClientId;
+        private readonly ProgressService _progressService;
         private readonly TrainingSessionService _sessionService;
         private readonly TrainerService _trainerService;
         private readonly BookingTrainingService _bookingTrainingService;
@@ -27,11 +28,12 @@ namespace FitnessStudioApp.FORMS
         private DateTime? _selectedDate;
 
         public ClientForm(int userId,
-            ClientService clientService,
-            UserService userService,
-            TrainingSessionService sessionService,
-            TrainerService trainerService,
-            BookingTrainingService bookingService)
+     ClientService clientService,
+     UserService userService,
+     TrainingSessionService sessionService,
+     TrainerService trainerService,
+     BookingTrainingService bookingService,
+     ProgressService progressService)
         {
             InitializeComponent();
 
@@ -42,6 +44,7 @@ namespace FitnessStudioApp.FORMS
             _sessionService = sessionService;
             _trainerService = trainerService;
             _bookingTrainingService = bookingService;
+            _progressService = progressService;
 
             _currentClientId = userId;
 
@@ -218,6 +221,14 @@ namespace FitnessStudioApp.FORMS
         private void btn_EditProfile_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_Progress_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            var progressForm = new ProgressForm(_userId, _progressService, _clientService);
+            progressForm.FormClosed += (s, args) => this.Close();
+            progressForm.Show();
         }
     }
 }
