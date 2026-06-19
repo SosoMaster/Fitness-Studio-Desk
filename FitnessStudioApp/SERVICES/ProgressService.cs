@@ -1,15 +1,16 @@
 ﻿using FitnessStudioApp.Logger;
 using FitnessStudioApp.MODELS;
 using FitnessStudioApp.REPOSITORY.Classes;
+using FitnessStudioApp.REPOSITORY.Interfaces;
 
 namespace FitnessStudioApp.SERVICES;
 
 public class ProgressService
 {
-    private readonly ProgressRepository _progressRepo;
+    private readonly IProgressRepository _progressRepo;
     private readonly ILoggerService _logger;
 
-    public ProgressService(ProgressRepository progressRepo)
+    public ProgressService(IProgressRepository progressRepo)
     {
         _progressRepo = progressRepo;
         _logger = new LoggerService(typeof(ProgressService));
