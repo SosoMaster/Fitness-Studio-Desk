@@ -113,6 +113,11 @@ namespace FitnessStudioApp.SERVICES
 
             if (role == "Admin")
             {
+
+                // Това е правено от Валери и е пълна простотия аз я бях (Сашо) направил като хората и сега е пълен shit
+                // Това е правено от Валери и е пълна простотия аз я бях (Сашо) направил като хората и сега е пълен shit
+                // Това е правено от Валери и е пълна простотия аз я бях (Сашо) направил като хората и сега е пълен shit
+
                 Admin admin = new() { UserId = user.UserId };
                 await _adminRepo.AddAsync(admin);
             }
@@ -122,3 +127,4 @@ namespace FitnessStudioApp.SERVICES
     }
 
 }
+
