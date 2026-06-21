@@ -2,33 +2,19 @@
 using FitnessStudioApp.MODELS.DTO;
 using FitnessStudioApp.REPOSITORY.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FitnessStudioApp.REPOSITORY.Classes;
+
 public class ProgressRepository : BaseRepository<Progress>, IProgressRepository
 {
     public ProgressRepository(FitnessStudioAppDbContext db) : base(db)
     {
     }
 
-    public Task GainMuscle()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task GainWeight()
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task LoseWeight()
-    {
-        throw new NotImplementedException();
-    }
+    public Task GainMuscle() => Task.CompletedTask;
+    public Task GainWeight() => Task.CompletedTask;
+    public Task LoseWeight() => Task.CompletedTask;
 
     public async Task<List<AdminProgressDTO>> GetAllProgressToClient(int clientId)
     {
@@ -38,7 +24,7 @@ public class ProgressRepository : BaseRepository<Progress>, IProgressRepository
 
             var result = await _dbSet
                 .Where(p => p.ClientId == clientId)
-                .Select(p => new AdminProgressDTO()
+                .Select(p => new AdminProgressDTO
                 {
                     ProgressId = p.ProgressId,
                     Weight = p.Weight,
@@ -63,7 +49,9 @@ public class ProgressRepository : BaseRepository<Progress>, IProgressRepository
         {
             _logger.Debug($"Търсене на прогрес за клиент Id={clientId}");
 
-            var result = await _dbSet.Where(c => c.ClientId == clientId).FirstOrDefaultAsync();
+            var result = await _dbSet
+                .Where(c => c.ClientId == clientId)
+                .FirstOrDefaultAsync();
 
             if (result == null)
                 _logger.Warn($"Не е намерен прогрес за клиент Id={clientId}");

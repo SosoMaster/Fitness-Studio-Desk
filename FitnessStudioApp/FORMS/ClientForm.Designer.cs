@@ -43,6 +43,7 @@
             cmb_TrainingSession = new ComboBox();
             btn_Cancel = new Button();
             btn_Create = new Button();
+            btn_Progress = new Button();
             SuspendLayout();
             // 
             // lbl_Name
@@ -101,6 +102,7 @@
             btn_EditProfile.TabIndex = 8;
             btn_EditProfile.Text = "Edit Profile";
             btn_EditProfile.UseVisualStyleBackColor = true;
+            btn_EditProfile.Click += btn_EditProfile_Click_1;
             // 
             // chb_ShowPassword_clientform
             // 
@@ -174,11 +176,29 @@
             btn_Create.UseVisualStyleBackColor = true;
             btn_Create.Click += btn_Create_Click;
             // 
+            // btn_Progress
+            // 
+            btn_Progress.BackColor = Color.FromArgb(24, 95, 165);
+            btn_Progress.Cursor = Cursors.Hand;
+            btn_Progress.FlatAppearance.BorderSize = 0;
+            btn_Progress.FlatAppearance.MouseOverBackColor = Color.FromArgb(55, 138, 221);
+            btn_Progress.FlatStyle = FlatStyle.Flat;
+            btn_Progress.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btn_Progress.ForeColor = Color.FromArgb(230, 241, 251);
+            btn_Progress.Location = new Point(61, 318);
+            btn_Progress.Name = "btn_Progress";
+            btn_Progress.Size = new Size(160, 40);
+            btn_Progress.TabIndex = 0;
+            btn_Progress.Text = "📈 My Progress";
+            btn_Progress.UseVisualStyleBackColor = false;
+            btn_Progress.Click += btn_Progress_Click;
+            // 
             // ClientForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btn_Progress);
             Controls.Add(monthCalendar1);
             Controls.Add(cmb_Trainer);
             Controls.Add(cmb_TrainingSession);
@@ -248,5 +268,6 @@
         private ComboBox cmb_TrainingSession;
         private Button btn_Cancel;
         private Button btn_Create;
+        private Button btn_Progress;
     }
 }

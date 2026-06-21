@@ -27,11 +27,12 @@ namespace FitnessStudioApp.FORMS
         private DateTime? _selectedDate;
 
         public ClientForm(int userId,
-            ClientService clientService,
-            UserService userService,
-            TrainingSessionService sessionService,
-            TrainerService trainerService,
-            BookingTrainingService bookingService)
+     ClientService clientService,
+     UserService userService,
+     TrainingSessionService sessionService,
+     TrainerService trainerService,
+     BookingTrainingService bookingService,
+     ProgressService progressService)
         {
             InitializeComponent();
 
@@ -42,10 +43,7 @@ namespace FitnessStudioApp.FORMS
             _sessionService = sessionService;
             _trainerService = trainerService;
             _bookingTrainingService = bookingService;
-            // _currentClientId will be populated after loading client by user id
             _currentClientId = 0;
-
-            // Events are wired in the designer; avoid wiring them again here to keep UI wiring centralized
         }
 
         private async void ClientForm_Load(object? sender, EventArgs e)
@@ -84,7 +82,7 @@ namespace FitnessStudioApp.FORMS
             }
             catch
             {
-                // ignore - client info is optional for loading sessions
+                
             }
 
             UpdateSessionComboBox();
@@ -232,7 +230,5 @@ namespace FitnessStudioApp.FORMS
                 MessageBox.Show(ex.Message);
             }
         }
-
-
     }
 }

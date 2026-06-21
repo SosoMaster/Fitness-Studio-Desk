@@ -63,7 +63,7 @@ namespace FitnessStudioApp.FORMS
                 };
 
                 await _trainerRegisterService.RegisterTrainerAsync(trainer);
-
+                this.Hide();
                 MessageBox.Show(
                     "Trainer profile created successfully!",
                     "Success",
