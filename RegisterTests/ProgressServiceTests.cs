@@ -19,10 +19,6 @@ namespace FitnessStudioApp.Tests
             _progressService = new ProgressService(_mockProgressRepo.Object);
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // CalculateBMI
-        // ══════════════════════════════════════════════════════════════
-
         [Test]
         public void CalculateBMI_NormalValues_ReturnsCorrectBMI()
         {
@@ -53,9 +49,6 @@ namespace FitnessStudioApp.Tests
             Assert.That(bmi, Is.EqualTo(expected).Within(0.01));
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // CalculateBodyFat
-        // ══════════════════════════════════════════════════════════════
 
         [Test]
         public void CalculateBodyFat_Male30BMI27_ReturnsApprox23()
@@ -88,9 +81,6 @@ namespace FitnessStudioApp.Tests
             Assert.That(bf1, Is.EqualTo(bf2).Within(0.001));
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // HealthyBodyFatRange
-        // ══════════════════════════════════════════════════════════════
 
         [Test]
         public void HealthyBodyFatRange_YoungMale_Returns8To19()
@@ -140,9 +130,6 @@ namespace FitnessStudioApp.Tests
             Assert.That(max, Is.EqualTo(36));
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // LoseFatRecommendation
-        // ══════════════════════════════════════════════════════════════
 
         [Test]
         public void LoseFatRecommendation_BodyFatWithinRange_ReturnsMaintainMessage()
@@ -173,9 +160,6 @@ namespace FitnessStudioApp.Tests
             Assert.That(result, Does.Contain("already within the healthy range"));
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // GainMuscleRecommendation
-        // ══════════════════════════════════════════════════════════════
 
         [Test]
         public void GainMuscleRecommendation_NormalBF_ReturnsMuscleAdvice()
@@ -206,9 +190,6 @@ namespace FitnessStudioApp.Tests
             Assert.That(result, Does.Contain("BMI"));
         }
 
-        // ══════════════════════════════════════════════════════════════
-        // SaveProgressAsync
-        // ══════════════════════════════════════════════════════════════
 
         [Test]
         public async Task SaveProgressAsync_ValidProgress_CallsRepoAdd()
@@ -274,10 +255,6 @@ namespace FitnessStudioApp.Tests
 
             Assert.That(ex.Message, Is.EqualTo("Weight must be greater than 0."));
         }
-
-        // ══════════════════════════════════════════════════════════════
-        // GetAllProgressAsync
-        // ══════════════════════════════════════════════════════════════
 
         [Test]
         public async Task GetAllProgressAsync_ReturnsOnlyMatchingClientId()
