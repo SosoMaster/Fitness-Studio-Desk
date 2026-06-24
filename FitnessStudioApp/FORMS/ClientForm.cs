@@ -19,8 +19,7 @@ namespace FitnessStudioApp.FORMS
         private int _userId;
         private Client _client;
 
-        private readonly int _currentClientId;
-        private readonly ProgressService _progressService;
+        private int _currentClientId;
         private readonly TrainingSessionService _sessionService;
         private readonly TrainerService _trainerService;
         private readonly BookingTrainingService _bookingTrainingService;
@@ -44,15 +43,7 @@ namespace FitnessStudioApp.FORMS
             _sessionService = sessionService;
             _trainerService = trainerService;
             _bookingTrainingService = bookingService;
-            _progressService = progressService;
-
-            _currentClientId = userId;
-
-            this.Load += ClientForm_Load;
-            monthCalendar1.DateSelected += monthCalendar1_DateSelected;
-            cmb_Trainer.SelectedIndexChanged += cmb_Trainer_SelectedIndexChanged;
-            btn_Create.Click += btn_Create_Click;
-            btn_Cancel.Click += btn_Cancel_Click;
+            _currentClientId = 0;
         }
 
         private async void ClientForm_Load(object? sender, EventArgs e)
@@ -71,6 +62,28 @@ namespace FitnessStudioApp.FORMS
             var sessions = await _sessionService.GetAllAsync();
 
             _allSessions = sessions.ToList();
+
+            // Load client info for the current user and populate fields
+            try
+            {
+                _client = await _clientService.GetClientByUserId(_userId);
+                if (_client != null)
+                {
+                    _currentClientId = _client.ClientId;
+
+                    if (_client.User != null)
+                    {
+                        textBox1.Text = _client.User.Username ?? string.Empty;
+                        txtb_Email.Text = _client.User.Email ?? string.Empty;
+                        txtb_Phone.Text = _client.User.Phone ?? string.Empty;
+                        txtb_Password_form.Text = _client.User.Password ?? string.Empty;
+                    }
+                }
+            }
+            catch
+            {
+                
+            }
 
             UpdateSessionComboBox();
 
@@ -216,19 +229,6 @@ namespace FitnessStudioApp.FORMS
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        private void btn_EditProfile_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btn_Progress_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            var progressForm = new ProgressForm(_userId, _progressService, _clientService);
-            progressForm.FormClosed += (s, args) => this.Close();
-            progressForm.Show();
         }
     }
 }

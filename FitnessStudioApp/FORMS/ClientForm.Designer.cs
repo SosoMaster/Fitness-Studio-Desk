@@ -137,6 +137,7 @@
             monthCalendar1.Location = new Point(464, 130);
             monthCalendar1.Name = "monthCalendar1";
             monthCalendar1.TabIndex = 19;
+            monthCalendar1.DateSelected += monthCalendar1_DateSelected;
             // 
             // cmb_Trainer
             // 
@@ -145,6 +146,7 @@
             cmb_Trainer.Name = "cmb_Trainer";
             cmb_Trainer.Size = new Size(121, 23);
             cmb_Trainer.TabIndex = 18;
+            cmb_Trainer.SelectedIndexChanged += cmb_Trainer_SelectedIndexChanged;
             // 
             // cmb_TrainingSession
             // 
@@ -162,6 +164,7 @@
             btn_Cancel.TabIndex = 16;
             btn_Cancel.Text = "Cancel";
             btn_Cancel.UseVisualStyleBackColor = true;
+            btn_Cancel.Click += btn_Cancel_Click;
             // 
             // btn_Create
             // 
@@ -171,6 +174,7 @@
             btn_Create.TabIndex = 15;
             btn_Create.Text = "Create Reservation";
             btn_Create.UseVisualStyleBackColor = true;
+            btn_Create.Click += btn_Create_Click;
             // 
             // btn_Progress
             // 
@@ -213,6 +217,7 @@
             Name = "ClientForm";
             Text = "ClientForm";
             Load += ClientForm_Load;
+            btn_EditProfile.Click += btn_EditProfile_Click;
             ResumeLayout(false);
             PerformLayout();
         }
